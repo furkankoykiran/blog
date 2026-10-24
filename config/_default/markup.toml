@@ -1,0 +1,32 @@
+# Markdown rendering. The goldmark settings mirror what Blowfish requires.
+
+[goldmark]
+  [goldmark.parser]
+    wrapStandAloneImageWithinParagraph = false
+    [goldmark.parser.attribute]
+      block = true
+      title = true
+
+  [goldmark.renderer]
+    unsafe = true
+
+  [goldmark.extensions]
+    [goldmark.extensions.passthrough]
+      enable = true
+      [goldmark.extensions.passthrough.delimiters]
+        block = [['\[', '\]'], ['$$', '$$']]
+        inline = [['\(', '\)']]
+    [goldmark.extensions.typographer]
+      disable = true
+
+[highlight]
+  noClasses = false
+  codeFences = true
+  guessSyntax = false
+  lineNos = false
+  tabWidth = 4
+
+[tableOfContents]
+  startLevel = 2
+  endLevel = 3
+  ordered = false

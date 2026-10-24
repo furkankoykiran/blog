@@ -1,0 +1,40 @@
+# Turkish menus
+[[main]]
+  name = "Yazılar"
+  pageRef = "/posts"
+  weight = 10
+[[main]]
+  name = "Seriler"
+  pageRef = "/series"
+  weight = 20
+[[main]]
+  name = "Etiketler"
+  pageRef = "/tags"
+  weight = 30
+[[main]]
+  name = "Hakkımda"
+  pageRef = "/about"
+  weight = 40
+[[main]]
+  name = "Portfolyo"
+  url = "https://furkankoykiran.com.tr/"
+  weight = 50
+  [main.params]
+    target = "_blank"
+
+[[footer]]
+  name = "RSS"
+  url = "/feed.xml"
+  weight = 10
+[[footer]]
+  name = "Kategoriler"
+  pageRef = "/categories"
+  weight = 20
+[[footer]]
+  name = "Gizlilik"
+  pageRef = "/privacy"
+  weight = 30
+[[footer]]
+  name = "llms.txt"
+  url = "/llms.txt"
+  weight = 40

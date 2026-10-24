@@ -1,0 +1,175 @@
+# Hugo configuration for blog.furkankoykiran.com.tr.
+# Blowfish is a pinned Git submodule in themes/blowfish and is never edited;
+# the site's own templates, styles and data live in layouts/, assets/, i18n/,
+# data/ and static/.
+
+baseURL = "https://blog.furkankoykiran.com.tr/"
+theme = "blowfish"
+title = "Furkan Köykıran Blog"
+
+# Turkish at the root, English under /en/.
+defaultContentLanguage = "tr"
+defaultContentLanguageInSubdir = false
+
+timeZone = "Europe/Istanbul"
+enableRobotsTXT = true
+# Dates come from front matter only (see [frontmatter]).
+enableGitInfo = false
+enableEmoji = true
+removePathAccents = true
+titleCaseStyle = "none"
+# The sitemaps are the site's own output format (sitemapx below).
+disableKinds = ["sitemap"]
+summaryLength = 40
+
+# Lists are never paginated, so every list has a single URL.
+[pagination]
+  pagerSize = 200
+
+[permalinks.page]
+  posts = "/posts/:slug/"
+
+# `lastmod` is set by hand, and only after a meaningful update. Without it a
+# page's modification date is its publication date.
+[frontmatter]
+  date        = ["date", "publishDate"]
+  publishDate = ["publishDate", "date"]
+  lastmod     = ["lastmod", "date"]
+
+[taxonomies]
+  tag = "tags"
+  category = "categories"
+  series = "series"
+
+[imaging]
+  resampleFilter = "Lanczos"
+  anchor = "Center"
+  [imaging.jpeg]
+    quality = 82
+  [imaging.webp]
+    quality = 78
+    hint = "picture"
+  [imaging.avif]
+    quality = 60
+
+[caches.images]
+  dir = ":cacheDir/images"
+  maxAge = -1
+
+# ---- Output formats --------------------------------------------------------
+# Besides HTML: RSS at feed.xml, a Markdown copy of every post at <url>index.md,
+# llms.txt / llms-full.txt for language models, the cross-posting feed and the
+# sitemaps.
+[mediaTypes."text/markdown"]
+  suffixes = ["md"]
+
+[outputFormats.RSS]
+  baseName = "feed"
+
+[outputFormats.llms]
+  mediaType = "text/plain"
+  baseName = "llms"
+  isPlainText = true
+  notAlternative = true
+  permalinkable = false
+
+[outputFormats.llmsfull]
+  mediaType = "text/plain"
+  baseName = "llms-full"
+  isPlainText = true
+  notAlternative = true
+  permalinkable = false
+
+[outputFormats.MD]
+  mediaType = "text/markdown"
+  baseName = "index"
+  isPlainText = true
+  rel = "alternate"
+  permalinkable = false
+
+# Post data for scripts/syndicate_devto.py (layouts/home.syndication.json).
+[outputFormats.syndication]
+  mediaType = "application/json"
+  baseName = "syndication"
+  isPlainText = true
+  notAlternative = true
+  permalinkable = false
+
+# One flat sitemap per language instead of Hugo's sitemap index, which would put
+# the root-level Turkish URLs in /tr/sitemap.xml, outside that file's path scope.
+# /sitemap.xml lists every page of both languages, /en/sitemap.xml the English ones.
+[outputFormats.sitemapx]
+  mediaType = "application/xml"
+  baseName = "sitemap"
+  isPlainText = false
+  notAlternative = true
+  permalinkable = false
+  noUgly = true
+
+[outputs]
+  home = ["HTML", "RSS", "JSON", "llms", "llmsfull", "syndication", "sitemapx"]
+  page = ["HTML", "MD"]
+  section = ["HTML", "RSS"]
+  taxonomy = ["HTML"]
+  term = ["HTML"]
+
+[services.rss]
+  limit = 30
+
+[privacy]
+  [privacy.youtube]
+    privacyEnhanced = true
+  [privacy.x]
+    enableDNT = true
+
+[related]
+  threshold = 60
+  toLower = true
+  includeNewer = true
+
+  [[related.indices]]
+    name = "series"
+    weight = 120
+
+  [[related.indices]]
+    name = "tags"
+    weight = 100
+
+  [[related.indices]]
+    name = "categories"
+    weight = 60
+
+  [[related.indices]]
+    name = "date"
+    weight = 10
+
+[module]
+  [module.hugoVersion]
+    extended = true
+    min = "0.160.0"
+
+# Content lives in three trees:
+#   content/tr     Turkish Markdown       content/en     English Markdown
+#   content/media  language-neutral files (covers, shared images, credits.yaml)
+# TR and EN pages pair by identical path, e.g. posts/<bundle>/index.md.
+# These mounts replace Hugo's default `content` mount. Diagram sources (*.mmd)
+# and credits.yaml (read from disk by layouts/partials/fk/credits.html) are not
+# published.
+[[module.mounts]]
+  source = "content/tr"
+  target = "content"
+  files = ["! **.mmd"]
+  [module.mounts.sites.matrix]
+    languages = ["tr"]
+[[module.mounts]]
+  source = "content/en"
+  target = "content"
+  files = ["! **.mmd"]
+  [module.mounts.sites.matrix]
+    languages = ["en"]
+[[module.mounts]]
+  source = "content/media"
+  target = "content"
+  files = ["! **.mmd", "! **credits.yaml"]
+  [module.mounts.sites.matrix]
+    languages = ["**"]

@@ -1,0 +1,23 @@
+disabled = false
+locale = "tr-TR"
+label = "Türkçe"
+direction = "ltr"
+weight = 1
+title = "Furkan Köykıran Blog"
+
+[params]
+  displayName = "TR"
+  isoCode = "tr"
+  htmlCode = "tr"
+  rtl = false
+  dateFormat = "2 January 2006"
+  logo = "img/fk-logo.png"
+  description = "Furkan Köykıran'ın teknik blogu: MCP sunucuları ve yapay zeka ajanları, açık kaynak katkıları, Python ile trading botları, backend ve DevOps üzerine sahadan notlar."
+  tagline = "MCP, yapay zeka ajanları, açık kaynak, Python ve DevOps üzerine sahadan notlar."
+  copyright = "© { year } Furkan Köykıran. Yazılar ve görseller tüm hakları saklıdır; kod örnekleri MIT lisanslıdır."
+
+[params.author]
+  name = "Furkan Köykıran"
+  image = "img/author.jpg"
+  headline = "Yazılım geliştirici · MCP sunucuları, Python ve açık kaynak"
+  bio = "Python ve TypeScript ile MCP sunucuları, trading botları ve backend servisleri geliştiriyorum. Büyük açık kaynak projelere katkı veriyor, öğrendiklerimi burada yazıyorum."
