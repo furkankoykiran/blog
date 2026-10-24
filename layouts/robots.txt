@@ -31,7 +31,8 @@ Allow: /*.jpg$
 Allow: /*.png$
 Allow: /*.svg$
 Disallow: /*?*
-Content-Signal: search=yes, ai-input=yes, ai-train=yes
+# Content signals (contentsignals.org), kept as a comment because Yandex and
+# Google reject unknown directives: search=yes, ai-input=yes, ai-train=yes
 
 Sitemap: {{ "sitemap.xml" | absURL }}
 # LLM summary: {{ "llms.txt" | absURL }} (English: {{ "en/llms.txt" | absURL }})

@@ -1,0 +1,11 @@
+{{- /* Display name of a taxonomy term: data/tag_labels.yaml for tags, the
+  term's own title otherwise. */ -}}
+{{- $label := .Title -}}
+{{- if eq .Data.Plural "tags" -}}
+  {{- with index hugo.Data.tag_labels .Data.Term -}}
+    {{- if reflect.IsMap . }}{{ $label = index . site.Language.Lang }}{{ else }}{{ $label = . }}{{ end -}}
+  {{- else -}}
+    {{- $label = strings.FirstUpper .Title -}}
+  {{- end -}}
+{{- end -}}
+{{- return $label -}}
