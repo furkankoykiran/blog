@@ -1,0 +1,50 @@
+name: Lighthouse
+
+on:
+  pull_request:
+    paths:
+      - "content/**"
+      - "layouts/**"
+      - "assets/**"
+      - "static/**"
+      - "config/**"
+      - "data/**"
+      - "i18n/**"
+      - ".lighthouserc.json"
+      - ".github/workflows/lighthouse.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: lighthouse-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  HUGO_VERSION: 0.167.0
+
+jobs:
+  lhci:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          submodules: recursive
+
+      - name: Install Hugo extended ${{ env.HUGO_VERSION }}
+        run: |
+          wget -q -O "${{ runner.temp }}/hugo.deb" \
+            "https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-amd64.deb"
+          sudo dpkg -i "${{ runner.temp }}/hugo.deb"
+
+      - name: Build (production, local baseURL)
+        env:
+          HUGO_ENVIRONMENT: production
+        run: hugo --gc --minify --baseURL http://localhost/
+
+      - uses: treosh/lighthouse-ci-action@v12
+        with:
+          configPath: ./.lighthouserc.json
+          uploadArtifacts: true
+          temporaryPublicStorage: false

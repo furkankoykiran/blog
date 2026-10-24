@@ -1,0 +1,37 @@
+{
+  "ci": {
+    "collect": {
+      "staticDistDir": "./public",
+      "url": [
+        "http://localhost/",
+        "http://localhost/en/",
+        "http://localhost/posts/ai-face-detector-yapay-zeka-ile-yuz-dogrulama/",
+        "http://localhost/en/posts/ai-face-detector/",
+        "http://localhost/tags/python/"
+      ],
+      "numberOfRuns": 3,
+      "settings": {
+        "formFactor": "mobile",
+        "screenEmulation": { "mobile": true },
+        "skipAudits": ["robots-txt"]
+      }
+    },
+    "assert": {
+      "assertions": {
+        "categories:performance": ["error", { "minScore": 0.9, "aggregationMethod": "median-run" }],
+        "categories:accessibility": ["error", { "minScore": 1 }],
+        "categories:seo": ["error", { "minScore": 0.95 }],
+        "categories:best-practices": ["warn", { "minScore": 0.95 }],
+        "largest-contentful-paint": ["error", { "maxNumericValue": 2500 }],
+        "total-blocking-time": ["error", { "maxNumericValue": 200 }],
+        "cumulative-layout-shift": ["error", { "maxNumericValue": 0.05 }],
+        "resource-summary:script:size": ["error", { "maxNumericValue": 220000 }],
+        "resource-summary:image:size": ["warn", { "maxNumericValue": 250000 }],
+        "resource-summary:font:size": ["error", { "maxNumericValue": 60000 }],
+        "resource-summary:total:size": ["warn", { "maxNumericValue": 600000 }],
+        "resource-summary:third-party:count": ["warn", { "maxNumericValue": 6 }]
+      }
+    },
+    "upload": { "target": "filesystem", "outputDir": "./lhci" }
+  }
+}
