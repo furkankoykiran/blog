@@ -1,6 +1,6 @@
 ---
 title: "GitHub Actions Self-Hosted Runner on Linux: Setup Guide"
-description: "When my GitHub Actions minutes ran out, I made a Linux server a self-hosted runner: dedicated user, SHA256 check, systemd, labels and security trade-offs."
+description: "My free GitHub Actions minutes (2,000 a month) ran out, so I made a Linux server a self-hosted runner: dedicated user, SHA256 check, systemd, labels, security."
 date: 2026-05-06T12:00:00+03:00
 slug: "github-actions-self-hosted-runner"
 postType: guide

@@ -1,5 +1,6 @@
 ---
 title: "Hakkımda"
+seoTitle: "Hakkımda: Furkan Köykıran ve bu blogun konuları | Furkan Köykıran Blog"
 description: "Furkan Köykıran kimdir, bu blogda neler yazıyor: MCP sunucuları, yapay zeka ajanları, açık kaynak katkıları, Python ve DevOps."
 showDate: false
 showReadingTime: false
@@ -20,4 +21,8 @@ Bu blog, gerçek projelerden çıkan notlarımı topladığım yer. Ağırlıkl�
 - **Python ile algoritmik trading:** Freqtrade, Telegram botları ve gerçek zamanlı veri.
 - **Python backend ve DevOps:** FastAPI, Docker, Nginx, GitHub Actions ve production'da ayakta kalan servisler.
 
-Projelerimin tamamı, açık kaynak katkılarım ve iletişim bilgilerim [portfolyo sitemde](https://furkankoykiran.com.tr/). Yeni yazılardan haberdar olmak için [RSS akışını](/feed.xml) takip edebilirsin.
+Yazmadığım ama üzerinde çalıştığım konular da var: kodlama ajanları için hafıza ve bağlam sistemleri, kantitatif analiz ve backtest, Telegram Mini App'leri, Cloudflare Workers ve Traefik ile kendi sunucularını yönetmek, tarayıcıda oynanan strateji simülasyonları ve sunucu tarafında bot tespiti. Bunlardan biriktirdiğim notlar da zamanla buraya gelecek.
+
+Her yazı Türkçe ve İngilizce olarak yayında. Yazılarda kullandığım kodu çalıştırıp sonuçlarını kontrol ediyorum; bir sayı ya da komut değiştiyse yazıyı güncelliyorum.
+
+Projelerimin tamamı, açık kaynak katkılarım ve iletişim bilgilerim [portfolyo sitemde](https://furkankoykiran.com.tr/). Yeni yazılardan haberdar olmak için [RSS akışını](/feed.xml) takip edebilirsiniz.
