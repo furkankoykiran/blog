@@ -1,0 +1,38 @@
+# python scripts/images/render.py card scripts/images/templates/data/web3-wallet-integration/sign-in-with-ethereum.yaml "content/{lang}/posts/web3-wallet-integration/img/sign-in-with-ethereum.webp"
+template: steps
+head_width: 360
+langs:
+  en:
+    kicker: "Sign-In with Ethereum · EIP-4361"
+    title: A signature, not a connected wallet, opens the session
+    steps:
+      - label: Browser → Server
+        code: GET /nonce
+        text: The server returns a single-use nonce.
+      - label: Browser → Wallet
+        code: personal_sign
+        text: The wallet signs the EIP-4361 message and returns the signature.
+      - label: Browser → Server
+        code: POST /verify
+        text: Sends the message and the signature.
+      - label: Server
+        code: session cookie
+        text: Checks the domain, nonce and signature, then opens the session.
+    takeaway: Keeping the nonce single-use stops the same signature from being replayed.
+  tr:
+    kicker: "Sign-In with Ethereum · EIP-4361"
+    title: Oturumu bağlı cüzdan değil, imza açar
+    steps:
+      - label: Tarayıcı → Sunucu
+        code: GET /nonce
+        text: Sunucu tek kullanımlık bir nonce döner.
+      - label: Tarayıcı → Cüzdan
+        code: personal_sign
+        text: Cüzdan EIP-4361 mesajını imzalar ve imzayı döner.
+      - label: Tarayıcı → Sunucu
+        code: POST /verify
+        text: Mesajı ve imzayı gönderir.
+      - label: Sunucu
+        code: oturum çerezi
+        text: Alan adını, nonce'u ve imzayı doğrular, oturumu açar.
+    takeaway: Nonce'un tek kullanımlık olması, aynı imzanın tekrar kullanılmasını engeller.

@@ -1,0 +1,21 @@
+# python scripts/images/render.py card scripts/images/templates/data/smart-contract-testing-hardhat-ethers/test-runners.yaml "content/{lang}/posts/smart-contract-testing-hardhat-ethers/img/test-runners.webp"
+template: compare
+langs:
+  en:
+    kicker: "Hardhat 3 · npx hardhat test"
+    title: Two kinds of test, one simulated chain
+    row_labels: [Written in, Gets]
+    use_label: Good for
+    columns:
+      - {name: Solidity tests, sub: "Compatible with forge-std", rows: ["Solidity", "Foundry-style tests, fuzzing included"], use: "Fuzz tests, such as `testFuzz_WithdrawOnlyAfterLock`"}
+      - {name: Mocha tests, sub: "TypeScript, ESM", rows: ["TypeScript", "`ethers` and `networkHelpers` from `network.create()`"], use: "Unit tests, events, time travel and a mainnet fork"}
+    takeaway: "`--coverage` and `--gas-stats` measure both kinds together, with no extra plugins."
+  tr:
+    kicker: "Hardhat 3 · npx hardhat test"
+    title: İki test türü, tek bir simüle zincir
+    row_labels: [Dil, Aldığı]
+    use_label: Ne için
+    columns:
+      - {name: Solidity testleri, sub: "forge-std uyumlu", rows: ["Solidity", "Foundry tarzı testler, fuzzing dahil"], use: "`testFuzz_WithdrawOnlyAfterLock` gibi fuzz testleri"}
+      - {name: Mocha testleri, sub: "TypeScript, ESM", rows: ["TypeScript", "`network.create()` ile gelen `ethers` ve `networkHelpers`"], use: "Birim testleri, event’ler, zaman atlatma ve mainnet fork"}
+    takeaway: "`--coverage` ve `--gas-stats` ikisini birlikte ölçer, ek eklenti gerekmez."

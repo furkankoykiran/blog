@@ -1,0 +1,21 @@
+# python scripts/images/render.py card scripts/images/templates/data/blockchain-data-analysis-python-tools/dune-sql-exploration.yaml "content/{lang}/posts/blockchain-data-analysis-python-tools/img/dune-sql-exploration.webp"
+template: compare
+langs:
+  en:
+    kicker: "Dune · from a saved query to pandas"
+    title: Read the stored result, or run the query again?
+    row_labels: [Takes, Does, Credits]
+    use_label: Use it
+    columns:
+      - {name: get_latest_result_dataframe, mono: true, pick: true, rows: ["The ID of a query saved in the web UI", "Fetches the most recent stored result", "Keeps usage low"], use: For most reads}
+      - {name: run_query_dataframe, mono: true, rows: ["The same query ID", "Executes the query again", "Every execution costs credits"], use: When you need fresh data}
+    takeaway: Both return a pandas DataFrame. Dune data lags the chain by a few minutes either way.
+  tr:
+    kicker: "Dune · kayıtlı sorgudan pandas'a"
+    title: Kayıtlı sonucu mu okumalı, sorguyu yeniden mi çalıştırmalı?
+    row_labels: [Alır, Yapar, Kredi]
+    use_label: Ne zaman
+    columns:
+      - {name: get_latest_result_dataframe, mono: true, pick: true, rows: ["Web arayüzünde kaydedilen sorgunun ID'si", "En son kayıtlı sonucu getirir", "Kredi harcamaz"], use: Çoğu okumada}
+      - {name: run_query_dataframe, mono: true, rows: ["Aynı sorgu ID'si", "Sorguyu yeniden çalıştırır", "Her çalıştırma kredi harcar"], use: Taze veri gerektiğinde}
+    takeaway: İkisi de pandas DataFrame döndürür. Dune verisi zincirin birkaç dakika gerisindedir.

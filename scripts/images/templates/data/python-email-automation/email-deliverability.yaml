@@ -1,0 +1,21 @@
+# python scripts/images/render.py card scripts/images/templates/data/python-email-automation/email-deliverability.yaml "content/{lang}/posts/python-email-automation/img/email-deliverability.webp"
+template: compare
+langs:
+  en:
+    kicker: "DMARC · one question per message"
+    title: Does SPF or DKIM pass and align with the From domain?
+    row_labels: [SPF / DKIM, Alignment, Result]
+    use_label: Then
+    columns:
+      - {name: "Yes", pick: true, rows: ["At least one passes", "Matches the domain in `From`", DMARC passes], use: The message passes DMARC}
+      - {name: "No", rows: ["Neither passes", "Or the pass doesn't align", "DMARC fails"], use: "The policy applies: `none`, `quarantine` or `reject`"}
+    takeaway: "Start DMARC at `p=none`, read the reports, and tighten it once they look clean."
+  tr:
+    kicker: "DMARC · her mesaja tek soru"
+    title: SPF ya da DKIM geçiyor ve From alan adıyla uyumlu mu?
+    row_labels: [SPF / DKIM, Uyum, Sonuç]
+    use_label: Ardından
+    columns:
+      - {name: Evet, pick: true, rows: ["En az biri geçer", "`From`'daki alan adıyla eşleşir", DMARC geçer], use: Mesaj DMARC'tan geçer}
+      - {name: Hayır, rows: ["İkisi de geçmez", "Ya da geçen uyumlu değildir", "DMARC geçmez"], use: "Politika uygulanır: `none`, `quarantine` ya da `reject`"}
+    takeaway: "DMARC'a `p=none` ile başlayın, raporları okuyun, temiz görününce sıkılaştırın."

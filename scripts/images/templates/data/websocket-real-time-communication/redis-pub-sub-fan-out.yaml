@@ -1,0 +1,31 @@
+# python scripts/images/render.py card scripts/images/templates/data/websocket-real-time-communication/redis-pub-sub-fan-out.yaml "content/{lang}/posts/websocket-real-time-communication/img/redis-pub-sub-fan-out.webp"
+template: steps
+langs:
+  en:
+    kicker: "WebSocket · several servers"
+    title: Redis carries the message to every server
+    steps:
+      - label: Server A
+        title: Alice sends
+        text: Her WebSocket lives on server A, which receives the message.
+      - label: Redis
+        code: PUBLISH chat
+        text: Server A publishes it to the chat channel.
+      - label: Every server
+        title: Bob receives
+        text: All servers subscribe, so server B gets it and forwards it to Bob.
+    takeaway: A connection lives in the memory of the process that accepted it. Redis connects the processes.
+  tr:
+    kicker: "WebSocket · birden fazla sunucu"
+    title: Mesajı her sunucuya Redis taşır
+    steps:
+      - label: Sunucu A
+        title: Ahmet gönderir
+        text: WebSocket bağlantısı Sunucu A'da; mesaj oraya gelir.
+      - label: REDIS
+        code: PUBLISH chat
+        text: Sunucu A mesajı chat kanalına yayınlar.
+      - label: Her sunucu
+        title: Mehmet alır
+        text: Tüm sunucular abone; Sunucu B mesajı alıp Mehmet'e iletir.
+    takeaway: Bağlantı, onu kabul eden sürecin belleğinde yaşar. Süreçleri birbirine Redis bağlar.

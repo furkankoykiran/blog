@@ -1,0 +1,35 @@
+# python scripts/images/render.py card scripts/images/templates/data/freqtrade-mcp-server/request-flow.yaml "content/{lang}/posts/freqtrade-mcp-server/img/freqtrade-mcp-request-flow.webp"
+template: steps
+langs:
+  en:
+    kicker: freqtrade-mcp
+    title: From a chat question to your bot's data
+    steps:
+      - label: Chat
+        title: "“Are any open trades in the red?”"
+        text: Asked in Claude Desktop, Claude Code, Cursor or Cline.
+      - label: MCP tool
+        title: Claude picks a tool
+        code: get_open_trades
+        text: freqtrade-mcp runs it and talks to the client over stdio.
+      - label: REST API
+        title: Freqtrade answers
+        code: /api/v1
+        text: The request uses HTTP Basic Auth. Claude sums up the JSON reply.
+    takeaway: One Node.js process sits between Claude and the bot. Keep the API on `127.0.0.1`.
+  tr:
+    kicker: freqtrade-mcp
+    title: Sohbetteki sorudan botun verisine
+    steps:
+      - label: Sohbet
+        title: "“Açık pozisyonlarda zararda olan var mı?”"
+        text: Claude Desktop, Claude Code, Cursor ya da Cline’da sorulur.
+      - label: MCP aracı
+        title: Claude bir araç seçer
+        code: get_open_trades
+        text: freqtrade-mcp aracı çalıştırır, istemciyle stdio üzerinden konuşur.
+      - label: REST API
+        title: Freqtrade yanıt verir
+        code: /api/v1
+        text: İstek HTTP Basic Auth ile gider. Dönen JSON’u Claude özetler.
+    takeaway: Claude ile bot arasında tek bir Node.js süreci var. API’yi `127.0.0.1` üzerinde tutun.

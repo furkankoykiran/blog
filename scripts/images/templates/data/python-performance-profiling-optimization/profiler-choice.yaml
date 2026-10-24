@@ -1,0 +1,23 @@
+# python scripts/images/render.py card scripts/images/templates/data/python-performance-profiling-optimization/profiler-choice.yaml "content/{lang}/posts/python-performance-profiling-optimization/img/profiler-choice.webp"
+template: compare
+langs:
+  en:
+    kicker: "Python profiling · which tool when"
+    title: Production, local repro or a memory leak?
+    row_labels: [Situation, Shows]
+    use_label: Good to know
+    columns:
+      - {name: "py-spy", mono: true, rows: ["The process is running in production right now", "Where the time goes, sampled 100 times a second"], use: "No code changes, no restart"}
+      - {name: "cProfile\nScalene", mono: true, rows: ["You can reproduce it locally", "Which function, then which line, and whether it is Python or native"], use: "cProfile slows code that makes many small calls"}
+      - {name: "memray", mono: true, rows: ["Memory keeps growing", "Which lines allocate how much, and what is never freed"], use: "Linux and macOS only"}
+    takeaway: Measure before you rewrite anything.
+  tr:
+    kicker: "Python profiling · hangi araç ne zaman"
+    title: Production, lokal tekrar ya da bellek sızıntısı?
+    row_labels: [Durum, Gösterdiği]
+    use_label: Bilmekte fayda var
+    columns:
+      - {name: "py-spy", mono: true, rows: ["Süreç şu an production’da çalışıyor", "Zamanın nereye gittiği, saniyede 100 örnekle"], use: "Kod değişikliği yok, yeniden başlatma yok"}
+      - {name: "cProfile\nScalene", mono: true, rows: ["Sorunu lokalde tekrar üretebiliyorsunuz", "Hangi fonksiyon, sonra hangi satır, Python mı native mi"], use: "cProfile çok sayıda küçük çağrı yapan kodu yavaşlatır"}
+      - {name: "memray", mono: true, rows: ["Bellek sürekli büyüyor", "Hangi satırın ne kadar ayırdığı ve neyin hiç serbest kalmadığı"], use: "Yalnızca Linux ve macOS"}
+    takeaway: Bir şeyi yeniden yazmadan önce ölçün.

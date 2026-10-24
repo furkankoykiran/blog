@@ -1,0 +1,37 @@
+# python scripts/images/render.py card scripts/images/templates/data/poetry-python-project-management/lock-flow.yaml "content/{lang}/posts/poetry-python-project-management/img/lock-flow.webp"
+template: steps
+langs:
+  en:
+    kicker: "Poetry · uv"
+    title: Intent in pyproject.toml, exact versions in the lock
+    steps:
+      - label: Intent
+        title: pyproject.toml
+        code: fastapi>=0.115
+        text: What you want, not what gets installed.
+      - label: Lock
+        title: poetry.lock / uv.lock
+        code: poetry lock · uv lock
+        text: Every package resolved to a version, with hashes. It goes into git.
+      - label: Sync
+        title: Same lock everywhere
+        code: poetry sync · uv sync
+        text: The local .venv, CI, Docker and production all install from it.
+    takeaway: When the lock file conflicts, take `main`’s version and regenerate it.
+  tr:
+    kicker: "Poetry · uv"
+    title: Niyet pyproject.toml’da, kesin sürümler lock’ta
+    steps:
+      - label: Niyet
+        title: pyproject.toml
+        code: fastapi>=0.115
+        text: Ne istediğiniz, neyin kurulacağı değil.
+      - label: Lock
+        title: poetry.lock / uv.lock
+        code: poetry lock · uv lock
+        text: Her paket bir sürüme çözülür, hash’leriyle birlikte. Git’e girer.
+      - label: Sync
+        title: Her yerde aynı lock
+        code: poetry sync · uv sync
+        text: Lokal .venv, CI, Docker ve üretim ortamı hep buradan kurulur.
+    takeaway: Lock dosyası çakışırsa `main`’deki sürümü alın ve yeniden üretin.

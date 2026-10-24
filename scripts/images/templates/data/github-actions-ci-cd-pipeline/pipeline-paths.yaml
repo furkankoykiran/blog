@@ -1,0 +1,21 @@
+# python scripts/images/render.py card scripts/images/templates/data/github-actions-ci-cd-pipeline/pipeline-paths.yaml "content/{lang}/posts/github-actions-ci-cd-pipeline/img/pipeline-paths.webp"
+template: compare
+langs:
+  en:
+    kicker: "GitHub Actions · two paths"
+    title: What runs on a pull request, and what on main
+    row_labels: [Jobs, Output, Gate]
+    use_label: Runs on
+    columns:
+      - {name: Pull request, rows: ["`test`: ruff + pytest", "Test results only", "None"], use: Every pull request}
+      - {name: push to main, mono: true, pick: true, rows: ["`test` → `build` → `deploy`", "A Docker image in GHCR", "The `production` environment waits for approval"], use: Every commit merged to main}
+    takeaway: Nothing reaches production without passing tests, a build and a human approval.
+  tr:
+    kicker: "GitHub Actions · iki yol"
+    title: Pull request’te ne çalışır, main’de ne?
+    row_labels: [İşler, Çıktı, Kapı]
+    use_label: Ne zaman
+    columns:
+      - {name: Pull request, rows: ["`test`: ruff + pytest", "Sadece test sonucu", "Yok"], use: Her pull request’te}
+      - {name: push to main, mono: true, pick: true, rows: ["`test` → `build` → `deploy`", "GHCR’de bir Docker imajı", "`production` ortamı onay bekler"], use: main’e giren her commit’te}
+    takeaway: Testten, build’den ve bir insanın onayından geçmeyen hiçbir şey production’a çıkmaz.

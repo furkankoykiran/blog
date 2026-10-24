@@ -1,0 +1,38 @@
+# python scripts/images/render.py card scripts/images/templates/data/api-authentication-strategies/passkey-flow.yaml "content/{lang}/posts/api-authentication-strategies/img/passkey-flow.webp"
+template: steps
+head_width: 470
+langs:
+  en:
+    kicker: "WebAuthn · passkey registration"
+    title: The server keeps a public key, nothing more
+    steps:
+      - label: Browser → Server
+        code: start registration
+        text: The server answers with options and a challenge.
+      - label: Browser → Device
+        code: navigator.credentials.create()
+        text: The device returns a public key and an attestation.
+      - label: Browser → Server
+        code: send credential
+        text: The server verifies the challenge, origin and RP ID.
+      - label: Server
+        code: credential_id + public key
+        text: Stores these two. The private key never leaves the device.
+    takeaway: Signatures are bound to the domain, so a fake login page can't use the passkey.
+  tr:
+    kicker: "WebAuthn · passkey kaydı"
+    title: Sunucu yalnızca açık anahtarı saklar
+    steps:
+      - label: Tarayıcı → Sunucu
+        code: kayıt başlat
+        text: Sunucu seçenekler ve bir challenge ile yanıt verir.
+      - label: Tarayıcı → Cihaz
+        code: navigator.credentials.create()
+        text: Cihaz bir açık anahtar ve attestation döndürür.
+      - label: Tarayıcı → Sunucu
+        code: kimlik bilgisini gönder
+        text: Sunucu challenge'ı, origin'i ve RP ID'yi doğrular.
+      - label: Sunucu
+        code: credential_id + açık anahtar
+        text: Bu ikisini saklar. Özel anahtar cihazdan çıkmaz.
+    takeaway: İmza alan adına bağlı; sahte bir giriş sayfası kullanıcının passkey'ini kullanamaz.

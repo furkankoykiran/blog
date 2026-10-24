@@ -1,0 +1,21 @@
+# python scripts/images/render.py card scripts/images/templates/data/mcp-ai-open-source-contributions/unicode-fix-location.yaml "content/{lang}/posts/mcp-ai-open-source-contributions/img/unicode-fix-location.webp"
+template: compare
+langs:
+  en:
+    kicker: "Playwright MCP · lone surrogates"
+    title: Fix the text where it's produced
+    row_labels: [Where, Covers, Outcome]
+    use_label: Layer
+    columns:
+      - {name: "#1448", sub: "frankhommers' first attempt", rows: ["`cli.js`", "The output at the transport layer", Closed], use: Transport}
+      - {name: "#39625", pick: true, sub: "`sanitizeUnicode()` with `toWellFormed()`", rows: ["`response.ts`, next to `redactText()`", "Every tool, in one place", "Merged on March 14"], use: Where the text is produced}
+    takeaway: The client's strict JSON parser shows the error, but the server is where it should be fixed.
+  tr:
+    kicker: "Playwright MCP · eşsiz surrogate'ler"
+    title: Metni üretildiği yerde düzeltin
+    row_labels: [Nerede, Kapsam, Sonuç]
+    use_label: Katman
+    columns:
+      - {name: "#1448", sub: "frankhommers'ın ilk denemesi", rows: ["`cli.js`", "Taşıma katmanındaki çıktı", Kapatıldı], use: Taşıma}
+      - {name: "#39625", pick: true, sub: "`toWellFormed()` ile `sanitizeUnicode()`", rows: ["`response.ts`, `redactText()`'in yanında", "Bütün araçlar, tek noktadan", "14 Mart'ta merge edildi"], use: Metnin üretildiği yer}
+    takeaway: Hatayı istemcinin katı JSON ayrıştırıcısı gösterir, ama düzeltilmesi gereken yer sunucudur.

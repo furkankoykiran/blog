@@ -1,0 +1,38 @@
+# python scripts/images/render.py card scripts/images/templates/data/solana-program-development-rust/account-model.yaml "content/{lang}/posts/solana-program-development-rust/img/account-model.webp"
+template: steps
+head_width: 510
+langs:
+  en:
+    kicker: "Solana · the account model"
+    title: The program is stateless, its data lives in an account
+    steps:
+      - label: User wallet
+        code: Signer
+        text: Signs the transaction.
+      - label: Transaction
+        code: account list
+        text: Lists every account it will touch, up front.
+      - label: Counter program
+        code: executable, stateless
+        text: Owns the counter account, so only it may write to that account.
+      - label: Counter account
+        code: "PDA · seeds: counter + user"
+        text: Created and funded for rent by the System Program, called via CPI.
+    takeaway: Knowing the accounts in advance lets Sealevel run non-conflicting transactions in parallel.
+  tr:
+    kicker: "Solana · hesap modeli"
+    title: Program durumsuz, verisi ayrı bir hesapta
+    steps:
+      - label: Kullanıcı cüzdanı
+        code: Signer
+        text: İşlemi imzalar.
+      - label: İşlem
+        code: hesap listesi
+        text: Dokunacağı bütün hesapları baştan listeler.
+      - label: Counter programı
+        code: çalıştırılabilir, durumsuz
+        text: Counter hesabının sahibidir; o hesaba yalnızca o yazabilir.
+      - label: Counter hesabı
+        code: "PDA · seeds: counter + kullanıcı"
+        text: CPI ile çağrılan System Program oluşturur ve kirasını yatırır.
+    takeaway: Hesaplar önceden bilindiği için Sealevel çakışmayan işlemleri paralel çalıştırabilir.

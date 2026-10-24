@@ -1,0 +1,37 @@
+# python scripts/images/render.py card scripts/images/templates/data/prometheus-grafana-monitoring/pull-model.yaml "content/{lang}/posts/prometheus-grafana-monitoring/img/pull-model.webp"
+template: steps
+langs:
+  en:
+    kicker: "Prometheus · Grafana"
+    title: Prometheus pulls, Grafana only reads
+    steps:
+      - label: Scrape
+        title: Prometheus pulls
+        code: GET /metrics
+        text: Each target is scraped on an interval.
+      - label: Rules
+        title: Alerts go out
+        code: Alertmanager
+        text: It evaluates rules and sends firing alerts to Alertmanager.
+      - label: Dashboards
+        title: Grafana reads
+        code: PromQL
+        text: It queries Prometheus and draws the result. It stores nothing.
+    takeaway: Every step is a place where something breaks in production.
+  tr:
+    kicker: "Prometheus · Grafana"
+    title: Prometheus çeker, Grafana yalnızca okur
+    steps:
+      - label: Scrape
+        title: Prometheus çeker
+        code: GET /metrics
+        text: Her hedef belirli aralıklarla çekilir.
+      - label: Kurallar
+        title: Alarmlar gider
+        code: Alertmanager
+        text: Kuralları değerlendirir, oluşan alarmı Alertmanager’a iletir.
+      - label: Paneller
+        title: Grafana okur
+        code: PromQL
+        text: Prometheus’a sorgu atar ve sonucu çizer. Veri saklamaz.
+    takeaway: Her adım, üretimde bir şeyin bozulabileceği bir yer.

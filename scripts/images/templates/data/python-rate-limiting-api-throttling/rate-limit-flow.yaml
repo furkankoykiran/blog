@@ -1,0 +1,37 @@
+# python scripts/images/render.py card scripts/images/templates/data/python-rate-limiting-api-throttling/rate-limit-flow.yaml "content/{lang}/posts/python-rate-limiting-api-throttling/img/rate-limit-flow.webp"
+template: steps
+langs:
+  en:
+    kicker: "FastAPI · Redis · token bucket"
+    title: One atomic Redis call decides each request
+    steps:
+      - label: Dependency
+        title: The request arrives
+        code: rate_limit
+        text: The FastAPI dependency runs before the endpoint.
+      - label: Redis
+        title: The Lua script runs
+        code: EVALSHA
+        text: It refills the bucket, spends a token and returns the decision in one step.
+      - label: Response
+        title: 200 or 429
+        code: Retry-After
+        text: "Token left: the endpoint answers with `X-RateLimit-Remaining`. Empty: 429 and `Retry-After`."
+    takeaway: Separate read, compute and write commands would let two requests pass at once.
+  tr:
+    kicker: "FastAPI · Redis · token bucket"
+    title: Her isteğin kararı tek bir atomik Redis çağrısında
+    steps:
+      - label: Bağımlılık
+        title: İstek gelir
+        code: rate_limit
+        text: FastAPI bağımlılığı endpoint’ten önce çalışır.
+      - label: REDIS
+        title: Lua script’i çalışır
+        code: EVALSHA
+        text: Kovayı doldurur, bir jeton harcar ve kararı tek adımda döndürür.
+      - label: Yanıt
+        title: 200 ya da 429
+        code: Retry-After
+        text: "Jeton varsa endpoint `X-RateLimit-Remaining` ile cevap verir. Yoksa 429 ve `Retry-After`."
+    takeaway: Okuma, hesap ve yazma ayrı komutlarla yapılsa iki istek aynı anda geçebilirdi.

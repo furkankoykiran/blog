@@ -1,0 +1,21 @@
+# python scripts/images/render.py card scripts/images/templates/data/docker-python-app-containerization/docker-stages.yaml "content/{lang}/posts/docker-python-app-containerization/img/docker-stages.webp"
+template: compare
+langs:
+  en:
+    kicker: "Dockerfile · multi-stage with uv"
+    title: Only .venv crosses from builder to runtime
+    row_labels: [Starts from, Does, Holds]
+    use_label: Result
+    columns:
+      - {name: builder, mono: true, rows: ["`python:3.14-slim` + uv 0.13.5", "`uv sync` installs deps into `/app/.venv`", "uv, its cache, any compilers"], use: Left behind}
+      - {name: runtime, mono: true, pick: true, rows: ["`python:3.14-slim`", "Copies `/app/.venv` and `app/`, runs as user `app`", "The venv and the code, nothing else"], use: The final image}
+    takeaway: "Both stages use the image’s `/usr/local/bin/python`, so the copied `.venv` still works."
+  tr:
+    kicker: "Dockerfile · uv ile multi-stage"
+    title: Builder’dan runtime’a yalnızca .venv geçer
+    row_labels: [Taban, Ne yapar, İçinde]
+    use_label: Sonuç
+    columns:
+      - {name: builder, mono: true, rows: ["`python:3.14-slim` + uv 0.13.5", "`uv sync` bağımlılıkları `/app/.venv`’e kurar", "uv, önbelleği, derleyiciler"], use: Geride kalır}
+      - {name: runtime, mono: true, pick: true, rows: ["`python:3.14-slim`", "`/app/.venv` ve `app/` kopyalanır, `app` kullanıcısıyla çalışır", "Sadece venv ve kod"], use: Son imaj}
+    takeaway: "İki aşama da imajdaki `/usr/local/bin/python`’ı kullanır; kopyalanan `.venv` bu yüzden çalışır."

@@ -1,0 +1,30 @@
+# python scripts/images/render.py card scripts/images/templates/data/webhook-handler-event-driven-architecture/webhook-flow.yaml "content/{lang}/posts/webhook-handler-event-driven-architecture/img/webhook-flow.webp"
+template: steps
+head_width: 420
+langs:
+  en:
+    kicker: "Webhook handler · FastAPI"
+    title: Verify, store, answer; the worker does the rest
+    steps:
+      - code: X-Hub-Signature-256
+        text: HMAC-SHA256 over the raw body, compared with `hmac.compare_digest`.
+      - code: ON CONFLICT DO NOTHING
+        text: The event goes into the inbox table. A repeated event ID is skipped.
+      - code: 202 Accepted
+        text: The handler answers right away, before any real work.
+      - code: process_pending()
+        text: "The worker picks up pending events and marks them `done`, or `failed` after 5 attempts."
+    takeaway: The inbox stops duplicates from being stored, so keep the worker idempotent too.
+  tr:
+    kicker: "Webhook handler · FastAPI"
+    title: Doğrula, kaydet, cevap ver; gerisi worker’da
+    steps:
+      - code: X-Hub-Signature-256
+        text: Ham body üzerinden HMAC-SHA256, `hmac.compare_digest` ile karşılaştırılır.
+      - code: ON CONFLICT DO NOTHING
+        text: Olay inbox tablosuna yazılır. Aynı olay kimliği ikinci kez gelirse atlanır.
+      - code: 202 Accepted
+        text: Handler asıl iş başlamadan hemen cevap verir.
+      - code: process_pending()
+        text: "Worker bekleyen olayları alır ve `done` yapar; 5 denemeden sonra `failed`."
+    takeaway: Inbox aynı olayın iki kez kaydedilmesini engeller; worker’ı yine de idempotent tutun.

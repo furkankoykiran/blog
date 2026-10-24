@@ -1,0 +1,37 @@
+# python scripts/images/render.py card scripts/images/templates/data/web3py-ethereum-interaction/json-rpc-clients.yaml "content/{lang}/posts/web3py-ethereum-interaction/img/json-rpc-clients.webp"
+template: steps
+langs:
+  en:
+    kicker: "Ethereum · client libraries"
+    title: Every library speaks the same JSON-RPC
+    steps:
+      - label: Your code
+        title: Any language
+        code: web3.py · ethers · viem · web3j
+        text: Python, JavaScript or Java.
+      - label: Interface
+        title: JSON-RPC
+        code: HTTP · WebSocket · IPC
+        text: The provider decides the transport.
+      - label: Node
+        title: Ethereum client
+        code: Geth · Reth · hosted
+        text: Talks to the Ethereum p2p network.
+    takeaway: Whatever the language, the requests reaching the node look the same.
+  tr:
+    kicker: "Ethereum · istemci kütüphaneleri"
+    title: Bütün kütüphaneler aynı JSON-RPC'yi konuşur
+    steps:
+      - label: Kodunuz
+        title: Herhangi bir dil
+        code: web3.py · ethers · viem · web3j
+        text: Python, JavaScript ya da Java.
+      - label: Arayüz
+        title: JSON-RPC
+        code: HTTP · WebSocket · IPC
+        text: Taşıma katmanını provider belirler.
+      - label: Düğüm
+        title: Ethereum istemcisi
+        code: Geth · Reth · sağlayıcı
+        text: Ethereum p2p ağıyla konuşur.
+    takeaway: Dil değişse de düğüme giden istekler aynıdır.

@@ -1,0 +1,38 @@
+# python scripts/images/render.py card scripts/images/templates/data/elasticsearch-full-text-search/tr-text-analyzer-pipeline.yaml "content/{lang}/posts/elasticsearch-full-text-search/img/tr-text-analyzer-pipeline.webp"
+template: steps
+head_width: 490
+langs:
+  en:
+    kicker: "Elasticsearch · the tr_text analyzer"
+    title: "“İstanbul'da KOŞU ayakkabısı”, one filter at a time"
+    steps:
+      - label: standard tokenizer
+        code: "İstanbul'da · KOŞU · ayakkabısı"
+        text: Splits the text into tokens and keeps the apostrophe suffix attached.
+      - label: apostrophe
+        code: "İstanbul · KOŞU · ayakkabısı"
+        text: Drops everything after the apostrophe.
+      - label: turkish_lowercase
+        code: "istanbul · koşu · ayakkabısı"
+        text: "Lowercases with Turkish rules, so “İ” becomes a plain “i”."
+      - label: asciifolding
+        code: "istanbul · kosu · ayakkabisi"
+        text: Maps letters like ç, ş, ğ to ASCII. These tokens go into the index.
+    takeaway: "If indexing and searching don't produce the same tokens, nothing matches. Check with `_analyze`."
+  tr:
+    kicker: "Elasticsearch · tr_text analyzer'ı"
+    title: "“İstanbul'da KOŞU ayakkabısı”, filtre filtre"
+    steps:
+      - label: STANDARD TOKENIZER
+        code: "İstanbul'da · KOŞU · ayakkabısı"
+        text: Metni token'lara böler, kesme işaretli eki token'da bırakır.
+      - label: apostrophe
+        code: "İstanbul · KOŞU · ayakkabısı"
+        text: Kesme işaretinden sonrasını atar.
+      - label: TURKISH_LOWERCASE
+        code: "istanbul · koşu · ayakkabısı"
+        text: "Türkçe kurallarla küçültür; “İ” düz bir “i” olur."
+      - label: ASCIIFOLDING
+        code: "istanbul · kosu · ayakkabisi"
+        text: ç, ş, ğ gibi harfleri ASCII'ye çevirir. İndekse bu token'lar yazılır.
+    takeaway: "İndeksleme ve arama aynı token'ları üretmezse hiçbir şey eşleşmez. `_analyze` ile kontrol edin."

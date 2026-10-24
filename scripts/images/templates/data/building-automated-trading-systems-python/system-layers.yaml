@@ -1,0 +1,44 @@
+# python scripts/images/render.py card scripts/images/templates/data/building-automated-trading-systems-python/system-layers.yaml "content/{lang}/posts/building-automated-trading-systems-python/img/system-layers.webp"
+template: steps
+head_width: 340
+langs:
+  en:
+    kicker: "Trading system · five layers"
+    title: The strategy states intent, it never places orders
+    steps:
+      - label: Data
+        code: REST + WebSocket
+        text: History over REST, live prices over a WebSocket subscription.
+      - label: Strategy
+        code: signal
+        text: "Only says “I want this position in this symbol.”"
+      - label: Risk
+        code: approve / reject
+        text: Checks balance, open positions and the daily loss limit.
+      - label: Execution
+        code: amount_to_precision
+        text: Rounds to the exchange’s precision and minimums, then sends the order.
+      - label: Monitoring
+        code: heartbeat
+        text: If the bot goes quiet, my phone buzzes.
+    takeaway: Because of the split, I can swap strategies without touching the risk rules.
+  tr:
+    kicker: "Trading sistemi · beş katman"
+    title: Strateji niyet bildirir, emir göndermez
+    steps:
+      - label: Veri
+        code: REST + WebSocket
+        text: Geçmiş veri REST’ten, canlı fiyat WebSocket aboneliğinden gelir.
+      - label: Strateji
+        code: sinyal
+        text: "Sadece “şu sembolde şu pozisyonu istiyorum” der."
+      - label: Risk
+        code: onay / ret
+        text: Bakiyeye, açık pozisyonlara ve günlük zarar limitine bakar.
+      - label: Emir yürütme
+        code: amount_to_precision
+        text: Borsanın hassasiyet ve minimum kurallarına yuvarlar, emri gönderir.
+      - label: İzleme
+        code: heartbeat
+        text: Bot sessizleşirse telefonuma bildirim düşer.
+    takeaway: Bu ayrım sayesinde stratejiyi değiştirirken risk kurallarına dokunmam gerekmiyor.

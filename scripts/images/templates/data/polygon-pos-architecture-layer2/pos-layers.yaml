@@ -1,0 +1,23 @@
+# python scripts/images/render.py card scripts/images/templates/data/polygon-pos-architecture-layer2/pos-layers.yaml "content/{lang}/posts/polygon-pos-architecture-layer2/img/pos-layers.webp"
+template: compare
+langs:
+  en:
+    kicker: "Polygon PoS · three layers"
+    title: Stake on Ethereum, validation in Heimdall, blocks from Bor
+    row_labels: [Runs on, Its job]
+    use_label: Holds
+    columns:
+      - {name: Ethereum, sub: "Mainnet contracts", rows: ["Ethereum mainnet", "Staking, rewards, checkpoints and the PoS bridge"], use: "POL stake and checkpoint roots"}
+      - {name: Heimdall v2, sub: "Validation layer", rows: ["Cosmos SDK and CometBFT", "Manages validators, validates Bor’s blocks, builds checkpoints"], use: "The validator set"}
+      - {name: Bor, sub: "Block production layer", rows: ["Go Ethereum (Geth) based", "Produces blocks; EVM compatible"], use: "The blocks you read with web3.py"}
+    takeaway: Heimdall posts a Merkle root of recent blocks to Ethereum, signed by the validators.
+  tr:
+    kicker: "Polygon PoS · üç katman"
+    title: Stake Ethereum’da, doğrulama Heimdall’da, bloklar Bor’da
+    row_labels: [Ne üzerinde, Görevi]
+    use_label: Ne tutar
+    columns:
+      - {name: Ethereum, sub: "Ana ağdaki kontratlar", rows: ["Ethereum ana ağı", "Staking, ödüller, checkpoint’ler ve PoS bridge"], use: "POL stake’i ve checkpoint kökleri"}
+      - {name: Heimdall v2, sub: "Doğrulama katmanı", rows: ["Cosmos SDK ve CometBFT", "Doğrulayıcıları yönetir, Bor’un bloklarını doğrular, checkpoint kurar"], use: "Doğrulayıcı seti"}
+      - {name: Bor, sub: "Blok üretim katmanı", rows: ["Go Ethereum (Geth) tabanlı", "Blokları üretir; EVM uyumlu"], use: "web3.py ile okuduğunuz bloklar"}
+    takeaway: Heimdall son blokların Merkle kökünü doğrulayıcı imzalarıyla Ethereum’a gönderir.

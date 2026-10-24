@@ -1,0 +1,21 @@
+# python scripts/images/render.py card scripts/images/templates/data/grpc-high-performance-apis/http2-balancing.yaml "content/{lang}/posts/grpc-high-performance-apis/img/http2-balancing.webp"
+template: compare
+langs:
+  en:
+    kicker: "gRPC · HTTP/2 load balancing"
+    title: One HTTP/2 connection, one pod
+    row_labels: [Balances, With 3 replicas]
+    use_label: Verdict
+    columns:
+      - {name: L4 load balancer, sub: "e.g. a default `ClusterIP` service", rows: [Per connection, "One pod gets every request, two sit idle"], use: The trap}
+      - {name: "L7 proxy or\nclient-side LB", pick: true, sub: "Envoy, Istio, Linkerd or `round_robin`", rows: [Per request, Requests spread across all three], use: The fix}
+    takeaway: "With client-side balancing, set `grpc.max_connection_age_ms` so connections get recycled."
+  tr:
+    kicker: "gRPC · HTTP/2 yük dağıtımı"
+    title: Tek HTTP/2 bağlantısı, tek pod
+    row_labels: [Dağıtım, 3 replikayla]
+    use_label: Sonuç
+    columns:
+      - {name: L4 load balancer, sub: "Ör. varsayılan `ClusterIP` servisi", rows: [Bağlantı başına, "Tüm istekler tek pod’a, ikisi boşta"], use: Tuzak}
+      - {name: "L7 proxy ya da\nistemci tarafı LB", pick: true, sub: "Envoy, Istio, Linkerd ya da `round_robin`", rows: [İstek başına, İstekler üç pod’a dağılır], use: Çözüm}
+    takeaway: "İstemci tarafı dağıtımda bağlantılar yenilensin diye `grpc.max_connection_age_ms` ayarlayın."

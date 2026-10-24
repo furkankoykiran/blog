@@ -1,0 +1,21 @@
+# python scripts/images/render.py card scripts/images/templates/data/websocket-real-time-communication/websocket-real-time-overview.yaml "content/{lang}/posts/websocket-real-time-communication/img/websocket-real-time-overview.webp"
+template: compare
+langs:
+  en:
+    kicker: "HTTP vs WebSocket · live prices"
+    title: An HTTP request ends, a WebSocket stays open
+    row_labels: [Client sends, Server replies, After that]
+    use_label: Server push
+    columns:
+      - {name: HTTP, rows: ["`GET /prices`", "`200 OK` with JSON", "The exchange is over"], use: "No, it only answers requests"}
+      - {name: WebSocket, pick: true, rows: ["`GET /ws` with an `Upgrade` header", "`101 Switching Protocols`", "Price updates flow; the client can subscribe to BTC-USDT"], use: "Yes, either side sends at any time"}
+    takeaway: One TCP connection stays open in both directions.
+  tr:
+    kicker: "HTTP ve WebSocket · canlı fiyatlar"
+    title: HTTP isteği kapanır, WebSocket açık kalır
+    row_labels: [İstemci gönderir, Sunucu yanıtlar, Sonrası]
+    use_label: Sunucu push
+    columns:
+      - {name: HTTP, rows: ["`GET /prices`", "JSON ile `200 OK`", "Alışveriş biter"], use: "Hayır, yalnızca isteklere yanıt verir"}
+      - {name: WebSocket, pick: true, rows: ["`Upgrade` header'ı ile `GET /ws`", "`101 Switching Protocols`", "Fiyat güncellemeleri akar; istemci BTC-USDT'ye abone olabilir"], use: "Evet, iki taraf da her an gönderebilir"}
+    takeaway: Tek bir TCP bağlantısı iki yönde de açık kalır.

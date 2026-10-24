@@ -1,0 +1,52 @@
+# python scripts/images/render.py card scripts/images/templates/data/mysql-sqlalchemy-database-management/lazy-raise-fix.yaml "content/{lang}/posts/mysql-sqlalchemy-database-management/img/lazy-raise-fix.webp"
+# Shortened from the post's active_users_with_orders() and the lazy="raise" relationship on User.orders.
+template: before-after
+langs:
+  en:
+    kicker: "SQLAlchemy 2.0 · async"
+    title: lazy="raise" turns a hidden N+1 into an error
+    before:
+      label: "Before: no loading strategy"
+      lines:
+        - "stmt = select(User)"
+        - ""
+        - "users = await session.scalars(stmt)"
+        - "for user in users:"
+        - {t: "    user.orders  # raises", hl: bad}
+        - "# InvalidRequestError:"
+        - "# 'User.orders' is not available"
+    after:
+      label: "After: selectinload"
+      lines:
+        - "stmt = select(User).options("
+        - {t: "    selectinload(User.orders))", hl: good}
+        - "users = await session.scalars(stmt)"
+        - "for user in users:"
+        - "    user.orders  # already loaded"
+        - "# 2nd query:"
+        - "# ... WHERE user_id IN (...)"
+    takeaway: selectinload runs two queries in total, however many users come back.
+  tr:
+    kicker: "SQLAlchemy 2.0 · async"
+    title: lazy="raise" gizli N+1’i hataya çevirir
+    before:
+      label: "Önce: yükleme stratejisi yok"
+      lines:
+        - "stmt = select(User)"
+        - ""
+        - "users = await session.scalars(stmt)"
+        - "for user in users:"
+        - {t: "    user.orders  # hata", hl: bad}
+        - "# InvalidRequestError:"
+        - "# 'User.orders' is not available"
+    after:
+      label: "Sonra: selectinload"
+      lines:
+        - "stmt = select(User).options("
+        - {t: "    selectinload(User.orders))", hl: good}
+        - "users = await session.scalars(stmt)"
+        - "for user in users:"
+        - "    user.orders  # zaten yüklü"
+        - "# 2. sorgu:"
+        - "# ... WHERE user_id IN (...)"
+    takeaway: selectinload, kaç kullanıcı dönerse dönsün toplam iki sorgu çalıştırır.

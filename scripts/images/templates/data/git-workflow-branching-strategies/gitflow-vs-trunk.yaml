@@ -1,0 +1,21 @@
+# python scripts/images/render.py card scripts/images/templates/data/git-workflow-branching-strategies/gitflow-vs-trunk.yaml "content/{lang}/posts/git-workflow-branching-strategies/img/gitflow-vs-trunk.webp"
+template: compare
+langs:
+  en:
+    kicker: "Git · branching strategy"
+    title: GitFlow or trunk-based?
+    row_labels: [Long-lived branches, Branch lifetime, Unfinished work]
+    use_label: Fits
+    columns:
+      - {name: GitFlow, rows: ["`main` and `develop`", "Often weeks, so branches drift apart", "Waits on `feature/*` and `release/*`"], use: "Several release lines, store review, on-premise"}
+      - {name: Trunk-based, pick: true, rows: ["Only `main`", "Hours, a day or two at most", "Lands on `main` behind a feature flag"], use: A web service deployed several times a day}
+    takeaway: Trunk-based work depends on CI. Tests run on every PR and a red build blocks the merge.
+  tr:
+    kicker: "Git · dallanma stratejisi"
+    title: GitFlow mu, trunk-based mi?
+    row_labels: [Kalıcı dallar, Dalın ömrü, Bitmemiş iş]
+    use_label: Uygun
+    columns:
+      - {name: GitFlow, rows: ["`main` ve `develop`", "Çoğu zaman haftalar, dallar birbirinden uzaklaşır", "`feature/*` ve `release/*` dallarında bekler"], use: "Birden çok sürüm hattı, mağaza onayı, kurulumlu yazılım"}
+      - {name: Trunk-based, pick: true, rows: ["Sadece `main`", "Saatler, en fazla bir iki gün", "Feature flag arkasında `main`’e girer"], use: Günde birkaç kez deploy edilen web servisi}
+    takeaway: Trunk-based çalışma iyi CI ister. Her PR’da testler koşar, kırmızı build merge’ü engeller.

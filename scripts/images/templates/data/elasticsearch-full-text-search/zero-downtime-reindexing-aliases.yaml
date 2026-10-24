@@ -1,0 +1,31 @@
+# python scripts/images/render.py card scripts/images/templates/data/elasticsearch-full-text-search/zero-downtime-reindexing-aliases.yaml "content/{lang}/posts/elasticsearch-full-text-search/img/zero-downtime-reindexing-aliases.webp"
+template: steps
+langs:
+  en:
+    kicker: "Elasticsearch · reindexing behind an alias"
+    title: The app only knows the alias
+    steps:
+      - label: Before
+        code: products → products-v1
+        text: The application reads and writes through the products alias.
+      - label: Copy
+        code: _reindex
+        text: Create products-v2 with the new mapping and copy the data from v1.
+      - label: Swap
+        code: update_aliases
+        text: One atomic request moves the alias to v2. The app keeps using the same name.
+    takeaway: Writes to v1 during the reindex don't reach v2. Dual-write, or reindex again on updated_at.
+  tr:
+    kicker: "Elasticsearch · alias arkasında reindex"
+    title: Uygulama yalnızca alias'ı tanır
+    steps:
+      - label: Önce
+        code: products → products-v1
+        text: Uygulama products alias'ı üzerinden okur ve yazar.
+      - label: Kopyala
+        code: _reindex
+        text: products-v2 yeni mapping'le oluşturulur, veri v1'den kopyalanır.
+      - label: Geçiş
+        code: update_aliases
+        text: Tek bir atomik istek alias'ı v2'ye taşır. Uygulama aynı adı kullanmaya devam eder.
+    takeaway: Reindex sırasında v1'e yazılanlar v2'ye geçmez. Ya iki yere yazın ya da updated_at ile yeniden reindex edin.

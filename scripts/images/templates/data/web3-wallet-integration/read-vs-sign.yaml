@@ -1,0 +1,21 @@
+# python scripts/images/render.py card scripts/images/templates/data/web3-wallet-integration/read-vs-sign.yaml "content/{lang}/posts/web3-wallet-integration/img/read-vs-sign.webp"
+template: compare
+langs:
+  en:
+    kicker: "DApp · wallet · RPC"
+    title: Reading and signing are separate jobs
+    row_labels: [What, Who does it]
+    use_label: The private key
+    columns:
+      - {name: Reading, rows: ["Balances and contract state", "Your front end, through any RPC provider"], use: "Not needed"}
+      - {name: Signing, rows: ["A transaction or a message", "The user’s wallet, asked through EIP-1193 `request({ method, params })`"], use: "Stays in the wallet and never reaches your code"}
+    takeaway: ethers, viem and Reown all build on the wallet’s EIP-1193 interface.
+  tr:
+    kicker: "DApp · cüzdan · RPC"
+    title: Okumak ve imzalamak iki ayrı iş
+    row_labels: [Ne, Kim yapar]
+    use_label: PRIVATE KEY
+    columns:
+      - {name: Okuma, rows: ["Bakiyeler ve kontrat durumu", "Ön yüzünüz, herhangi bir RPC sağlayıcısı üzerinden"], use: "Gerekmez"}
+      - {name: İmzalama, rows: ["Bir işlem ya da mesaj", "Kullanıcının cüzdanı, EIP-1193 `request({ method, params })` ile istenir"], use: "Cüzdanda kalır, kodunuza hiç ulaşmaz"}
+    takeaway: ethers, viem ve Reown, cüzdanın EIP-1193 arayüzü üzerine kurulu.

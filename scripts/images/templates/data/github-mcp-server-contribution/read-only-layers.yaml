@@ -1,0 +1,31 @@
+# python scripts/images/render.py card scripts/images/templates/data/github-mcp-server-contribution/read-only-layers.yaml "content/{lang}/posts/github-mcp-server-contribution/img/read-only-layers.webp"
+template: steps
+langs:
+  en:
+    kicker: "github-mcp-server · read-only after #2208"
+    title: The flag sets the ceiling, the header can only lower it
+    steps:
+      - label: CLI flag
+        code: --read-only
+        text: A static upper bound on the tools the server allows.
+      - label: Request header
+        code: X-MCP-Readonly
+        text: Can narrow that set per request, never widen it.
+      - label: Client
+        title: The remaining tools
+        text: The tool list the client sees is what both layers allow.
+    takeaway: "Merged on April 13, 2026. It was cleaner than the middleware in my PR #2200."
+  tr:
+    kicker: "github-mcp-server · #2208 sonrası read-only"
+    title: Bayrak tavanı koyar, header yalnızca alçaltır
+    steps:
+      - label: CLI bayrağı
+        code: --read-only
+        text: Sunucunun izin verdiği araçlara statik bir üst sınır koyar.
+      - label: İstek header'ı
+        code: X-MCP-Readonly
+        text: Bu kümeyi istek başına daraltabilir, asla genişletemez.
+      - label: İstemci
+        title: Kalan araçlar
+        text: İstemcinin gördüğü liste, iki katmanın da izin verdiği araçlardır.
+    takeaway: "13 Nisan 2026'da merge edildi. Benim #2200'deki middleware'imden daha temizdi."
