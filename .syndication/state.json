@@ -2,7 +2,8 @@
   "https://blog.furkankoykiran.com.tr/en/posts/github-actions-self-hosted-runner/": {
     "id": 3621968,
     "url": "https://dev.to/furkankoykiran/free-ci-minutes-are-gone-setting-up-a-github-actions-self-hosted-runner-on-linux-4a6l",
-    "synced_at": "2026-10-24T04:07:30"
+    "hash": "44829933b0d6856dd180f01eb64dc3a46b2272d1748d781470255d7b65502c67",
+    "synced_at": "2026-10-24T03:16:40+00:00"
   },
   "https://blog.furkankoykiran.com.tr/posts/freqtrade-mcp-server-tr/": {
     "id": 3453987,
@@ -12,12 +13,14 @@
   "https://blog.furkankoykiran.com.tr/en/posts/freqtrade-mcp-server/": {
     "id": 3453986,
     "url": "https://dev.to/furkankoykiran/freqtrade-mcp-ask-claude-to-check-your-trades-44hj",
-    "synced_at": "2026-10-24T04:07:41"
+    "hash": "2a1acd1f4d9e23af4c4a823dfcb9f213f8f297ba71ddfa510734a1e6ebf3d4ff",
+    "synced_at": "2026-10-24T03:16:40+00:00"
   },
   "https://blog.furkankoykiran.com.tr/en/posts/awesome-trending-repos-web/": {
     "id": 3416810,
     "url": "https://dev.to/furkankoykiran/awesome-trending-repos-modern-web-interface-for-github-trending-26b5",
-    "synced_at": "2026-10-24T04:07:46"
+    "hash": "36d2d0b4655c82d71b9a6cd3864ab165bdf031a9bde77e32dbf873cd22aa6e74",
+    "synced_at": "2026-10-24T03:16:40+00:00"
   },
   "https://blog.furkankoykiran.com.tr/posts/awesome-trending-repos-web/": {
     "id": 3416808,
@@ -27,7 +30,8 @@
   "https://blog.furkankoykiran.com.tr/en/posts/cli-anything-browser-automation-contribution/": {
     "id": 3386202,
     "url": "https://dev.to/furkankoykiran/adding-browser-automation-to-cli-anything-first-mcp-backend-pattern-4bb3",
-    "synced_at": "2026-10-24T04:07:56"
+    "hash": "b30257eb3684477565b8f49d593e8f5a3b85edd8752df0fb5a627c28e89bc037",
+    "synced_at": "2026-10-24T03:16:40+00:00"
   },
   "https://blog.furkankoykiran.com.tr/posts/cli-anything-browser-automation-katkim/": {
     "id": 3386201,
@@ -37,7 +41,8 @@
   "https://blog.furkankoykiran.com.tr/en/posts/my-open-source-contribution-keploy/": {
     "id": 3378441,
     "url": "https://dev.to/furkankoykiran/my-keploy-contribution-resource-management-in-go-and-open-source-journey-2139",
-    "synced_at": "2026-10-24T04:08:07"
+    "hash": "6715b2789421506558a63a8056bed6ee3d2358096e30dfb2e4a9c9ee86b2a72f",
+    "synced_at": "2026-10-24T03:16:40+00:00"
   },
   "https://blog.furkankoykiran.com.tr/posts/keploy-acik-kaynak-katkim/": {
     "id": 3378440,
