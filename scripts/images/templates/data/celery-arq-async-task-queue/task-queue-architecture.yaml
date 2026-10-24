@@ -1,0 +1,38 @@
+# python scripts/images/render.py card scripts/images/templates/data/celery-arq-async-task-queue/task-queue-architecture.yaml "content/{lang}/posts/celery-arq-async-task-queue/img/task-queue-architecture.webp"
+template: steps
+head_width: 300
+langs:
+  en:
+    kicker: "Celery and Arq · the same moving parts"
+    title: The request returns, a worker does the heavy work
+    steps:
+      - label: Web app
+        code: enqueue
+        text: Drops the task on the broker and returns right away.
+      - label: Broker
+        code: RabbitMQ / Redis
+        text: Holds the queue. A scheduler (Celery beat, Arq cron) adds periodic jobs here too.
+      - label: Workers
+        code: worker 1 … N
+        text: Pull tasks from the queue and run them.
+      - label: Result backend
+        code: result
+        text: Stores the return value, if you need it.
+    takeaway: For fire-and-forget work like email, you usually skip the result backend.
+  tr:
+    kicker: "Celery ve Arq · aynı parçalar"
+    title: İstek hemen döner, ağır işi worker yapar
+    steps:
+      - label: Web uygulaması
+        code: enqueue
+        text: Görevi broker'a bırakır ve hemen döner.
+      - label: Broker
+        code: RabbitMQ / Redis
+        text: Kuyruğu tutar. Zamanlayıcı (Celery beat, Arq cron) periyodik görevleri de buraya ekler.
+      - label: Worker'lar
+        code: worker 1 … N
+        text: Görevleri kuyruktan çekip çalıştırır.
+      - label: Result backend
+        code: sonuç
+        text: Gerekiyorsa dönüş değerini saklar.
+    takeaway: E-posta gibi gönderip unuttuğunuz işlerde result backend'e genellikle gerek kalmaz.

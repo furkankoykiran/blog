@@ -1,0 +1,30 @@
+# python scripts/images/render.py card scripts/images/templates/data/ai-face-detector/detect-flow.yaml "content/{lang}/posts/ai-face-detector/img/detect-flow.webp"
+template: steps
+head_width: 480
+langs:
+  en:
+    kicker: "ai-face-detector · FastAPI"
+    title: One /detect request, from upload to verdict
+    steps:
+      - code: POST /detect
+        text: Accepts a JPG, PNG or WEBP file of up to 5 MB.
+      - code: 224×224 + ImageNet norm
+        text: The image is resized and normalized with ImageNet mean and std.
+      - code: MobileNetV2 → 1 logit
+        text: The model, loaded once at startup, returns a single logit.
+      - code: sigmoid < 0.5 → AI_GENERATED
+        text: "The sigmoid is the probability of `REAL`; the reply is JSON with a confidence."
+    takeaway: "If `model.pth` is missing, the API still starts but `/detect` returns 503."
+  tr:
+    kicker: "ai-face-detector · FastAPI"
+    title: Bir /detect isteği, yüklemeden karara
+    steps:
+      - code: POST /detect
+        text: En fazla 5 MB’lık JPG, PNG ya da WEBP dosyası alır.
+      - code: 224×224 + ImageNet norm
+        text: Görsel ölçeklenir, ImageNet ortalaması ve standart sapmasıyla normalize edilir.
+      - code: MobileNetV2 → 1 logit
+        text: Açılışta bir kez yüklenen model tek bir logit döndürür.
+      - code: sigmoid < 0.5 → AI_GENERATED
+        text: "Sigmoid `REAL` olasılığıdır; cevap, confidence ile birlikte JSON olarak döner."
+    takeaway: "`model.pth` yoksa API yine açılır ama `/detect` 503 döndürür."

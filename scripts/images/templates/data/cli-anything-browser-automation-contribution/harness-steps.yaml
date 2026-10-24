@@ -1,0 +1,33 @@
+# python scripts/images/render.py card scripts/images/templates/data/cli-anything-browser-automation-contribution/harness-steps.yaml "content/{lang}/posts/cli-anything-browser-automation-contribution/img/harness-steps.webp"
+template: steps
+langs:
+  en:
+    kicker: "CLI-Anything · browser harness"
+    title: An MCP client sits between the CLI and Chrome
+    steps:
+      - label: CLI
+        title: Click commands
+        text: "Four groups: `page`, `fs`, `act` and `session`. The CLI keeps the URL and working directory."
+      - label: MCP client
+        title: The backend
+        code: mcp SDK · stdio
+        text: "`domshell_backend.py` talks to the DOMShell MCP server over stdio."
+      - label: Browser
+        title: DOMShell
+        text: Its MCP server and extension expose Chrome’s Accessibility Tree as a filesystem.
+    takeaway: Most harnesses shell out to an app or call its API. This one goes through MCP.
+  tr:
+    kicker: "CLI-Anything · tarayıcı harness’ı"
+    title: CLI ile Chrome arasında bir MCP istemcisi var
+    steps:
+      - label: CLI
+        title: Click komutları
+        text: "Dört grup: `page`, `fs`, `act` ve `session`. URL ve çalışma dizinini CLI tutar."
+      - label: MCP istemcisi
+        title: Backend
+        code: mcp SDK · stdio
+        text: "`domshell_backend.py`, DOMShell MCP sunucusuyla stdio üzerinden konuşur."
+      - label: Tarayıcı
+        title: DOMShell
+        text: MCP sunucusu ve eklentisi, Chrome’un Accessibility Tree’sini dosya sistemi gibi sunar.
+    takeaway: Çoğu harness uygulamayı ya da API’sini doğrudan çağırır. Bu, araya MCP koyuyor.

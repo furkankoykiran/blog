@@ -1,0 +1,23 @@
+# python scripts/images/render.py card scripts/images/templates/data/python-asyncio-concurrent-processing/blocking-work-choice.yaml "content/{lang}/posts/python-asyncio-concurrent-processing/img/blocking-work-choice.webp"
+template: compare
+langs:
+  en:
+    kicker: "asyncio · inside the loop"
+    title: Where each kind of work goes
+    row_labels: [Work, Examples]
+    use_label: Run it with
+    columns:
+      - {name: "await", mono: true, rows: ["I/O, an async library exists", "`httpx`, `aiohttp`, `asyncpg`"], use: "A plain `await`"}
+      - {name: "to_thread", mono: true, rows: ["I/O, only a sync library", "`requests`, a vendor SDK, file compression"], use: "`to_thread()`: the thread releases the GIL while it waits"}
+      - {name: "process pool", mono: true, rows: ["CPU-heavy computation", "Image processing, number crunching"], use: "`run_in_executor` with a process pool"}
+    takeaway: All three keep the event loop free to serve other tasks.
+  tr:
+    kicker: "asyncio · loop içinde"
+    title: Hangi iş nereye
+    row_labels: [İş, Örnekler]
+    use_label: Nasıl çalıştırılır
+    columns:
+      - {name: "await", mono: true, rows: ["I/O, async kütüphanesi var", "`httpx`, `aiohttp`, `asyncpg`"], use: "Doğrudan `await`"}
+      - {name: "to_thread", mono: true, rows: ["I/O, yalnızca senkron kütüphane", "`requests`, bir vendor SDK’sı, dosya sıkıştırma"], use: "`to_thread()`: thread beklerken GIL’i bırakır"}
+      - {name: "process pool", mono: true, rows: ["CPU ağırlıklı hesaplama", "Görüntü işleme, sayı hesaplama"], use: "Process pool ile `run_in_executor`"}
+    takeaway: Üçü de event loop’u başka işlere hizmet etmesi için boş bırakır.

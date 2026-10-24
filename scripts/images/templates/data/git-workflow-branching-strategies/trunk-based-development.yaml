@@ -1,0 +1,38 @@
+# python scripts/images/render.py card scripts/images/templates/data/git-workflow-branching-strategies/trunk-based-development.yaml "content/{lang}/posts/git-workflow-branching-strategies/img/trunk-based-development.webp"
+template: steps
+head_width: 410
+langs:
+  en:
+    kicker: "Trunk-based · from v1.4.0 to v1.5.0"
+    title: Each branch is one commit, then back into main
+    steps:
+      - label: fix-login
+        code: "fix: token expiry"
+        text: Merged back into main after a single commit.
+      - label: feat-search
+        code: "feat: search (flag off)"
+        text: Lands on main unfinished, hidden behind a feature flag.
+      - label: main
+        code: "chore: deps"
+        text: Small changes go straight onto the trunk.
+      - label: feat-search-ui
+        code: "feat: search UI"
+        text: Merged, then main is tagged v1.5.0.
+    takeaway: Branches live for hours, a day or two at most, so main stays current.
+  tr:
+    kicker: "Trunk-based · v1.4.0'dan v1.5.0'a"
+    title: Her branch tek commit, sonra main'e geri
+    steps:
+      - label: FIX-LOGIN
+        code: "fix: token süresi"
+        text: Tek bir commit'ten sonra main'e birleşir.
+      - label: feat-search
+        code: "feat: arama (flag kapalı)"
+        text: Bitmeden main'e girer, feature flag arkasında gizli kalır.
+      - label: MAIN
+        code: "chore: bağımlılık"
+        text: Küçük değişiklikler doğrudan ana branch'e gider.
+      - label: FEAT-SEARCH-UI
+        code: "feat: arama arayüzü"
+        text: Birleşir, ardından main v1.5.0 olarak etiketlenir.
+    takeaway: Branch'ler saatler, en fazla bir iki gün yaşar; main hep güncel kalır.

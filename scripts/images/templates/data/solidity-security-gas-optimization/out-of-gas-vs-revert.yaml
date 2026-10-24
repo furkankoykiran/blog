@@ -1,0 +1,23 @@
+# python scripts/images/render.py card scripts/images/templates/data/solidity-security-gas-optimization/out-of-gas-vs-revert.yaml "content/{lang}/posts/solidity-security-gas-optimization/img/out-of-gas-vs-revert.webp"
+template: compare
+langs:
+  en:
+    kicker: "EVM · gas check before every opcode"
+    title: How a transaction ends
+    row_labels: [State changes, Unused gas]
+    use_label: Happens when
+    columns:
+      - {name: Out of gas, rows: ["Rolled back", "All of it is spent"], use: "There isn’t enough gas for the next opcode"}
+      - {name: REVERT, mono: true, rows: ["Rolled back", "Refunded"], use: "Execution reaches a REVERT"}
+      - {name: Success, rows: ["Kept, with a receipt", "Refunded"], use: "There are no more opcodes to run"}
+    takeaway: The user pays gas used times gas price. Your code only controls the first part.
+  tr:
+    kicker: "EVM · her opcode öncesi gas kontrolü"
+    title: Bir işlem nasıl biter
+    row_labels: [Durum değişiklikleri, Kullanılmayan gas]
+    use_label: Ne zaman
+    columns:
+      - {name: Out of gas, rows: ["Geri alınır", "Tamamı harcanır"], use: "Sıradaki opcode için yeterli gas kalmadığında"}
+      - {name: REVERT, mono: true, rows: ["Geri alınır", "İade edilir"], use: "Yürütme bir REVERT’e geldiğinde"}
+      - {name: Başarılı, rows: ["Kalır, makbuz (receipt) oluşur", "İade edilir"], use: "Çalışacak opcode kalmadığında"}
+    takeaway: Kullanıcı harcanan gas ile gas fiyatının çarpımını öder. Kodunuz yalnızca ilkini belirler.

@@ -1,0 +1,38 @@
+# python scripts/images/render.py card scripts/images/templates/data/gitlab-github-jekyll-migration/migration-stops.yaml "content/{lang}/posts/gitlab-github-jekyll-migration/img/migration-stops.webp"
+template: steps
+head_width: 420
+langs:
+  en:
+    kicker: "Blog and portfolio · four stops"
+    title: From GitHub to GitLab and back, then to Hugo
+    steps:
+      - label: Start
+        title: GitHub · Jekyll + Pages
+        text: Portfolio and blog, both Jekyll sites on GitHub Pages.
+      - label: Account suspended
+        title: GitLab · GitLab CI + Pages
+        text: "Repos pushed from local clones; CI rewritten as one `.gitlab-ci.yml`."
+      - label: Account restored
+        title: GitHub · Jekyll + Actions
+        text: Back for the projects I contribute to, my tools and Dependabot.
+      - label: Last stop
+        title: GitHub · Hugo + Actions
+        text: Both sites on Hugo with the Blowfish theme, deployed by Actions.
+    takeaway: Git itself moved easily. Rewriting CI/CD was the real work.
+  tr:
+    kicker: "Blog ve portfolyo · dört durak"
+    title: GitHub’dan GitLab’e, geri dönüş ve Hugo
+    steps:
+      - label: Başlangıç
+        title: GitHub · Jekyll + Pages
+        text: Portfolyo ve blog, ikisi de GitHub Pages’te Jekyll.
+      - label: Hesap askıya alındı
+        title: GitLab · GitLab CI + Pages
+        text: "Repolar yerel kopyalardan taşındı; CI tek bir `.gitlab-ci.yml` olarak yeniden yazıldı."
+      - label: Hesap geri geldi
+        title: GitHub · Jekyll + Actions
+        text: Katkı verdiğim projeler, araçlarım ve Dependabot için geri dönüş.
+      - label: Son durak
+        title: GitHub · Hugo + Actions
+        text: İki site de Blowfish temalı Hugo’da, Actions ile yayınlanıyor.
+    takeaway: Git kolay taşındı. Asıl iş CI/CD’yi yeniden yazmaktı.

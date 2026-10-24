@@ -1,0 +1,37 @@
+# python scripts/images/render.py card scripts/images/templates/data/mcp-gemini-challenge-experience/agent-publish-steps.yaml "content/{lang}/posts/mcp-gemini-challenge-experience/img/agent-publish-steps.webp"
+template: steps
+langs:
+  en:
+    kicker: "DevTo-MCP · Gemini challenge"
+    title: One instruction, four steps, a live post
+    steps:
+      - label: Research
+        title: Reads the challenge
+        text: The announcement and the submission template with its required sections.
+      - label: Source
+        title: Reads my DevTo-MCP post
+        text: Maps its technical content onto the template.
+      - label: Write
+        title: Drafts the entry
+        text: Adds a note that it was written and published through DevTo-MCP.
+      - label: Publish
+        code: "create_article(published: true)"
+        text: Live on DEV on February 27, 2026, within a few minutes.
+    takeaway: "Next time the agent sends published: false and I publish the draft myself."
+  tr:
+    kicker: "DevTo-MCP · Gemini yarışması"
+    title: Tek talimat, dört adım, yayında bir yazı
+    steps:
+      - label: Araştırma
+        title: Yarışmayı okur
+        text: Duyuruyu ve istenen bölümleri içeren gönderim şablonunu.
+      - label: Kaynak
+        title: DevTo-MCP yazımı okur
+        text: Teknik içeriği şablonun bölümlerine dağıtır.
+      - label: Yazım
+        title: Makaleyi yazar
+        text: Sonuna, DevTo-MCP üzerinden otonom yayınlandığını söyleyen bir not ekler.
+      - label: Yayın
+        code: "create_article(published: true)"
+        text: 27 Şubat 2026’da, birkaç dakika içinde DEV’de yayında.
+    takeaway: "Bir dahaki sefere ajan published: false gönderecek, taslağı ben yayınlayacağım."

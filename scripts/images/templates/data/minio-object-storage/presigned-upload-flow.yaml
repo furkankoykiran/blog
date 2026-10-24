@@ -1,0 +1,38 @@
+# python scripts/images/render.py card scripts/images/templates/data/minio-object-storage/presigned-upload-flow.yaml "content/{lang}/posts/minio-object-storage/img/presigned-upload-flow.webp"
+template: steps
+head_width: 340
+langs:
+  en:
+    kicker: "Object storage · presigned upload"
+    title: The file never passes through the app server
+    steps:
+      - label: Browser → API
+        code: request upload
+        text: Sends the file name and type.
+      - label: API → Browser
+        code: presigned PUT URL
+        text: Checks permissions, generates a key, returns a URL valid for 10 minutes.
+      - label: Browser → Storage
+        code: PUT file
+        text: Uploads straight to S3-compatible storage, which answers 200 OK.
+      - label: Browser → API
+        code: upload done
+        text: Reports back, and the API stores the key.
+    takeaway: The API only grants access and records the key. Large files skip your servers.
+  tr:
+    kicker: "Object storage · presigned yükleme"
+    title: Dosya uygulama sunucusundan hiç geçmez
+    steps:
+      - label: Tarayıcı → API
+        code: yükleme izni iste
+        text: Dosya adını ve türünü gönderir.
+      - label: API → Tarayıcı
+        code: presigned PUT URL
+        text: Yetkiyi kontrol eder, key üretir, 10 dakika geçerli bir URL döner.
+      - label: Tarayıcı → Depolama
+        code: PUT dosya
+        text: Doğrudan S3 uyumlu depolamaya yükler; depolama 200 OK döner.
+      - label: Tarayıcı → API
+        code: yükleme bitti
+        text: API'ye bildirir, API key'i kaydeder.
+    takeaway: API yalnızca izni verir ve key'i kaydeder. Büyük dosyalar sunucularınıza uğramaz.

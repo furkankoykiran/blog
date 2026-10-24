@@ -1,0 +1,21 @@
+# python scripts/images/render.py card scripts/images/templates/data/database-connection-pool-optimization/pgbouncer-scale-out.yaml "content/{lang}/posts/database-connection-pool-optimization/img/pgbouncer-scale-out.webp"
+template: compare
+langs:
+  en:
+    kicker: "PostgreSQL · scaling out"
+    title: PgBouncer turns hundreds of connections into a few dozen
+    row_labels: [App side, PostgreSQL sees]
+    use_label: Result
+    columns:
+      - {name: Direct, sub: "a small pool in every process", rows: ["Workers 1 to N, each with its own pool", "Every pooled connection"], use: "The total passes `max_connections`"}
+      - {name: "Through PgBouncer", pick: true, sub: "transaction mode", rows: ["Hundreds of client connections to PgBouncer", "20 to 50 real connections"], use: A few dozen connections}
+    takeaway: In session mode a server connection stays with its client, which barely reduces the total.
+  tr:
+    kicker: "PostgreSQL · ölçeklenince"
+    title: PgBouncer yüzlerce bağlantıyı birkaç düzineye indirir
+    row_labels: [Uygulama tarafı, POSTGRESQL'E ULAŞAN]
+    use_label: Sonuç
+    columns:
+      - {name: Doğrudan, sub: "her process'te küçük bir havuz", rows: ["1'den N'ye worker, her birinin kendi havuzu", "Havuzlardaki bütün bağlantılar"], use: "Toplam `max_connections`'ı aşar"}
+      - {name: "PgBouncer üzerinden", pick: true, sub: "transaction modu", rows: ["PgBouncer'a yüzlerce istemci bağlantısı", "20-50 gerçek bağlantı"], use: Birkaç düzine bağlantı}
+    takeaway: Session modunda sunucu bağlantısı istemcide kalır; toplamı neredeyse hiç azaltmaz.

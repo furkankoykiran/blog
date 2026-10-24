@@ -1,0 +1,37 @@
+# python scripts/images/render.py card scripts/images/templates/data/re2-lookaround-proof-of-concept/bounded-subprograms.yaml "content/{lang}/posts/re2-lookaround-proof-of-concept/img/bounded-subprograms.webp"
+template: steps
+langs:
+  en:
+    kicker: "RE2 · (?<!pre)main(?=post)"
+    title: Each lookaround compiles to its own subprogram
+    steps:
+      - label: Compile
+        title: One pattern, three programs
+        code: main · pre · post
+        text: The main program plus one subprogram per lookaround.
+      - label: Run
+        title: The NFA hits a lookaround
+        code: kInstLookBehind
+        text: It runs the matching subprogram at the current position.
+      - label: Decide
+        title: Continue or die
+        code: kInstLookAhead
+        text: The thread goes on only if the subprogram’s result allows it.
+    takeaway: Lookbehind looks back at most 255 characters, so the extra work per position stays bounded.
+  tr:
+    kicker: "RE2 · (?<!pre)main(?=post)"
+    title: Her lookaround kendi alt programına derleniyor
+    steps:
+      - label: Derleme
+        title: Bir kalıp, üç program
+        code: main · pre · post
+        text: Ana program ve her lookaround için bir alt program.
+      - label: Çalıştırma
+        title: NFA bir lookaround’a gelir
+        code: kInstLookBehind
+        text: İlgili alt programı o konumda çalıştırır.
+      - label: Karar
+        title: Devam ya da düşür
+        code: kInstLookAhead
+        text: Thread yalnızca alt programın sonucu izin verirse devam eder.
+    takeaway: Lookbehind en fazla 255 karakter geriye bakar, konum başına ek iş sınırlı kalır.

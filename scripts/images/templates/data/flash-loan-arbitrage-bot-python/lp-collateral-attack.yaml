@@ -1,0 +1,34 @@
+# python scripts/images/render.py card scripts/images/templates/data/flash-loan-arbitrage-bot-python/lp-collateral-attack.yaml "content/{lang}/posts/flash-loan-arbitrage-bot-python/img/lp-collateral-attack.webp"
+template: steps
+head_width: 300
+langs:
+  en:
+    kicker: "Flash loan attack · one transaction"
+    title: LP tokens priced from pool reserves can be inflated
+    steps:
+      - code: flash loan
+        text: Borrow DAI and WETH from flash loan sources.
+      - code: add liquidity
+        text: Add liquidity to the WETH/DAI pool and deposit the LP tokens as collateral.
+      - code: huge swap
+        text: Swap a huge amount of WETH for DAI. The reserves skew, so the collateral looks far bigger.
+      - code: borrow
+        text: Borrow DAI and USDC against the inflated collateral.
+      - code: swap back, repay
+        text: Swap back and repay the flash loans. What’s left of the borrowed funds is the profit.
+    takeaway: Design a protocol assuming the attacker has unlimited capital for one transaction.
+  tr:
+    kicker: "Flash loan saldırısı · tek işlem"
+    title: Havuz rezervlerinden fiyatlanan LP token şişirilebilir
+    steps:
+      - code: flash loan
+        text: Flash loan kaynaklarından DAI ve WETH borç alınır.
+      - code: likidite ekle
+        text: WETH/DAI havuzuna likidite eklenir, alınan LP token’lar teminat olarak yatırılır.
+      - code: dev swap
+        text: Çok büyük miktarda WETH, DAI’ye çevrilir. Rezervler bozulur, teminat çok daha değerli görünür.
+      - code: borç al
+        text: Şişen teminata karşı DAI ve USDC borç alınır.
+      - code: geri çevir, öde
+        text: Swap geri çevrilir, flash loan’lar ödenir. Borç alınan fonlardan kalan kısım kârdır.
+    takeaway: Protokolü, saldırganın tek bir işlem için sınırsız sermayesi varmış gibi tasarlayın.

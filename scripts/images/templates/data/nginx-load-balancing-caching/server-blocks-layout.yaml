@@ -1,0 +1,21 @@
+# python scripts/images/render.py card scripts/images/templates/data/nginx-load-balancing-caching/server-blocks-layout.yaml "content/{lang}/posts/nginx-load-balancing-caching/img/server-blocks-layout.webp"
+template: compare
+langs:
+  en:
+    kicker: "nginx · server blocks"
+    title: Same IP, different Host, different block
+    row_labels: [Request, Reaches, Matches, Serves]
+    use_label: Config file
+    columns:
+      - {name: Site A, rows: ["`Host: a.example.com`", "nginx on :80 / :443", "`server_name a.example.com`", "`/var/www/a.example.com`"], use: "Its own file in `conf.d/`"}
+      - {name: Site B, rows: ["`Host: b.example.com`", "The same nginx", "`server_name b.example.com`", "`/var/www/b.example.com`"], use: "Its own file in `conf.d/`"}
+    takeaway: "Every `server` block is a virtual host. Test the config before each reload."
+  tr:
+    kicker: "nginx · server blokları"
+    title: Aynı IP, farklı Host, farklı blok
+    row_labels: [İstek, Ulaştığı, Eşleşen, Sunduğu]
+    use_label: CONFIG DOSYASI
+    columns:
+      - {name: Site A, rows: ["`Host: a.example.com`", ":80 / :443'teki nginx", "`server_name a.example.com`", "`/var/www/a.example.com`"], use: "`conf.d/` altında kendi dosyası"}
+      - {name: Site B, rows: ["`Host: b.example.com`", "Aynı nginx", "`server_name b.example.com`", "`/var/www/b.example.com`"], use: "`conf.d/` altında kendi dosyası"}
+    takeaway: "Her `server` bloğu bir sanal host. Her reload'dan önce config'i test edin."

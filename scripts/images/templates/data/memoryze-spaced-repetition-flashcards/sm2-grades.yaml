@@ -1,0 +1,21 @@
+# python scripts/images/render.py card scripts/images/templates/data/memoryze-spaced-repetition-flashcards/sm2-grades.yaml "content/{lang}/posts/memoryze-spaced-repetition-flashcards/img/sm2-grades.webp"
+template: compare
+langs:
+  en:
+    kicker: "SM-2 · one review"
+    title: What the grade does to a card
+    row_labels: [repetition, Next review in]
+    use_label: Result
+    columns:
+      - {name: "q ≥ 3", mono: true, sub: "Hard, Good, Easy", pick: true, rows: ["`+ 1`", "1 day, then 6, then `interval × EF`"], use: The gaps keep growing}
+      - {name: "q < 3", mono: true, sub: "Again", rows: ["Back to `0`", "1 day"], use: The card starts over}
+    takeaway: EF is updated after every grade (Easy +0.1, Hard −0.14) and never drops below 1.3.
+  tr:
+    kicker: "SM-2 · bir tekrar"
+    title: Verilen not karta ne yapar?
+    row_labels: [Tekrar sayısı, Sonraki tekrar]
+    use_label: Sonuç
+    columns:
+      - {name: "q ≥ 3", mono: true, sub: "Hard, Good, Easy", pick: true, rows: ["`+ 1`", "1 gün, sonra 6, sonra `interval × EF`"], use: Aralıklar büyümeye devam eder}
+      - {name: "q < 3", mono: true, sub: "Again", rows: ["`0`’a döner", "1 gün"], use: Kart baştan başlar}
+    takeaway: EF her nottan sonra güncellenir (Easy +0,1, Hard −0,14) ve 1,3’ün altına inmez.

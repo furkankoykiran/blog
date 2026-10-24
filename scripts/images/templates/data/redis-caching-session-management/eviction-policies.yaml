@@ -1,0 +1,23 @@
+# python scripts/images/render.py card scripts/images/templates/data/redis-caching-session-management/eviction-policies.yaml "content/{lang}/posts/redis-caching-session-management/img/eviction-policies.webp"
+template: compare
+langs:
+  en:
+    kicker: "Redis · maxmemory-policy"
+    title: What Redis does when memory is full
+    row_labels: [Evicts]
+    use_label: Use for
+    columns:
+      - {name: "allkeys-lru\nallkeys-lfu", mono: true, rows: [Any key], use: A pure cache}
+      - {name: "volatile-lru\nvolatile-lfu", mono: true, rows: [Only keys with a TTL], use: Keys without a TTL must stay}
+      - {name: noeviction, mono: true, sub: "Writes fail with an error", rows: [Nothing], use: Data you can’t lose}
+    takeaway: When you can, run one Redis for the cache and a separate one for sessions and queues.
+  tr:
+    kicker: "Redis · maxmemory-policy"
+    title: Bellek dolunca Redis ne yapar?
+    row_labels: [Ne siler]
+    use_label: Ne için
+    columns:
+      - {name: "allkeys-lru\nallkeys-lfu", mono: true, rows: [Herhangi bir anahtarı], use: Saf önbellek}
+      - {name: "volatile-lru\nvolatile-lfu", mono: true, rows: [Sadece TTL’i olan anahtarları], use: TTL’siz anahtarlar kalmalı}
+      - {name: noeviction, mono: true, sub: "Yazmalar hata ile reddedilir", rows: [Hiçbir şeyi], use: Kaybedilemeyecek veri}
+    takeaway: Mümkünse önbellek için ayrı, oturumlar ve kuyruklar için ayrı bir Redis çalıştırın.

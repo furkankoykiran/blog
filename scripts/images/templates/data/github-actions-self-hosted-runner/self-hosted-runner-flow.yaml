@@ -1,0 +1,35 @@
+# python scripts/images/render.py card scripts/images/templates/data/github-actions-self-hosted-runner/self-hosted-runner-flow.yaml "content/{lang}/posts/github-actions-self-hosted-runner/img/self-hosted-runner-flow.webp"
+template: steps
+langs:
+  en:
+    kicker: "GitHub Actions · self-hosted runner"
+    title: The runner always opens the connection
+    steps:
+      - label: Runner → GitHub
+        title: Wait for a job
+        code: HTTPS long poll
+        text: An outbound connection from your server.
+      - label: GitHub → Runner
+        title: A matching job
+        text: GitHub hands over a job whose labels match the runner's.
+      - label: On your server
+        title: Run and report
+        code: github-runner
+        text: Runs the steps as this user, then streams logs and results back.
+    takeaway: Nothing connects in, so you don't need to open any inbound ports.
+  tr:
+    kicker: "GitHub Actions · self-hosted runner"
+    title: Bağlantıyı her zaman runner açar
+    steps:
+      - label: RUNNER → GITHUB
+        title: İş bekler
+        code: HTTPS long poll
+        text: Sunucunuzdan dışarıya açılan bir bağlantı.
+      - label: GITHUB → RUNNER
+        title: Uyan bir iş
+        text: GitHub, etiketleri runner'ınkilerle uyan bir işi verir.
+      - label: Sunucunuzda
+        title: Çalıştır ve bildir
+        code: github-runner
+        text: Adımları bu kullanıcıyla çalıştırır, log ve sonuçları geri gönderir.
+    takeaway: İçeriye bağlanan bir şey yok; sunucuda içeriye port açmanız gerekmez.

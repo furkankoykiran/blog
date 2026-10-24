@@ -1,0 +1,31 @@
+# python scripts/images/render.py card scripts/images/templates/data/devto-mcp-server/draft-404-fallback.yaml "content/{lang}/posts/devto-mcp-server/img/draft-404-fallback.webp"
+template: steps
+langs:
+  en:
+    kicker: "DevTo-MCP · get_article_by_id"
+    title: A 404 doesn’t always mean “no such article”
+    steps:
+      - label: Try
+        code: GET /articles/{id}
+        text: Returns published articles only. A draft gives 404.
+      - label: On a 404
+        code: GET /articles/me/all
+        text: Fetches all of your own articles, drafts included.
+      - label: Look up
+        title: Find the ID
+        text: Returns the draft, or a not-found error if the ID isn’t in the list.
+    takeaway: Before this fallback, the assistant read the 404 as “no such article”, though the draft existed.
+  tr:
+    kicker: "DevTo-MCP · get_article_by_id"
+    title: 404 her zaman “böyle bir yazı yok” demek değil
+    steps:
+      - label: Dene
+        code: GET /articles/{id}
+        text: Yalnızca yayınlanmış yazıları döndürür. Taslakta 404 gelir.
+      - label: 404 gelirse
+        code: GET /articles/me/all
+        text: Taslaklar dahil kendi yazılarının hepsini çeker.
+      - label: Ara
+        title: ID’yi bul
+        text: Taslağı döndürür; ID listede yoksa bulunamadı hatası verir.
+    takeaway: Bu yedek yol eklenmeden önce asistan 404’ü “böyle bir yazı yok” diye okuyordu; oysa taslak vardı.

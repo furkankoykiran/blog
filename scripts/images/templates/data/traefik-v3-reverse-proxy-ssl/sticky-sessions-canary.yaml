@@ -1,0 +1,21 @@
+# python scripts/images/render.py card scripts/images/templates/data/traefik-v3-reverse-proxy-ssl/sticky-sessions-canary.yaml "content/{lang}/posts/traefik-v3-reverse-proxy-ssl/img/sticky-sessions-canary.webp"
+template: compare
+langs:
+  en:
+    kicker: "Traefik v3 · weighted service app-canary"
+    title: A canary is two weights behind one router
+    row_labels: [Service, Weight, Traffic]
+    use_label: Role
+    columns:
+      - {name: app-v1, mono: true, rows: ["`app-v1@docker`", "9", "About 90%"], use: Current version}
+      - {name: app-v2, mono: true, pick: true, rows: ["`app-v2@docker`", "1", "About 10%"], use: The canary}
+    takeaway: Weighted services need the file provider or Kubernetes CRDs. Docker labels can't define them.
+  tr:
+    kicker: "Traefik v3 · app-canary ağırlıklı servisi"
+    title: Canary, tek router arkasında iki ağırlıktır
+    row_labels: [Servis, Ağırlık, Trafik]
+    use_label: Rol
+    columns:
+      - {name: app-v1, mono: true, rows: ["`app-v1@docker`", "9", "Yaklaşık %90"], use: Mevcut sürüm}
+      - {name: app-v2, mono: true, pick: true, rows: ["`app-v2@docker`", "1", "Yaklaşık %10"], use: Canary}
+    takeaway: Ağırlıklı servis yalnızca file provider ya da Kubernetes CRD ile tanımlanır, Docker label'larıyla değil.

@@ -1,0 +1,30 @@
+# python scripts/images/render.py card scripts/images/templates/data/redis-caching-session-management/cache-aside-steps.yaml "content/{lang}/posts/redis-caching-session-management/img/cache-aside-steps.webp"
+template: steps
+head_width: 470
+langs:
+  en:
+    kicker: "Redis · cache-aside"
+    title: On a miss, one request rebuilds the entry
+    steps:
+      - code: GET product:42
+        text: "Hit: return the cached JSON. Miss: go on."
+      - code: SET lock:product:42 NX EX 10
+        text: Only the request that gets the lock reads the database.
+      - code: load_product_from_db(42)
+        text: One query reaches the database, not hundreds.
+      - code: SET product:42 EX 3600+jitter
+        text: "Jitter of 0–300 s keeps keys from expiring together."
+    takeaway: Requests without the lock poll the cache every 50 ms, up to 20 times.
+  tr:
+    kicker: "Redis · cache-aside"
+    title: Miss olunca kaydı tek bir istek yeniden kurar
+    steps:
+      - code: GET product:42
+        text: "Hit: cache’teki JSON döner. Miss: devam."
+      - code: SET lock:product:42 NX EX 10
+        text: Veritabanını yalnızca kilidi alan istek okur.
+      - code: load_product_from_db(42)
+        text: Veritabanına yüzlerce değil, tek sorgu gider.
+      - code: SET product:42 EX 3600+jitter
+        text: "0–300 sn’lik jitter, anahtarların aynı anda düşmesini önler."
+    takeaway: Kilidi alamayan istekler cache’e 50 ms arayla, en fazla 20 kez tekrar bakar.

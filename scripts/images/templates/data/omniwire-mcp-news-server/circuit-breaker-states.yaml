@@ -1,0 +1,31 @@
+# python scripts/images/render.py card scripts/images/templates/data/omniwire-mcp-news-server/circuit-breaker-states.yaml "content/{lang}/posts/omniwire-mcp-news-server/img/circuit-breaker-states.webp"
+template: steps
+langs:
+  en:
+    kicker: "OmniWire · Sentinel, one breaker per source"
+    title: Three states decide whether a source gets a request
+    steps:
+      - label: CLOSED
+        title: Requests go through
+        text: Failures are counted. After 3 consecutive failures the circuit opens.
+      - label: OPEN
+        title: No requests sent
+        text: After 60 seconds the source moves to HALF_OPEN.
+      - label: HALF_OPEN
+        title: Another chance
+        text: 2 consecutive successes close the circuit. Any failure opens it again.
+    takeaway: Both numbers are defaults. A broken source is skipped instead of retried on every request.
+  tr:
+    kicker: "OmniWire · Sentinel, kaynak başına bir devre kesici"
+    title: Kaynağa istek gidip gitmeyeceğini üç durum belirler
+    steps:
+      - label: CLOSED
+        title: İstekler geçer
+        text: Hatalar sayılır. Art arda 3 hatada devre açılır.
+      - label: OPEN
+        title: İstek gönderilmez
+        text: 60 saniye sonra kaynak HALF_OPEN'a geçer.
+      - label: HALF_OPEN
+        title: Bir şans daha
+        text: Art arda 2 başarı devreyi kapatır. Tek bir hata yeniden açar.
+    takeaway: Eşik ve süre varsayılan değerler. Bozuk kaynak her istekte yeniden denenmez, atlanır.

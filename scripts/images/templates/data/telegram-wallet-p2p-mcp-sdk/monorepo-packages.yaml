@@ -1,0 +1,23 @@
+# python scripts/images/render.py card scripts/images/templates/data/telegram-wallet-p2p-mcp-sdk/monorepo-packages.yaml "content/{lang}/posts/telegram-wallet-p2p-mcp-sdk/img/monorepo-packages.webp"
+template: compare
+langs:
+  en:
+    kicker: "telegram-wallet-p2p-sdk · packages/"
+    title: Three packages wrap the same API
+    row_labels: [Built on, Registry]
+    use_label: Used for
+    columns:
+      - {name: "python", mono: true, rows: ["aiohttp and Pydantic v2", "PyPI"], use: "Data collection and analysis"}
+      - {name: "node", mono: true, rows: ["Native fetch, zero dependencies", "npm"], use: "Web apps and bots"}
+      - {name: "mcp", mono: true, rows: ["MCP SDK and Zod, with its own types and HTTP call", "npm, one package for npx"], use: "Claude and Cursor"}
+    takeaway: When the API adds a field, all three change in the same PR.
+  tr:
+    kicker: "telegram-wallet-p2p-sdk · packages/"
+    title: Aynı API’yi saran üç paket
+    row_labels: [Temeli, Nerede]
+    use_label: Ne için
+    columns:
+      - {name: "python", mono: true, rows: ["aiohttp ve Pydantic v2", "PyPI"], use: "Veri toplama ve analiz"}
+      - {name: "node", mono: true, rows: ["Yerleşik fetch, sıfır bağımlılık", "npm"], use: "Web uygulamaları ve botlar"}
+      - {name: "mcp", mono: true, rows: ["MCP SDK ve Zod, kendi tipleri ve HTTP çağrısıyla", "npm, npx tek paket indirir"], use: "Claude ve Cursor"}
+    takeaway: API’ye bir alan eklenince üç paket de aynı PR’da değişir.

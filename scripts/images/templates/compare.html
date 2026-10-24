@@ -1,0 +1,82 @@
+<!doctype html>
+<!--
+  compare: two or three columns, X vs Y.
+  Data keys: kicker, title, row_labels[], use_label, columns[{name, mono, sub, rows[], use, pick}], takeaway, height.
+  `name` may hold "\n" for two lines. `pick: true` gives a column the teal border.
+  Inline `code` and **bold** work in every text field.
+-->
+<html lang="en"><head><meta charset="utf-8">
+<style>
+@font-face{font-family:"Inter";src:url("../../../assets/fonts/Inter-Medium.ttf");font-weight:500}
+@font-face{font-family:"Inter";src:url("../../../assets/fonts/Inter-SemiBold.ttf");font-weight:600}
+@font-face{font-family:"IBM Plex Mono";src:url("../../../assets/fonts/IBMPlexMono-Medium.ttf");font-weight:500}
+@font-face{font-family:"Inter Display";src:url("../../../assets/fonts/InterDisplay-Bold.ttf");font-weight:700}
+:root{--navy:#11151D;--teal:#2DD4BF;--teal-ink:#0F766E;--teal-bg:#E3F8F4;--amber:#FBBF24;--amber-bg:#FEF5DC;
+  --ink:#11151D;--muted:#566070;--bg:#F5F7FA;--card:#FFFFFF;--line:#DCE2EA;
+  --mono:"IBM Plex Mono",ui-monospace,monospace}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--bg)}
+#card{width:1280px;height:720px;display:flex;flex-direction:column;background:var(--bg);color:var(--ink);
+  font:500 30px/1.4 "Inter",sans-serif;overflow:hidden}
+.bar{background:var(--navy);color:#fff;padding:36px 64px 34px;position:relative;flex:none}
+.bar::after{content:"";position:absolute;left:64px;bottom:0;width:140px;height:6px;background:var(--teal);border-radius:3px 3px 0 0}
+.kicker{font:600 28px/1 "Inter";letter-spacing:.03em;color:var(--teal)}
+h1{font:700 54px/1.12 "Inter Display";letter-spacing:-.01em;margin-top:14px}
+main{flex:1;min-height:0;padding:40px 64px 0;display:flex}
+.take{flex:none;margin:28px 64px 36px;padding:22px 30px;border-left:8px solid var(--amber);background:var(--amber-bg);
+  border-radius:0 14px 14px 0;font:600 30px/1.35 "Inter"}
+code{font-family:var(--mono);font-weight:500;font-size:.92em}
+strong{font-weight:600}
+
+.cols{display:grid;gap:32px;width:100%}
+.col{background:var(--card);border:2px solid var(--line);border-radius:20px;display:flex;flex-direction:column;overflow:hidden}
+.col.pick{border-color:var(--teal-ink)}
+.col h2{font:700 38px/1.2 "Inter Display";padding:28px 34px 24px;border-bottom:2px solid var(--line)}
+.col h2.mono{font:500 30px/1.35 var(--mono);color:var(--navy)}
+.col h2 small{display:block;font:500 24px/1.3 "Inter";color:var(--muted);margin-top:6px}
+.rows{padding:26px 34px 10px;display:flex;flex-direction:column;gap:22px;flex:1}
+.k{display:block;font:600 19px/1 "Inter";letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+.v{font:500 30px/1.3 "Inter"}
+.use{margin:0 18px 18px;padding:18px 20px 20px;background:var(--teal-bg);border-radius:12px;font:600 29px/1.3 "Inter";color:var(--teal-ink)}
+.use .k{color:var(--teal-ink)}
+</style></head>
+<body><div id="card">
+  <div class="bar"><div class="kicker" id="kicker"></div><h1 id="title"></h1></div>
+  <main><div class="cols fit" id="cols"></div></main>
+  <div class="take" id="take"></div>
+</div>
+<script>
+const D = window.DATA || {};
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const md = s => esc(s).replace(/`([^`]+)`/g, "<code>$1</code>").replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
+document.documentElement.lang = D.lang || "en";
+const card = document.getElementById("card");
+card.style.width = (D.width || 1280) + "px";
+// Without an explicit height the card grows with its content (at least 16:9).
+if (D.height) card.style.height = D.height + "px";
+else { card.style.height = "auto"; card.style.minHeight = "720px"; }
+document.getElementById("kicker").innerHTML = md(D.kicker);
+document.getElementById("title").innerHTML = md(D.title);
+const take = document.getElementById("take");
+if (D.takeaway) take.innerHTML = md(D.takeaway); else take.remove();
+const cols = document.getElementById("cols");
+const list = D.columns || [];
+cols.style.gridTemplateColumns = `repeat(${list.length}, 1fr)`;
+for (const c of list) {
+  const rows = (c.rows || []).map((v, i) =>
+    `<div><span class="k">${md((D.row_labels || [])[i] || "")}</span><div class="v">${md(v)}</div></div>`).join("");
+  const name = String(c.name).split("\n").map(c.mono ? esc : md).join("<br>");
+  cols.insertAdjacentHTML("beforeend", `<section class="col fit${c.pick ? " pick" : ""}">
+    <h2 class="${c.mono ? "mono" : ""}">${name}${c.sub ? `<small>${md(c.sub)}</small>` : ""}</h2>
+    <div class="rows">${rows}</div>
+    ${c.use ? `<div class="use"><span class="k">${md(D.use_label || "Use this when")}</span>${md(c.use)}</div>` : ""}
+  </section>`);
+}
+// Same height for every "use" box, so the highlighted lines line up across columns.
+// Measure after the web fonts have loaded, or the fallback font gives the wrong heights.
+document.fonts.ready.then(() => {
+  const uses = [...cols.querySelectorAll(".use")];
+  const tallest = Math.max(0, ...uses.map(u => u.offsetHeight));
+  uses.forEach(u => u.style.minHeight = tallest + "px");
+});
+</script></body></html>

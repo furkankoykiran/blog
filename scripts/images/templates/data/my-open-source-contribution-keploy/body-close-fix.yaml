@@ -1,0 +1,57 @@
+# python scripts/images/render.py card scripts/images/templates/data/my-open-source-contribution-keploy/body-close-fix.yaml "content/{lang}/posts/my-open-source-contribution-keploy/img/keploy-body-close-fix.webp"
+# Shortened from pkg/platform/http/agent.go in keploy PR #3932 (error handling, logging and the mockResp declaration left out).
+# Blank lines keep the unchanged lines at the same height in both panes.
+template: before-after
+langs:
+  en:
+    kicker: "Keploy PR #3932 · Go"
+    title: Close the response body, but drain it first
+    before:
+      label: "Before: the body stays open"
+      lines:
+        - "res, err := a.client.Do(req)"
+        - "// … error check …"
+        - {t: "// res.Body is never closed", hl: bad}
+        - ""
+        - ""
+        - ""
+        - ""
+        - "json.NewDecoder(res.Body).Decode(…)"
+    after:
+      label: "After: drain, then close"
+      lines:
+        - "res, err := a.client.Do(req)"
+        - "// … error check …"
+        - {t: "defer func() {", hl: good}
+        - {t: "    io.Copy(io.Discard, res.Body)", hl: good}
+        - {t: "    res.Body.Close()", hl: good}
+        - {t: "}()", hl: good}
+        - ""
+        - "json.NewDecoder(res.Body).Decode(…)"
+    takeaway: A drained, closed body returns its TCP connection to the pool, so keep-alive works.
+  tr:
+    kicker: "Keploy PR #3932 · Go"
+    title: Response body’yi kapatın, ama önce sonuna kadar okuyun
+    before:
+      label: "Önce: body açık kalıyor"
+      lines:
+        - "res, err := a.client.Do(req)"
+        - "// … hata kontrolü …"
+        - {t: "// res.Body hiç kapatılmıyor", hl: bad}
+        - ""
+        - ""
+        - ""
+        - ""
+        - "json.NewDecoder(res.Body).Decode(…)"
+    after:
+      label: "Sonra: önce oku, sonra kapat"
+      lines:
+        - "res, err := a.client.Do(req)"
+        - "// … hata kontrolü …"
+        - {t: "defer func() {", hl: good}
+        - {t: "    io.Copy(io.Discard, res.Body)", hl: good}
+        - {t: "    res.Body.Close()", hl: good}
+        - {t: "}()", hl: good}
+        - ""
+        - "json.NewDecoder(res.Body).Decode(…)"
+    takeaway: Sonuna kadar okunup kapatılan body, TCP bağlantısını havuza geri verir; keep-alive çalışır.

@@ -1,0 +1,37 @@
+# python scripts/images/render.py card scripts/images/templates/data/nft-minting-ethereum-guide/merkle-allowlist.yaml "content/{lang}/posts/nft-minting-ethereum-guide/img/merkle-allowlist.webp"
+template: steps
+langs:
+  en:
+    kicker: "ERC721A · Merkle allowlist"
+    title: The list stays off-chain, the contract keeps the root
+    steps:
+      - label: Off-chain
+        title: Build the tree
+        code: build-tree.mjs
+        text: OpenZeppelin’s merkle-tree library turns the allowlist into a root and proofs.json.
+      - label: Owner
+        title: Store the root
+        code: setMerkleRoot
+        text: The contract keeps one 32-byte root, not one storage write per address.
+      - label: Minter
+        title: Send a proof
+        code: allowlistMint
+        text: The frontend passes the minter’s proof from proofs.json with the quantity.
+    takeaway: The contract checks each proof against the stored root and reverts if it doesn’t match.
+  tr:
+    kicker: "ERC721A · Merkle allowlist"
+    title: Liste off-chain kalır, zincire yalnızca kök gider
+    steps:
+      - label: OFF-CHAIN
+        title: Ağacı kur
+        code: build-tree.mjs
+        text: OpenZeppelin’in merkle-tree kütüphanesi allowlist’ten bir kök ve proofs.json üretir.
+      - label: Sahip
+        title: Kökü kaydet
+        code: setMerkleRoot
+        text: Kontrat adres başına bir storage yazımı yerine tek bir 32 byte’lık kök tutar.
+      - label: MINT eden
+        title: Proof gönder
+        code: allowlistMint
+        text: Frontend, proofs.json’daki proof’u adetle birlikte gönderir.
+    takeaway: Kontrat her proof’u kayıtlı köke göre doğrular, eşleşmezse işlem geri alınır.

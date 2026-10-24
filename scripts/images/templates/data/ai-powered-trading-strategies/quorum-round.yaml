@@ -1,0 +1,34 @@
+# python scripts/images/render.py card scripts/images/templates/data/ai-powered-trading-strategies/quorum-round.yaml "content/{lang}/posts/ai-powered-trading-strategies/img/quorum-round.webp"
+template: steps
+head_width: 330
+langs:
+  en:
+    kicker: "Quorum · one decision round"
+    title: The order is fixed in code, not chosen by an LLM
+    steps:
+      - code: tech → news
+        text: Fixed LangGraph edges; the tech agent reads candles, the news agent headlines.
+      - code: Pyth price check
+        text: Older than 60 s or confidence wider than 1%? HOLD, and no LLM is called.
+      - code: risk agent
+        text: "Votes with a `FINAL:` line: `BUY`, `SELL` or `HOLD` plus a rationale."
+      - code: tally → simulation
+        text: The Jupiter swap only runs as a read-only simulation; nothing is broadcast.
+      - code: Shapley weights
+        text: Each specialist’s contribution to the decision becomes a weight.
+    takeaway: If the price check itself errors, the answer is still HOLD. The system fails closed.
+  tr:
+    kicker: "Quorum · bir karar turu"
+    title: Sırayı LLM değil, kod belirliyor
+    steps:
+      - code: teknik → haber
+        text: Sabit LangGraph kenarları; teknik ajan mumları, haber ajanı başlıkları okur.
+      - code: Pyth fiyat kontrolü
+        text: Fiyat 60 sn’den eski ya da güven aralığı %1’den genişse HOLD; LLM çağrılmaz.
+      - code: risk ajanı
+        text: "`FINAL:` satırıyla oy verir: `BUY`, `SELL` ya da `HOLD` ve bir gerekçe."
+      - code: sayım → simülasyon
+        text: Jupiter takası yalnızca salt okunur simülasyonla çalışır; işlem yayınlanmaz.
+      - code: Shapley ağırlıkları
+        text: Her uzmanın karara katkısı bir ağırlığa dönüşür.
+    takeaway: Kontrolün kendisi hata verirse cevap yine HOLD. Sistem kapalı tarafta kalır.

@@ -1,0 +1,21 @@
+# python scripts/images/render.py card scripts/images/templates/data/rabbitmq-message-queue/retry-vs-dead-letter.yaml "content/{lang}/posts/rabbitmq-message-queue/img/retry-vs-dead-letter.webp"
+template: compare
+langs:
+  en:
+    kicker: "RabbitMQ · quorum queue + DLX"
+    title: Retry transient errors, set permanent ones aside
+    row_labels: [Example, The consumer calls, What happens]
+    use_label: Ends in
+    columns:
+      - {name: Transient error, rows: ["A timeout", "`reject(requeue=True)`", "Redelivered until `x-delivery-limit` (5 here) is exceeded"], use: "`orders.dead` via `orders.dlx`, once the limit is passed"}
+      - {name: Permanent error, rows: ["A message that crashes the consumer every time", "`reject(requeue=False)`", "Dead-lettered at once"], use: "`orders.dead` via `orders.dlx`, right away"}
+    takeaway: Inspect what lands in orders.dead, fix the bug and republish.
+  tr:
+    kicker: "RabbitMQ · quorum queue + DLX"
+    title: Geçici hatayı tekrar dene, kalıcı hatayı kenara ayır
+    row_labels: [Örnek, Consumer çağırır, Ne olur]
+    use_label: Gittiği yer
+    columns:
+      - {name: Geçici hata, rows: ["Bağlantı zaman aşımı", "`reject(requeue=True)`", "`x-delivery-limit` (burada 5) aşılana kadar tekrar teslim edilir"], use: "Limit aşılınca `orders.dlx` üzerinden `orders.dead`"}
+      - {name: Kalıcı hata, rows: ["Consumer’ı her seferinde çökerten mesaj", "`reject(requeue=False)`", "Hemen dead letter olur"], use: "Hemen `orders.dlx` üzerinden `orders.dead`"}
+    takeaway: orders.dead’e düşeni inceleyin, hatayı düzeltin ve tekrar yayınlayın.

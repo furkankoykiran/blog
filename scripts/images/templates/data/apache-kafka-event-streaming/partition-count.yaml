@@ -1,0 +1,31 @@
+# python scripts/images/render.py card scripts/images/templates/data/apache-kafka-event-streaming/partition-count.yaml "content/{lang}/posts/apache-kafka-event-streaming/img/partition-count.webp"
+template: steps
+langs:
+  en:
+    kicker: "Kafka · topic orders, group billing"
+    title: Within a group, each partition has one consumer
+    steps:
+      - label: Producer
+        code: key hash
+        text: The key's hash picks one of the topic's partitions.
+      - label: Topic
+        title: orders
+        text: Partitions 0, 1 and 2, each with its own offsets.
+      - label: Consumer group
+        title: billing
+        text: Consumer 1 reads partitions 0 and 1, consumer 2 reads partition 2.
+    takeaway: Attach 8 consumers to a 6-partition topic and 2 of them sit idle.
+  tr:
+    kicker: "Kafka · orders topic'i, billing grubu"
+    title: Bir grupta her partition'ı tek bir consumer okur
+    steps:
+      - label: Producer
+        code: key hash
+        text: Key'in hash'i, topic'in partition'larından birini seçer.
+      - label: TOPIC
+        title: orders
+        text: Partition 0, 1 ve 2; her birinin kendi offset'leri var.
+      - label: Consumer grubu
+        title: billing
+        text: Consumer 1, partition 0 ve 1'i; consumer 2, partition 2'yi okur.
+    takeaway: 6 partition'lı bir topic'e 8 consumer bağlarsanız 2'si boşta bekler.

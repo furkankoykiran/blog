@@ -1,0 +1,38 @@
+# python scripts/images/render.py card scripts/images/templates/data/graceful-shutdown-signal-handling/kubernetes-sigterm-timing.yaml "content/{lang}/posts/graceful-shutdown-signal-handling/img/kubernetes-sigterm-timing.webp"
+template: steps
+head_width: 300
+langs:
+  en:
+    kicker: "Kubernetes · default 30 s grace period"
+    title: The preStop pause comes out of the grace period
+    steps:
+      - label: t = 0 s
+        code: pod deleted
+        text: The 30-second grace period starts.
+      - label: t = 0–10 s
+        code: "preStop: sleep 10"
+        text: Meanwhile the pod is removed from the Service endpoints.
+      - label: t = 10 s
+        code: SIGTERM
+        text: 20 seconds are left to finish requests and close connections.
+      - label: t = 30 s
+        code: SIGKILL
+        text: Sent if the process is still running.
+    takeaway: "Set `terminationGracePeriodSeconds` to preStop + your longest shutdown + a small buffer."
+  tr:
+    kicker: "Kubernetes · varsayılan 30 sn grace period"
+    title: preStop beklemesi grace period'dan düşer
+    steps:
+      - label: t = 0 sn
+        code: pod silinir
+        text: 30 saniyelik grace period başlar.
+      - label: t = 0–10 sn
+        code: "preStop: sleep 10"
+        text: Bu arada pod, Service endpoint'lerinden çıkarılır.
+      - label: t = 10 sn
+        code: SIGTERM
+        text: İstekleri bitirip bağlantıları kapatmak için 20 saniye kalır.
+      - label: t = 30 sn
+        code: SIGKILL
+        text: Süreç hâlâ çalışıyorsa gönderilir.
+    takeaway: "`terminationGracePeriodSeconds`: preStop + en uzun kapanış süresi + küçük bir pay."
