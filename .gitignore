@@ -1,0 +1,29 @@
+# Hugo output and caches
+/public/
+/resources/_gen/
+.hugo_build.lock
+hugo_stats.json
+
+# Lighthouse CI
+/lhci/
+/.lighthouseci/
+
+# Deploy and cross-posting state (state.json itself is committed by CI)
+.indexnow/
+.syndication/errors.txt
+
+# Tooling
+node_modules/
+__pycache__/
+*.pyc
+.venv/
+.ruff_cache/
+.env
+*.log
+
+# OS and editors
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
