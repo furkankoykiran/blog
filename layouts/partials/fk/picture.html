@@ -1,0 +1,40 @@
+{{- /*
+  Renders a responsive <picture> for an image resource.
+  Input dict: res, alt, sizes, widths (slice), eager (bool), class, title
+*/ -}}
+{{- $res := .res -}}
+{{- $alt := .alt | default "" -}}
+{{- $sizes := .sizes | default "(min-width: 768px) 720px, 100vw" -}}
+{{- $widths := .widths | default (slice 480 800 1200) -}}
+{{- $sub := $res.MediaType.SubType -}}
+{{- if eq $sub "svg" -}}
+  {{- /* Diagrams keep their natural size (capped by CSS) instead of stretching to the column. */ -}}
+  {{- $size := partial "fk/svg-size.html" $res -}}
+  <img src="{{ $res.RelPermalink }}" alt="{{ $alt }}" class="fk-svg{{ with .class }} {{ . }}{{ end }}"
+    {{- with $size }} width="{{ .w }}" height="{{ .h }}"{{ end }}
+    loading="{{ cond .eager "eager" "lazy" }}" decoding="async">
+{{- else if eq $sub "gif" -}}
+  <img src="{{ $res.RelPermalink }}" alt="{{ $alt }}" {{ with .class }}class="{{ . }}"{{ end }}
+    width="{{ $res.Width }}" height="{{ $res.Height }}"
+    loading="{{ cond .eager "eager" "lazy" }}" decoding="async">
+{{- else -}}
+  {{- $avif := slice -}}{{- $webp := slice -}}{{- $fallback := "" -}}{{- $seen := dict -}}
+  {{- range $w := $widths -}}
+    {{- $tw := math.Min $w $res.Width | int -}}
+    {{- if not (index $seen (string $tw)) -}}
+      {{- $seen = merge $seen (dict (string $tw) true) -}}
+      {{- $a := $res.Process (printf "resize %dx avif" $tw) -}}
+      {{- $b := $res.Process (printf "resize %dx webp" $tw) -}}
+      {{- $avif = $avif | append (printf "%s %dw" $a.RelPermalink $tw) -}}
+      {{- $webp = $webp | append (printf "%s %dw" $b.RelPermalink $tw) -}}
+      {{- if or (not $fallback) (le $tw 800) }}{{ $fallback = $b }}{{ end -}}
+    {{- end -}}
+  {{- end -}}
+  <picture>
+    <source type="image/avif" srcset="{{ delimit $avif ", " }}" sizes="{{ $sizes }}">
+    <source type="image/webp" srcset="{{ delimit $webp ", " }}" sizes="{{ $sizes }}">
+    <img src="{{ $fallback.RelPermalink }}" alt="{{ $alt }}" width="{{ $res.Width }}" height="{{ $res.Height }}"
+      {{ with .class }}class="{{ . }}"{{ end }}
+      {{ if .eager }}loading="eager" fetchpriority="high"{{ else }}loading="lazy"{{ end }} decoding="async">
+  </picture>
+{{- end -}}

@@ -1,0 +1,15 @@
+{{- /* Redirect page for an alias (old URL): instant redirect, noindex, canonical to the target. */ -}}
+<!doctype html>
+<html lang="{{ site.Language.Lang }}">
+<head>
+  <meta charset="utf-8">
+  <title>{{ .Permalink }}</title>
+  <meta name="robots" content="noindex, follow">
+  <link rel="canonical" href="{{ .Permalink }}">
+  <meta http-equiv="refresh" content="0; url={{ .Permalink }}">
+  <script>location.replace({{ .Permalink }} + location.hash);</script>
+</head>
+<body>
+  <p>{{ if eq site.Language.Lang "tr" }}Bu sayfa taşındı:{{ else }}This page has moved to{{ end }} <a href="{{ .Permalink }}">{{ .Permalink }}</a></p>
+</body>
+</html>

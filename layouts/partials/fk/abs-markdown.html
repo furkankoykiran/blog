@@ -1,0 +1,10 @@
+{{- /*
+  The page's Markdown source with every bundle image reference turned into an
+  absolute URL, for outputs read outside the site (Markdown output, llms-full.txt,
+  syndication.json). Root-relative links keep their path; callers add the host when needed.
+*/ -}}
+{{- $md := .RawContent -}}
+{{- range .Resources.ByType "image" -}}
+  {{- $md = replace $md (printf "](%s" .Name) (printf "](%s" .Permalink) -}}
+{{- end -}}
+{{- return $md -}}

@@ -1,0 +1,11 @@
+{{- if .Params.showRelatedContent | default (site.Params.article.showRelatedContent | default false) -}}
+  {{- $related := site.RegularPages.Related . | first (site.Params.article.relatedContentLimit | default 3) -}}
+  {{- with $related }}
+<section class="fk-related not-prose" aria-labelledby="fk-related-title">
+  <h2 id="fk-related-title">{{ i18n "article.related_articles" }}</h2>
+  <ul class="fk-cards fk-cards-3">
+    {{- range . }}<li>{{ partial "fk/card.html" (dict "page" . "eager" false) }}</li>{{ end }}
+  </ul>
+</section>
+  {{- end }}
+{{- end -}}

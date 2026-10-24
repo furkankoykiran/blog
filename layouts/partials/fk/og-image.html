@@ -1,0 +1,31 @@
+{{- /*
+  Generates a branded 1200x630 social card at build time.
+  Input: dict "title" (string) "lang" ("tr"|"en") "path" (publish path, e.g. "posts/x/og.jpg")
+  Returns: the image resource (JPEG). Fonts: Inter (SIL OFL 1.1) in assets/fonts.
+*/ -}}
+{{- $title := .title | plainify | htmlUnescape -}}
+{{- $n := strings.RuneCount $title -}}
+{{- $size := 64 -}}{{- $ls := 14 -}}
+{{- if gt $n 95 -}}{{- $size = 44 -}}{{- $ls = 10 -}}
+{{- else if gt $n 70 -}}{{- $size = 50 -}}{{- $ls = 12 -}}
+{{- else if gt $n 42 -}}{{- $size = 58 -}}{{- $ls = 12 -}}
+{{- end -}}
+{{- $bold := resources.Get "fonts/InterDisplay-Bold.ttf" -}}
+{{- $semi := resources.Get "fonts/Inter-SemiBold.ttf" -}}
+{{- $med := resources.Get "fonts/Inter-Medium.ttf" -}}
+{{- $tagline := cond (eq .lang "en") "MCP · AI agents · Open source · Python · DevOps" "MCP · Yapay zeka ajanları · Açık kaynak · Python · DevOps" -}}
+{{- $langLabel := cond (eq .lang "en") "EN" "TR" -}}
+{{- $titleImg := resources.Get "img/og-canvas.png" | images.Filter (images.Text $title (dict "font" $bold "size" $size "linespacing" $ls "color" "#F5F6F8" "x" 0 "y" 0)) -}}
+{{- $logo := (resources.Get "img/fk-logo.png").Resize "64x64 Lanczos" -}}
+{{- $avatar := (resources.Get "img/og-author.png").Resize "88x88 Lanczos" -}}
+{{- $img := resources.Get "img/og-base.png" | images.Filter
+  (images.Overlay $logo 80 72)
+  (images.Text (urls.Parse site.BaseURL).Host (dict "font" $med "size" 26 "color" "#AEB6C6" "x" 164 "y" 88))
+  (images.Text $langLabel (dict "font" $semi "size" 24 "color" "#FA9648" "x" 1080 "y" 90))
+  (images.Overlay $titleImg 80 200)
+  (images.Overlay $avatar 80 506)
+  (images.Text site.Params.author.name (dict "font" $semi "size" 30 "color" "#FFFFFF" "x" 188 "y" 512))
+  (images.Text $tagline (dict "font" $med "size" 22 "color" "#FA9648" "x" 188 "y" 556))
+-}}
+{{- $img = $img.Process "jpg q86" -}}
+{{- return ($img | resources.Copy .path) -}}

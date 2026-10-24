@@ -1,0 +1,4 @@
+{{- /* Default social card for the home page and every non-post page (one per language). Context: language code. */ -}}
+{{- $isTR := eq . "tr" -}}
+{{- $title := cond $isTR "MCP sunucuları, yapay zeka ajanları, açık kaynak, Python ve DevOps üzerine sahadan notlar" "Field notes on MCP servers, AI agents, open source, Python and DevOps" -}}
+{{- return partial "fk/og-image.html" (dict "title" $title "lang" . "path" (cond $isTR "og-default.jpg" "en/og-default.jpg")) -}}

@@ -1,0 +1,26 @@
+{{- /* Post card for the home page and related posts. Input: dict "page" "eager" (bool: first card, LCP candidate). */ -}}
+{{- $p := .page -}}
+{{- $cover := partial "fk/cover.html" $p -}}
+<article class="fk-card">
+  <div class="fk-card-media" aria-hidden="true">
+    {{- if $cover }}
+      {{- if $cover.isSVG }}
+      <img src="{{ $cover.src }}" alt="" loading="lazy" decoding="async">
+      {{- else }}
+      {{- partial "fk/picture.html" (dict "res" $cover.res "alt" "" "sizes" "(min-width: 1024px) 360px, (min-width: 640px) 50vw, 100vw" "widths" (slice 400 720) "eager" .eager) -}}
+      {{- end }}
+    {{- else }}
+      <span class="fk-card-fallback">{{ substr ($p.Title | plainify) 0 1 }}</span>
+    {{- end }}
+  </div>
+  <div class="fk-card-body">
+    {{- with $p.Params.categories }}<p class="fk-card-kicker">{{ index . 0 }}</p>{{ end }}
+    <h3><a href="{{ $p.RelPermalink }}">{{ $p.Title }}</a></h3>
+    {{- with $p.Description }}<p class="fk-card-desc">{{ . | plainify | truncate 150 }}</p>{{ end }}
+    <p class="fk-card-meta">
+      <time datetime="{{ $p.Date.Format "2006-01-02" }}">{{ $p.Date | time.Format site.Params.dateFormat }}</time>
+      <span aria-hidden="true">·</span>
+      <span>{{ i18n "article.reading_time" $p.ReadingTime }}</span>
+    </p>
+  </div>
+</article>

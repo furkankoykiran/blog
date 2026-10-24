@@ -1,0 +1,12 @@
+{{- $isTR := eq site.Language.Lang "tr" -}}
+<nav class="fk-breadcrumbs print:hidden" aria-label="{{ cond $isTR "Sayfa konumu" "Breadcrumb" }}">
+  <ol>
+    <li><a href="{{ site.Home.RelPermalink }}">{{ cond $isTR "Ana sayfa" "Home" }}</a></li>
+    {{- range .Ancestors.Reverse }}
+      {{- if not .IsHome }}
+    <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+      {{- end }}
+    {{- end }}
+    <li aria-current="page"><span>{{ .Title | plainify | truncate 60 }}</span></li>
+  </ol>
+</nav>

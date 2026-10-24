@@ -1,0 +1,23 @@
+{{- /* Share links with URL-encoded title/URL. Order from params.article.sharingLinks. */ -}}
+{{- with .Params.sharingLinks | default (site.Params.article.sharingLinks | default false) -}}
+{{- $u := $.Permalink | urlquery -}}
+{{- $t := $.Title | plainify | htmlUnescape | urlquery -}}
+{{- $isTR := eq site.Language.Lang "tr" -}}
+{{- $defs := dict
+  "linkedin" (dict "icon" "linkedin" "label" "LinkedIn" "url" (printf "https://www.linkedin.com/sharing/share-offsite/?url=%s" $u))
+  "twitter" (dict "icon" "x-twitter" "label" "X" "url" (printf "https://x.com/intent/post?url=%s&text=%s" $u $t))
+  "reddit" (dict "icon" "reddit" "label" "Reddit" "url" (printf "https://www.reddit.com/submit?url=%s&title=%s" $u $t))
+  "telegram" (dict "icon" "telegram" "label" "Telegram" "url" (printf "https://t.me/share/url?url=%s&text=%s" $u $t))
+  "whatsapp" (dict "icon" "whatsapp" "label" "WhatsApp" "url" (printf "https://api.whatsapp.com/send?text=%s%%20%s" $t $u))
+  "email" (dict "icon" "email" "label" (cond $isTR "E-posta" "Email") "url" (printf "mailto:?subject=%s&body=%s" $t $u))
+  "bluesky" (dict "icon" "bluesky" "label" "Bluesky" "url" (printf "https://bsky.app/intent/compose?text=%s%%20%s" $t $u))
+-}}
+<section class="fk-share print:hidden" aria-labelledby="fk-share-title">
+  <h2 id="fk-share-title" class="fk-share-title">{{ cond $isTR "Bu yazıyı paylaş" "Share this post" }}</h2>
+  <ul>
+    {{- range . }}{{ with index $defs . }}
+    <li><a href="{{ .url | safeURL }}" target="_blank" rel="noopener noreferrer" aria-label="{{ cond $isTR (printf "%s ile paylaş" .label) (printf "Share on %s" .label) }}" title="{{ .label }}">{{ partial "icon.html" .icon }}</a></li>
+    {{- end }}{{ end }}
+  </ul>
+</section>
+{{- end -}}

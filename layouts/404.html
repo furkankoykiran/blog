@@ -1,0 +1,25 @@
+{{ define "main" }}
+{{- /* GitHub Pages serves /404.html for every missing URL, so this page speaks both languages. */ -}}
+<section class="fk-404" aria-labelledby="fk-404-title">
+  <p class="fk-404-code" aria-hidden="true">404</p>
+  <h1 id="fk-404-title">
+    <span lang="tr">Bu sayfa burada değil.</span>
+    <span lang="en" class="fk-404-en">This page isn't here.</span>
+  </h1>
+  <p class="fk-lead">
+    <span lang="tr">Adres taşınmış, silinmiş ya da hiç var olmamış olabilir. Aramayı dene ya da son yazılara göz at.</span>
+    <span lang="en" class="fk-404-en">It may have moved, been removed or never existed. Try searching or browse the latest posts.</span>
+  </p>
+  <div class="fk-actions fk-actions-center">
+    <button type="button" class="fk-btn fk-btn-primary" onclick="document.getElementById('search-button').click()">{{ partial "icon.html" "search" }}<span>Ara · Search</span></button>
+    <a class="fk-btn" href="/" lang="tr">Ana sayfa</a>
+    <a class="fk-btn" href="/en/" lang="en">English home</a>
+  </div>
+  <h2 class="fk-404-sub">Son yazılar · Latest posts</h2>
+  <ul class="fk-postlist">
+    {{- range first 5 (where site.RegularPages "Section" "posts").ByDate.Reverse }}
+    <li><a href="{{ .RelPermalink }}">{{ .Title }}</a><time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date | time.Format site.Params.dateFormat }}</time></li>
+    {{- end }}
+  </ul>
+</section>
+{{ end }}

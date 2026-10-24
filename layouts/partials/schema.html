@@ -1,0 +1,105 @@
+{{- /*
+  JSON-LD for every page, replacing Blowfish's own schema output.
+  Stable ids from params.fk: personId (shared with the portfolio) and websiteId.
+*/ -}}
+{{- $isTR := eq site.Language.Lang "tr" -}}
+{{- $personId := site.Params.fk.personId -}}
+{{- $websiteId := site.Params.fk.websiteId -}}
+{{- $locale := site.Language.Locale | default site.Language.Lang -}}
+{{- $sameAs := slice -}}
+{{- range site.Params.fk.social }}{{ $sameAs = $sameAs | append .url }}{{ end -}}
+{{- $sameAs = $sameAs | append site.Params.fk.portfolio -}}
+{{- $photo := resources.Get site.Params.author.image -}}
+{{- $person := dict
+  "@type" "Person" "@id" $personId
+  "name" site.Params.author.name "alternateName" site.Params.fk.alternateName
+  "url" site.Params.fk.portfolio
+  "image" (dict "@type" "ImageObject" "url" $photo.Permalink "width" $photo.Width "height" $photo.Height)
+  "jobTitle" (cond $isTR "Yazılım Geliştirici" "Software Developer")
+  "knowsAbout" (slice "Model Context Protocol" "AI agents" "Python" "TypeScript" "Algorithmic trading" "DevOps" "Open source")
+  "sameAs" $sameAs
+-}}
+{{- $website := dict
+  "@type" "WebSite" "@id" $websiteId
+  "url" site.Home.Permalink "name" site.Title
+  "description" site.Params.description
+  "inLanguage" (slice "tr-TR" "en-US")
+  "publisher" (dict "@id" $personId) "author" (dict "@id" $personId)
+  "potentialAction" (dict "@type" "SearchAction"
+      "target" (dict "@type" "EntryPoint" "urlTemplate" (printf "%s?q={search_term_string}" site.Home.Permalink))
+      "query-input" "required name=search_term_string")
+-}}
+{{- $graph := slice $person $website -}}
+
+{{- /* Breadcrumbs: Home > Section/Taxonomy > Term/Page */ -}}
+{{- $crumbs := slice (dict "@type" "ListItem" "position" 1 "name" site.Title "item" site.Home.Permalink) -}}
+{{- if not .IsHome -}}
+  {{- $pos := 1 -}}
+  {{- range .Ancestors.Reverse -}}
+    {{- if not .IsHome -}}
+      {{- $pos = add $pos 1 -}}
+      {{- $crumbs = $crumbs | append (dict "@type" "ListItem" "position" $pos "name" (.Title | plainify) "item" .Permalink) -}}
+    {{- end -}}
+  {{- end -}}
+  {{- $crumbs = $crumbs | append (dict "@type" "ListItem" "position" (add $pos 1) "name" (.Title | plainify) "item" .Permalink) -}}
+{{- end -}}
+
+{{- if .IsHome -}}
+  {{- $graph = $graph | append (dict "@type" "Blog" "@id" (printf "%s#blog" .Permalink) "url" .Permalink "name" site.Title
+      "description" site.Params.description "inLanguage" $locale
+      "isPartOf" (dict "@id" $websiteId) "author" (dict "@id" $personId) "publisher" (dict "@id" $personId)) -}}
+{{- else if and .IsPage (eq .Section "posts") -}}
+  {{- /* Cover first (the page's main image, with its real size), then the 1200x630 social card. */ -}}
+  {{- $images := slice -}}
+  {{- with .Store.Get "fkCover" -}}
+    {{- $images = $images | append (dict "@type" "ImageObject" "url" .url "contentUrl" .url "width" .w "height" .h
+        "caption" ($.Params.coverAlt | default $.Title | plainify)) -}}
+  {{- end -}}
+  {{- with .Store.Get "fkOG" -}}
+    {{- $images = $images | append (dict "@type" "ImageObject" "url" .url "contentUrl" .url "width" .w "height" .h) -}}
+  {{- end -}}
+  {{- $post := dict
+    "@type" "BlogPosting" "@id" (printf "%s#article" .Permalink)
+    "mainEntityOfPage" (dict "@type" "WebPage" "@id" .Permalink)
+    "url" .Permalink
+    "headline" (.Title | plainify | truncate 110)
+    "description" (.Description | plainify)
+    "image" $images
+    "datePublished" (.Date.Format "2006-01-02T15:04:05Z07:00")
+    "dateModified" (.Lastmod.Format "2006-01-02T15:04:05Z07:00")
+    "inLanguage" $locale
+    "author" (dict "@id" $personId)
+    "publisher" (dict "@id" $personId)
+    "isPartOf" (dict "@id" $websiteId)
+    "keywords" (delimit (.Params.tags | default slice) ", ")
+    "wordCount" .WordCount
+    "timeRequired" (printf "PT%dM" .ReadingTime)
+    "articleSection" (index (.Params.categories | default (slice "Blog")) 0)
+  -}}
+  {{- $tr := slice -}}
+  {{- range .Translations -}}
+    {{- $tr = $tr | append (dict "@type" "BlogPosting" "@id" (printf "%s#article" .Permalink) "url" .Permalink "inLanguage" (.Language.Locale | default .Language.Lang)) -}}
+  {{- end -}}
+  {{- with $tr }}{{ $post = merge $post (dict "workTranslation" .) }}{{ end -}}
+  {{- with .Params.series }}{{ $post = merge $post (dict "isPartOf" (slice (dict "@id" $websiteId) (dict "@type" "CreativeWorkSeries" "name" (index . 0)))) }}{{ end -}}
+  {{- $graph = $graph | append $post -}}
+  {{- $graph = $graph | append (dict "@type" "BreadcrumbList" "itemListElement" $crumbs) -}}
+{{- else if or (eq .Kind "term") (eq .Kind "taxonomy") (eq .Kind "section") -}}
+  {{- $items := slice -}}
+  {{- range $i, $p := first 50 .Pages -}}
+    {{- $items = $items | append (dict "@type" "ListItem" "position" (add $i 1) "url" $p.Permalink "name" ($p.Title | plainify)) -}}
+  {{- end -}}
+  {{- $graph = $graph | append (dict "@type" "CollectionPage" "@id" .Permalink "url" .Permalink "name" (.Title | plainify)
+      "inLanguage" $locale "isPartOf" (dict "@id" $websiteId)
+      "mainEntity" (dict "@type" "ItemList" "itemListElement" $items)) -}}
+  {{- $graph = $graph | append (dict "@type" "BreadcrumbList" "itemListElement" $crumbs) -}}
+{{- else if .IsPage -}}
+  {{- /* The about page is content/<lang>/about/index.md in both languages. */ -}}
+  {{- $type := cond (eq (path.Base (replace .File.Dir "\\" "/")) "about") "AboutPage" "WebPage" -}}
+  {{- $wp := dict "@type" $type "@id" .Permalink "url" .Permalink "name" (.Title | plainify) "description" (.Description | plainify)
+      "inLanguage" $locale "isPartOf" (dict "@id" $websiteId) "dateModified" (.Lastmod.Format "2006-01-02T15:04:05Z07:00") -}}
+  {{- if eq $type "AboutPage" }}{{ $wp = merge $wp (dict "mainEntity" (dict "@id" $personId)) }}{{ end -}}
+  {{- $graph = $graph | append $wp -}}
+  {{- $graph = $graph | append (dict "@type" "BreadcrumbList" "itemListElement" $crumbs) -}}
+{{- end }}
+<script type="application/ld+json">{{ dict "@context" "https://schema.org" "@graph" $graph | jsonify | safeJS }}</script>

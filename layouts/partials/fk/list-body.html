@@ -1,0 +1,36 @@
+{{- $isTR := eq site.Language.Lang "tr" -}}
+{{- /* Section and term lists: header, then posts grouped by year (sections) or in date order (terms; series oldest first). */ -}}
+{{- $pages := .Pages -}}
+<header class="fk-list-head">
+  {{ partial "breadcrumbs.html" . }}
+  <h1>
+    {{- if eq .Kind "term" -}}
+      <span class="fk-term-kind">{{ if eq .Data.Plural "tags" }}#{{ else if eq .Data.Plural "series" }}{{ cond $isTR "Seri: " "Series: " }}{{ else }}{{ cond $isTR "Kategori: " "Category: " }}{{ end }}</span>{{ .Title }}
+    {{- else -}}
+      {{ .Title }}
+    {{- end -}}
+  </h1>
+  {{- with .Description }}<p class="fk-lead">{{ . }}</p>{{ end }}
+  <p class="fk-list-meta">
+    {{ cond $isTR (printf "%d yazı" (len $pages)) (printf "%d posts" (len $pages)) }}
+    {{- if eq .Kind "section" }} · <a href="{{ "feed.xml" | relLangURL }}">{{ partial "icon.html" "rss" }} RSS</a>{{ end }}
+  </p>
+  {{- with .Content }}<div class="prose dark:prose-invert">{{ . }}</div>{{ end }}
+</header>
+{{- if eq .Kind "term" }}
+  {{- if eq .Data.Plural "series" }}{{ $pages = $pages.ByDate }}{{ else }}{{ $pages = $pages.ByDate.Reverse }}{{ end -}}
+<h2 class="sr-only">{{ cond $isTR "Yazılar" "Posts" }}</h2>
+<ol class="fk-rows">
+  {{- range $pages }}<li>{{ partial "fk/row.html" . }}</li>{{ end }}
+</ol>
+{{- else }}
+  {{- range $pages.GroupByDate "2006" }}
+<section class="fk-year" aria-labelledby="y-{{ .Key }}">
+  <h2 id="y-{{ .Key }}">{{ .Key }}</h2>
+  <ol class="fk-rows">
+    {{- range .Pages }}<li>{{ partial "fk/row.html" . }}</li>{{ end }}
+  </ol>
+</section>
+  {{- end }}
+{{- end }}
+{{- if not $pages }}<p>{{ i18n "list.no_articles" }}</p>{{ end }}

@@ -1,0 +1,40 @@
+{{- $thr := site.Params.fk.thinTermThreshold | default 3 -}}
+{{ printf "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\"?>" | safeHTML }}
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+{{- $all := slice -}}
+{{- if eq site.Language.Lang "tr" }}{{ range hugo.Sites }}{{ $all = $all | append .Pages }}{{ end }}{{ else }}{{ $all = site.Pages }}{{ end -}}
+{{- range $all }}
+  {{- $skip := or .Sitemap.Disable .Draft .Params.noindex (eq .Kind "404") -}}
+  {{- if and (eq .Kind "term") (lt (len .Pages) $thr) }}{{ $skip = true }}{{ end -}}
+  {{- if not $skip }}
+  <url>
+    <loc>{{ .Permalink }}</loc>
+    {{- if not .Lastmod.IsZero }}
+    <lastmod>{{ safeHTML (.Lastmod.Format "2006-01-02T15:04:05-07:00") }}</lastmod>
+    {{- end }}
+    {{- if .IsTranslated }}
+      {{- range .AllTranslations }}
+    <xhtml:link rel="alternate" hreflang="{{ .Language.Lang }}" href="{{ .Permalink }}" />
+      {{- end }}
+      {{- range where .AllTranslations "Language.Lang" "tr" }}
+    <xhtml:link rel="alternate" hreflang="x-default" href="{{ .Permalink }}" />
+      {{- end }}
+    {{- end }}
+    {{- if and .IsPage (eq .Section "posts") }}
+      {{- /* Image sitemap: the cover and every image the text uses, at the URLs the page serves. */ -}}
+      {{- with partial "fk/cover.html" . }}{{ if not .isSVG }}
+    <image:image><image:loc>{{ (.res.Process "resize 1200x jpg q82").Permalink }}</image:loc></image:image>
+      {{- end }}{{ end }}
+      {{- $raw := .RawContent -}}
+      {{- range .Resources.ByType "image" }}
+        {{- if strings.Contains $raw (printf "](%s" .Name) }}
+          {{- $loc := .Permalink -}}
+          {{- if ne .MediaType.SubType "svg" }}{{ $loc = (.Process (printf "resize %dx webp" (math.Min 1200 .Width | int))).Permalink }}{{ end }}
+    <image:image><image:loc>{{ $loc }}</image:loc></image:image>
+        {{- end }}
+      {{- end }}
+    {{- end }}
+  </url>
+  {{- end }}
+{{- end }}
+</urlset>
