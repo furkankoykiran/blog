@@ -1,0 +1,32 @@
+# Display names of tags for page titles and descriptions. Tags are lowercase
+# slugs shared by both languages; a plain string is used in both, a map gives
+# one name per language. Tags missing here show their slug with a capital.
+python: Python
+security: { tr: Güvenlik, en: Security }
+asyncio: asyncio
+performance: { tr: Performans, en: Performance }
+devops: DevOps
+open-source: { tr: Açık kaynak, en: Open source }
+ci-cd: CI/CD
+api: API
+web3: Web3
+ethereum: Ethereum
+docker: Docker
+databases: { tr: Veritabanları, en: Databases }
+typescript: TypeScript
+trading: Trading
+mcp: MCP
+automation: { tr: Otomasyon, en: Automation }
+web: Web
+testing: { tr: Test, en: Testing }
+fastapi: FastAPI
+ai-agents: { tr: Yapay zeka ajanları, en: AI agents }
+tooling: { tr: Geliştirici araçları, en: Developer tooling }
+github-actions: GitHub Actions
+monitoring: { tr: İzleme, en: Monitoring }
+redis: Redis
+messaging: { tr: Mesajlaşma, en: Messaging }
+linux: Linux
+telegram: Telegram
+kubernetes: Kubernetes
+go: Go

@@ -15,13 +15,19 @@
   {{- if .IsHome -}}
     {{- $title = printf "%s | %s" site.Title (cond $isTR "MCP, yapay zeka ajanları, Python ve DevOps" "MCP, AI agents, Python and DevOps") -}}
   {{- else if eq .Kind "term" -}}
-    {{- $label := "" -}}
-    {{- if eq .Data.Plural "tags" }}{{ $label = cond $isTR "Etiket" "Tag" }}{{ else if eq .Data.Plural "series" }}{{ $label = cond $isTR "Seri" "Series" }}{{ else }}{{ $label = cond $isTR "Kategori" "Category" }}{{ end -}}
-    {{- $title = printf "%s: %s | %s" $label .Title site.Title -}}
+    {{- $n := len .Pages -}}
+    {{- $label := partial "fk/term-label.html" . -}}
+    {{- if eq .Data.Plural "series" -}}
+      {{- $title = printf (cond $isTR "%s serisi: %d bölümlük rehber | %s" "The %s series: a %d-part guide | %s") $label $n site.Title -}}
+    {{- else if eq .Data.Plural "tags" -}}
+      {{- $title = printf (cond $isTR "%s yazıları: rehberler ve sahadan notlar | %s" "%s posts: guides and hands-on notes | %s") $label site.Title -}}
+    {{- else -}}
+      {{- $title = printf (cond $isTR "%s kategorisi: yazılar ve rehberler | %s" "%s: posts and guides | %s") $label site.Title -}}
+    {{- end -}}
   {{- else if $isPost -}}
     {{- $title = printf "%s | %s" .Title $author -}}
   {{- else -}}
-    {{- $title = printf "%s | %s" .Title site.Title -}}
+    {{- $title = .Params.seoTitle | default (printf "%s | %s" .Title site.Title) -}}
   {{- end -}}
   <title>{{ $title | plainify | htmlUnescape }}</title>
 
@@ -30,11 +36,17 @@
   {{- if not $desc -}}
     {{- if eq .Kind "term" -}}
       {{- $count := len .Pages -}}
+      {{- $label := partial "fk/term-label.html" . -}}
       {{- if eq .Data.Plural "series" -}}
-        {{- $desc = cond $isTR (printf "“%s” serisindeki %d yazı, okuma sırasıyla. Furkan Köykıran'ın blogu." .Title $count) (printf "All %d posts in the “%s” series, in reading order. Furkan Köykıran's blog." $count .Title) -}}
+        {{- $desc = cond $isTR (printf "“%s” serisindeki %d yazı, okuma sırasıyla. Furkan Köykıran'ın blogu." $label $count) (printf "All %d posts in the “%s” series, in reading order. Furkan Köykıran's blog." $count $label) -}}
       {{- else -}}
-        {{- $desc = cond $isTR (printf "“%s” konusundaki %d yazı: Furkan Köykıran'ın MCP, Python ve DevOps blogu." .Title $count) (printf "%d posts about “%s” on Furkan Köykıran's blog about MCP, Python and DevOps." $count .Title) -}}
+        {{- $desc = cond $isTR (printf "“%s” konusundaki %d yazı: Furkan Köykıran'ın MCP, Python ve DevOps blogu." $label $count) (printf "%d posts about “%s” on Furkan Köykıran's blog about MCP, Python and DevOps." $count $label) -}}
       {{- end -}}
+      {{- /* Name the latest posts so every term page has its own snippet. */ -}}
+      {{- $recent := slice -}}
+      {{- range first 3 .Pages }}{{ $recent = $recent | append .Title }}{{ end -}}
+      {{- with $recent }}{{ $desc = printf "%s %s %s." $desc (cond $isTR "Son yazılar:" "Latest:") (delimit . "; ") }}{{ end -}}
+      {{- if gt (len $desc) 160 }}{{ $desc = printf "%s…" (substr $desc 0 157 | replaceRE `\s+\S*$` "") }}{{ end -}}
     {{- else if .IsPage -}}
       {{- $desc = .Summary | plainify | htmlUnescape | truncate 158 -}}
     {{- else -}}
