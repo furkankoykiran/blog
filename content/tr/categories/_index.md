@@ -1,0 +1,4 @@
+---
+title: "Kategoriler"
+description: "Blogun konu kategorileri: MCP ve yapay zeka, açık kaynak, Python, backend, DevOps, trading, Web3, projeler ve hikâyeler."
+---
