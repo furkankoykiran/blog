@@ -1,0 +1,31 @@
+# Tooling configuration for the maintenance scripts in scripts/ and their tests.
+# The site itself is built by Hugo; this is not an installable package.
+
+[project]
+name = "furkankoykiran-blog-scripts"
+version = "1.0.0"
+description = "Post linter, image tooling and deployment scripts for blog.furkankoykiran.com.tr"
+requires-python = ">=3.11"
+license = "MIT"
+authors = [{ name = "Furkan Köykıran" }]
+# The linter, the URL check and the deploy scripts use the standard library only.
+dependencies = []
+
+[project.optional-dependencies]
+# Full linter checks: YAML front matter, JSON Schema validation, image metadata.
+lint = ["pyyaml>=6", "jsonschema>=4.23", "pillow>=11"]
+# Image tooling (scripts/images/, make_covers.py, render_diagrams.py); also needs Chrome.
+images = ["pillow>=11", "pygments>=2.18", "pyyaml>=6", "websocket-client>=1.8"]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+src = ["scripts", "scripts/images", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "W", "F", "I", "B", "UP", "SIM", "C4", "RUF", "PTH", "LOG"]
+# Turkish text legitimately uses dotless i and similar letters.
+ignore = ["RUF001", "RUF002", "RUF003"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["common", "_chrome", "credits", "optimize", "render", "lint_posts"]
