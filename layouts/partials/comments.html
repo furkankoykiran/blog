@@ -1,0 +1,15 @@
+{{- /*
+  giscus (GitHub Discussions), configured under [giscus] in config/_default/params.toml.
+  assets/js/fk.js loads the widget when the section approaches the viewport.
+*/ -}}
+{{- $g := site.Params.giscus -}}
+{{- $isTR := eq site.Language.Lang "tr" -}}
+<section id="fk-comments" class="fk-comments" aria-labelledby="fk-comments-title"
+  data-repo="{{ $g.repo }}" data-repo-id="{{ $g.repoId }}" data-category="{{ $g.category }}" data-category-id="{{ $g.categoryId }}"
+  data-mapping="{{ $g.mapping | default "pathname" }}" data-strict="{{ $g.strict | default "1" }}"
+  data-reactions="{{ $g.reactionsEnabled | default "1" }}" data-emit-metadata="{{ $g.emitMetadata | default "0" }}"
+  data-input-position="{{ $g.inputPosition | default "top" }}" data-lang="{{ site.Language.Lang }}">
+  <h2 id="fk-comments-title">{{ cond $isTR "Yorumlar" "Comments" }}</h2>
+  <p class="fk-muted">{{ cond $isTR "Yorumlar GitHub Discussions üzerinden giscus ile çalışır; yorum yapmak için GitHub hesabı gerekir." "Comments run on GitHub Discussions via giscus; you need a GitHub account to comment." }}</p>
+  <div class="fk-giscus-target"></div>
+</section>

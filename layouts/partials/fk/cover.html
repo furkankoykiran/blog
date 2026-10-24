@@ -1,0 +1,43 @@
+{{- /*
+  Resolves a page's cover image and returns a dict with responsive sources, or "" when none.
+  Order: front matter `cover` (bundle resource or assets path) -> bundle feature* -> translation's feature*.
+  Keys: res, w, h, avif, webp (srcset strings), src (fallback webp), alt, isSVG, explicit (bool: set via front matter)
+*/ -}}
+{{- $p := . -}}
+{{- $res := "" -}}
+{{- $explicit := false -}}
+{{- with $p.Params.cover -}}
+  {{- $res = or ($p.Resources.Get .) (resources.Get .) -}}
+  {{- if $res }}{{ $explicit = true }}{{ end -}}
+{{- end -}}
+{{- if not $res -}}
+  {{- $res = $p.Resources.GetMatch "feature*" -}}
+{{- end -}}
+{{- if not $res -}}
+  {{- range $p.Translations -}}
+    {{- if not $res }}{{ $res = .Resources.GetMatch "feature*" }}{{ end -}}
+  {{- end -}}
+{{- end -}}
+{{- $out := "" -}}
+{{- with $res -}}
+  {{- $alt := $p.Params.coverAlt | default $p.Title -}}
+  {{- if eq .MediaType.SubType "svg" -}}
+    {{- $out = dict "res" . "isSVG" true "src" .RelPermalink "alt" $alt "explicit" $explicit "w" 1200 "h" 630 -}}
+  {{- else if eq .MediaType.SubType "gif" -}}
+    {{- $out = dict "res" . "isSVG" true "src" .RelPermalink "alt" $alt "explicit" $explicit "w" .Width "h" .Height -}}
+  {{- else -}}
+    {{- $avif := slice -}}{{- $webp := slice -}}{{- $fallback := "" -}}
+    {{- range $w := slice 480 800 1200 -}}
+      {{- if or (le $w $res.Width) (eq $w 480) -}}
+        {{- $tw := math.Min $w $res.Width | int -}}
+        {{- $a := $res.Process (printf "resize %dx avif" $tw) -}}
+        {{- $b := $res.Process (printf "resize %dx webp" $tw) -}}
+        {{- $avif = $avif | append (printf "%s %dw" $a.RelPermalink $tw) -}}
+        {{- $webp = $webp | append (printf "%s %dw" $b.RelPermalink $tw) -}}
+        {{- if le $tw 800 }}{{ $fallback = $b }}{{ end -}}
+      {{- end -}}
+    {{- end -}}
+    {{- $out = dict "res" . "isSVG" false "avif" (delimit $avif ", ") "webp" (delimit $webp ", ") "src" $fallback.RelPermalink "w" .Width "h" .Height "alt" $alt "explicit" $explicit -}}
+  {{- end -}}
+{{- end -}}
+{{- return $out -}}

@@ -1,0 +1,32 @@
+{{- /*
+  "Image credits" under a post: third-party images, logos and screenshots of other
+  people's pages, read from content/media/posts/<bundle>/credits.yaml (format:
+  scripts/images/README.md). Only images this language's page actually uses are listed.
+  The file is excluded from the content mounts, so it is read from disk here.
+*/ -}}
+{{- $dir := replace .File.Dir "\\" "/" -}}
+{{- $file := path.Join "content/media" $dir "credits.yaml" -}}
+{{- $items := slice -}}
+{{- if fileExists $file -}}
+  {{- range (os.ReadFile $file | transform.Unmarshal (dict "format" "yaml")) -}}
+    {{- $shown := or (in (slice "third-party" "logo") .kind) (and (eq .kind "screenshot") (eq .license "quotation")) -}}
+    {{- if and $shown (ne .license "own") (strings.Contains $.RawContent (printf "(%s" .file)) -}}
+      {{- $items = $items | append . -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- with $items }}
+<aside class="fk-credits not-prose max-w-prose" aria-label="{{ i18n "article.image_credits" }}">
+  <p class="fk-credits-title">{{ i18n "article.image_credits" }}</p>
+  <ul>
+    {{- range . }}
+    <li>
+      {{- if .source }}<a href="{{ .source }}" rel="noopener">{{ .author | default .source }}</a>{{ else }}{{ .author }}{{ end -}}
+      {{- $lic := cond (eq .license "quotation") (i18n "article.image_quotation") .license -}}
+      {{- with $lic }}, {{ end -}}
+      {{- if .license_url }}<a href="{{ .license_url }}" rel="noopener license">{{ $lic }}</a>{{ else }}{{ $lic }}{{ end -}}
+    </li>
+    {{- end }}
+  </ul>
+</aside>
+{{- end -}}

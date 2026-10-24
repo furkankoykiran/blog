@@ -1,0 +1,21 @@
+{{- /* Author box under each post: photo, headline, bio, portfolio and social links. */ -}}
+{{- $isTR := eq site.Language.Lang "tr" -}}
+{{- $a := site.Params.Author -}}
+<aside class="fk-author" aria-label="{{ cond $isTR "Yazar hakkında" "About the author" }}">
+  {{- with resources.Get $a.image }}
+    {{- $i1 := .Resize "96x96 webp q85" }}{{ $i2 := .Resize "192x192 webp q85" }}
+  <img class="fk-author-photo" src="{{ $i1.RelPermalink }}" srcset="{{ $i1.RelPermalink }} 1x, {{ $i2.RelPermalink }} 2x" width="96" height="96" alt="{{ $a.name }}" loading="lazy" decoding="async">
+  {{- end }}
+  <div class="fk-author-body">
+    <p class="fk-author-kicker">{{ i18n "author.byline_title" }}</p>
+    <p class="fk-author-name"><a href="{{ cond $isTR site.Params.fk.portfolio site.Params.fk.portfolioEN }}" rel="author">{{ $a.name }}</a></p>
+    {{- with $a.headline }}<p class="fk-author-headline">{{ . }}</p>{{ end }}
+    {{- with $a.bio }}<p class="fk-author-bio">{{ . }}</p>{{ end }}
+    <ul class="fk-social" aria-label="{{ cond $isTR "Sosyal hesaplar" "Social accounts" }}">
+      <li><a href="{{ cond $isTR site.Params.fk.portfolio site.Params.fk.portfolioEN }}" aria-label="{{ cond $isTR "Portfolyo" "Portfolio" }}" title="{{ cond $isTR "Portfolyo" "Portfolio" }}">{{ partial "icon.html" "globe" }}</a></li>
+      {{- range where site.Params.fk.social "support" "!=" true }}
+      <li><a href="{{ .url }}" target="_blank" rel="me noopener" aria-label="{{ .name }}" title="{{ .name }}">{{ partial "icon.html" .icon }}</a></li>
+      {{- end }}
+    </ul>
+  </div>
+</aside>

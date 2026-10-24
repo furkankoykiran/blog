@@ -1,0 +1,43 @@
+{{- /*
+  Analytics and consent, shared with the portfolio site. Nothing is rendered
+  unless at least one analytics ID is set.
+  GA4 runs in Consent Mode v2 advanced mode: every signal starts denied and
+  only cookieless pings are sent until the visitor accepts. Clarity starts
+  cookieless too. Cloudflare Web Analytics never sets cookies.
+  Third-party scripts load after the page has loaded and the browser is idle,
+  so they never compete with the first paint.
+*/ -}}
+{{- $a := site.Params.analytics -}}
+{{- $ga := $a.ga4 | default "" -}}
+{{- $cl := $a.clarity | default "" -}}
+{{- $cf := $a.cfBeaconToken | default "" -}}
+{{- if and hugo.IsProduction (or $ga $cl $cf) -}}
+<script>
+(function(){
+  var m=document.cookie.match(/(?:^|; )fk_consent=(granted|denied)/),c=m?m[1]:null;
+  window.__fkConsent=c;
+  window.dataLayer=window.dataLayer||[];
+  window.gtag=function(){dataLayer.push(arguments);};
+  gtag('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',
+    analytics_storage:c==='granted'?'granted':'denied',functionality_storage:'granted',security_storage:'granted',wait_for_update:500});
+  gtag('set','ads_data_redaction',true);
+  {{- with $ga }}
+  gtag('js',new Date());
+  gtag('config','{{ . }}',{cookie_flags:'SameSite=Lax;Secure'});
+  {{- end }}
+  window.clarity=window.clarity||function(){(clarity.q=clarity.q||[]).push(arguments);};
+  if(c==='granted')clarity('consentv2',{ad_Storage:'denied',analytics_Storage:'granted'});
+  function add(src,attrs){var s=document.createElement('script');s.async=true;s.src=src;
+    if(attrs)for(var k in attrs)s.setAttribute(k,attrs[k]);document.head.appendChild(s);}
+  function load(){
+    {{- with $ga }}add('https://www.googletagmanager.com/gtag/js?id={{ . }}');{{ end }}
+    {{- with $cl }}add('https://www.clarity.ms/tag/{{ . }}');{{ end }}
+    {{- with $cf }}add('https://static.cloudflareinsights.com/beacon.min.js',{'data-cf-beacon':'{"token":"{{ . }}"}'});{{ end }}
+  }
+  function idle(){('requestIdleCallback' in window)?requestIdleCallback(load,{timeout:3000}):setTimeout(load,1500);}
+  if(document.readyState==='complete')idle();else addEventListener('load',idle);
+})();
+</script>
+{{- $js := resources.Get "js/fk-consent.js" | minify | fingerprint -}}
+<script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}" defer></script>
+{{- end -}}

@@ -1,0 +1,5 @@
+{{- /* Comments render only when enabled and both giscus IDs are configured. */ -}}
+{{- $g := site.Params.giscus -}}
+{{- if and (.Params.showComments | default (site.Params.article.showComments | default false)) $g.repoId $g.categoryId (not .Draft) -}}
+  {{ partial "comments.html" . }}
+{{- end -}}

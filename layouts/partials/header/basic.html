@@ -1,0 +1,88 @@
+{{- /* Theme header row with a responsive WebP logo (1x/2x/3x) instead of the full-size PNG. */ -}}
+<div class="main-menu flex items-center w-full gap-2 p-1 pl-0">
+  {{ if .Site.Params.Logo }}
+    {{ $logo := resources.Get .Site.Params.Logo }}
+    {{ if $logo }}
+      <div>
+        <a href="{{ "" | relLangURL }}" class="flex">
+          <span class="sr-only">{{ .Site.Title | markdownify }}</span>
+          {{ if eq $logo.MediaType.SubType "svg" }}
+            <span class="logo object-scale-down object-left nozoom">
+              {{ $logo.Content | safeHTML }}
+            </span>
+          {{ else }}
+            {{- $l1 := $logo.Resize "40x40 webp q90" }}{{ $l2 := $logo.Resize "80x80 webp q90" }}{{ $l3 := $logo.Resize "120x120 webp q90" }}
+            <img
+              src="{{ $l2.RelPermalink }}"
+              srcset="{{ $l1.RelPermalink }} 1x, {{ $l2.RelPermalink }} 2x, {{ $l3.RelPermalink }} 3x"
+              width="40"
+              height="40"
+              class="logo max-h-20 max-w-20 object-scale-down object-left nozoom"
+              alt="">
+          {{ end }}
+        </a>
+      </div>
+    {{ end }}
+  {{ end }}
+  {{ if not .Site.Params.disableTextInHeader | default true }}
+    <a href="{{ "" | relLangURL }}" class="text-base font-medium truncate min-w-0 shrink">
+      {{ .Site.Title | markdownify }}
+    </a>
+  {{ end }}
+  <div class="flex items-center ms-auto">
+    <div class="hidden md:flex">
+      {{ partial "header/components/desktop-menu.html" . }}
+    </div>
+    <div class="flex md:hidden">
+      {{ partial "header/components/mobile-menu.html" . }}
+    </div>
+  </div>
+</div>
+
+{{ if .Site.Menus.subnavigation }}
+  <nav id="main-menu" aria-label="{{ i18n "nav.main_menu" }}">
+    <div
+      class="main-menu flex pb-3 flex-col items-end justify-between md:justify-start space-x-3 {{ if .Site.Params.Logo }}
+        -mt-[15px]
+      {{ end }}">
+      <div class="hidden md:flex items-center space-x-5">
+        {{ range .Site.Menus.subnavigation }}
+          <a
+            href="{{ .URL }}"
+            {{ if or (strings.HasPrefix .URL "http:" ) (strings.HasPrefix .URL "https:" ) }}
+              target="_blank"
+            {{ end }}
+            class="flex items-center bf-icon-color-hover">
+            {{ if .Pre }}
+              <span {{ if and .Pre .Name }}class="mr-1"{{ end }}>
+                {{ partial "icon.html" .Pre }}
+              </span>
+            {{ end }}
+            <span class="text-xs font-light" title="{{ .Title }}">
+              {{ .Name | markdownify }}
+            </span>
+          </a>
+        {{ end }}
+      </div>
+    </div>
+  </nav>
+{{ end }}
+
+{{ if .Site.Params.highlightCurrentMenuArea }}
+  <script>
+    (function () {
+      var mainmenu = document.querySelector(".main-menu");
+      if (!mainmenu) return;
+
+      var path = window.location.pathname;
+      var links = mainmenu.querySelectorAll('a[href="' + path + '"]');
+
+      links.forEach(function (link) {
+        var targets = link.querySelectorAll("span");
+        targets.forEach(function (el) {
+          el.classList.add("active");
+        });
+      });
+    })();
+  </script>
+{{ end }}

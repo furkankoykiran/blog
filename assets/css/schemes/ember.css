@@ -1,0 +1,43 @@
+/*
+ * Ember: Furkan Köykıran Blog colour scheme.
+ * Shared base with the portfolio: dark navy #11151D (neutral-800, the dark-mode background).
+ * The portfolio uses a cool blue/teal accent; the blog gets a warm amber-orange accent
+ * (primary) with a coral secondary, so the two sites feel related but distinct.
+ * Contrast: primary-600 on paper >= 4.5:1, primary-400 on navy >= 8:1.
+ */
+:root {
+  --color-neutral: 253, 252, 250;
+  /* Navy-tinted greys */
+  --color-neutral-50: 248, 249, 251;
+  --color-neutral-100: 240, 242, 246;
+  --color-neutral-200: 226, 230, 237;
+  --color-neutral-300: 203, 209, 220;
+  --color-neutral-400: 148, 157, 175;
+  --color-neutral-500: 104, 114, 134;
+  --color-neutral-600: 71, 80, 99;
+  --color-neutral-700: 38, 45, 59;
+  --color-neutral-800: 17, 21, 29;
+  --color-neutral-900: 10, 13, 19;
+  /* Ember (amber-orange) */
+  --color-primary-50: 255, 247, 237;
+  --color-primary-100: 255, 236, 214;
+  --color-primary-200: 254, 214, 170;
+  --color-primary-300: 252, 183, 116;
+  --color-primary-400: 250, 150, 72;
+  --color-primary-500: 236, 116, 40;
+  --color-primary-600: 190, 80, 16;
+  --color-primary-700: 160, 62, 14;
+  --color-primary-800: 128, 50, 16;
+  --color-primary-900: 99, 40, 15;
+  /* Coral */
+  --color-secondary-50: 255, 241, 240;
+  --color-secondary-100: 255, 226, 222;
+  --color-secondary-200: 254, 202, 195;
+  --color-secondary-300: 252, 165, 154;
+  --color-secondary-400: 246, 120, 106;
+  --color-secondary-500: 229, 83, 72;
+  --color-secondary-600: 197, 58, 52;
+  --color-secondary-700: 163, 44, 43;
+  --color-secondary-800: 134, 38, 40;
+  --color-secondary-900: 108, 33, 36;
+}

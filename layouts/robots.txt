@@ -1,0 +1,38 @@
+# {{ site.BaseURL }}: open to search engines and AI systems (search, user agents and training).
+User-agent: *
+User-agent: Googlebot
+User-agent: Googlebot-Image
+User-agent: Google-Extended
+User-agent: bingbot
+User-agent: YandexBot
+User-agent: YandexAdditional
+User-agent: GPTBot
+User-agent: OAI-SearchBot
+User-agent: ChatGPT-User
+User-agent: ClaudeBot
+User-agent: Claude-SearchBot
+User-agent: Claude-User
+User-agent: PerplexityBot
+User-agent: Perplexity-User
+User-agent: Applebot
+User-agent: Applebot-Extended
+User-agent: Amazonbot
+User-agent: Meta-ExternalAgent
+User-agent: Meta-ExternalFetcher
+User-agent: DuckAssistBot
+User-agent: MistralAI-User
+User-agent: CCBot
+User-agent: Bytespider
+Allow: /
+# Images (covers, diagrams, screenshots) may be indexed and shown in image search.
+Allow: /*.webp$
+Allow: /*.avif$
+Allow: /*.jpg$
+Allow: /*.png$
+Allow: /*.svg$
+Disallow: /*?*
+Content-Signal: search=yes, ai-input=yes, ai-train=yes
+
+Sitemap: {{ "sitemap.xml" | absURL }}
+# LLM summary: {{ "llms.txt" | absURL }} (English: {{ "en/llms.txt" | absURL }})
+# Full text for LLMs: {{ "llms-full.txt" | absURL }}

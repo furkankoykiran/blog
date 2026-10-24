@@ -1,0 +1,17 @@
+{{- /* Responsive images: AVIF + WebP <picture>, intrinsic size (no CLS), lazy below the fold. */ -}}
+{{- $u := urls.Parse .Destination -}}
+{{- $alt := .PlainText | default .Text -}}
+{{- $caption := .Title -}}
+{{- $res := "" -}}
+{{- if not $u.IsAbs -}}
+  {{- $res = or (.Page.Resources.Get $u.Path) (resources.Get $u.Path) -}}
+{{- end -}}
+<figure class="fk-figure">
+  {{- with $res -}}
+    {{- partial "fk/picture.html" (dict "res" . "alt" $alt "sizes" "(min-width: 768px) 720px, 100vw" "class" "my-0 rounded-md") -}}
+  {{- else -}}
+    <img src="{{ .Destination | safeURL }}" alt="{{ $alt }}" loading="lazy" decoding="async" class="my-0 rounded-md">
+  {{- end -}}
+  {{- with $caption }}<figcaption>{{ . | markdownify }}</figcaption>{{ end -}}
+</figure>
+{{- /* no trailing newline */ -}}

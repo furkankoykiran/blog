@@ -1,0 +1,45 @@
+{{- $isTR := eq site.Language.Lang "tr" -}}
+{{- $posts := (where site.RegularPages "Section" "posts").ByDate.Reverse -}}
+# {{ site.Title }}{{ if not $isTR }} (English){{ end }}
+
+> {{ site.Params.description }}
+
+{{ if $isTR -}}
+Furkan Köykıran'ın teknik blogu. Ağırlıklı konular: MCP (Model Context Protocol) sunucuları ve yapay zeka ajanları, büyük açık kaynak projelere katkılar, Python ile algoritmik trading botları (Freqtrade, Telegram), Python backend ve DevOps (FastAPI, Docker, Nginx, GitHub Actions). Yazılar Türkçe yazılır; İngilizce sürümleri {{ "en/" | absURL }} altında yayımlanır.
+
+Yazar: {{ site.Params.author.name }}, yazılım geliştirici. Projeler, açık kaynak katkıları ve iletişim: {{ site.Params.fk.portfolio }}
+
+Her yazının Markdown sürümü, yazı adresinin sonuna `index.md` eklenerek alınabilir (ör. {{ with index $posts 0 }}{{ .Permalink }}index.md{{ end }}). Bütün yazıların tam metni: {{ "llms-full.txt" | absLangURL }}
+{{- else -}}
+Engineering blog by {{ site.Params.author.name }}. Main topics: MCP (Model Context Protocol) servers and AI agents, contributions to large open-source projects, Python trading bots (Freqtrade, Telegram), Python backend and DevOps (FastAPI, Docker, Nginx, GitHub Actions). Posts are written in Turkish first; English versions live under {{ "en/" | absURL }}, and the Turkish archive is listed at {{ "llms.txt" | absURL }}.
+
+Author: {{ site.Params.author.name }}, software developer. Projects, open-source contributions and contact: {{ site.Params.fk.portfolioEN }}
+
+Every post is also available as Markdown by appending `index.md` to its URL{{ with index $posts 0 }} (e.g. {{ .Permalink }}index.md){{ end }}. Full text of all English posts: {{ "llms-full.txt" | absLangURL }}
+{{- end }}
+
+## {{ if $isTR }}Öne çıkan seriler{{ else }}Series{{ end }}
+
+{{ range site.Taxonomies.series.ByCount -}}
+- [{{ .Page.Title }}]({{ .Page.Permalink }}): {{ .Count }} {{ if $isTR }}yazı{{ else }}{{ cond (eq .Count 1) "post" "posts" }}{{ end }}
+{{ end }}
+## {{ if $isTR }}Tüm yazılar{{ else }}All posts{{ end }}
+
+{{ range $posts -}}
+- [{{ .Title }}]({{ .Permalink }}index.md): {{ .Description | plainify | htmlUnescape }} ({{ .Date.Format "2006-01-02" }})
+{{ end }}
+## {{ if $isTR }}Sayfalar{{ else }}Pages{{ end }}
+
+{{ range where site.RegularPages "Section" "!=" "posts" -}}
+- [{{ .Title }}]({{ .Permalink }}): {{ .Description | plainify | htmlUnescape }}
+{{ end }}
+## Optional
+
+{{ range .Translations -}}
+- [{{ .Language.Label }} llms.txt]({{ .Permalink }}llms.txt)
+{{ end -}}
+- [RSS]({{ "feed.xml" | absLangURL }})
+- [Sitemap]({{ "sitemap.xml" | absURL }})
+- [{{ if $isTR }}Yazar / portfolyo{{ else }}Author / portfolio{{ end }}]({{ cond $isTR site.Params.fk.portfolio site.Params.fk.portfolioEN }})
+{{ range where site.Params.fk.social "name" "GitHub" }}- [GitHub]({{ .url }})
+{{ end -}}

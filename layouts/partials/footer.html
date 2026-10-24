@@ -1,0 +1,65 @@
+{{- $isTR := eq site.Language.Lang "tr" -}}
+{{- $author := site.Params.author.name -}}
+{{- $a := site.Params.analytics -}}
+<footer id="site-footer" class="fk-footer print:hidden" aria-labelledby="fk-footer-title">
+  <h2 id="fk-footer-title" class="sr-only">{{ cond $isTR "Site altbilgisi" "Site footer" }}</h2>
+  <div class="fk-footer-grid">
+    <section class="fk-footer-brand">
+      <a href="{{ "" | relLangURL }}" class="fk-footer-logo">
+        {{- with resources.Get "img/fk-logo.png" }}{{ $l := .Resize "96x96 webp" }}
+        <img src="{{ $l.RelPermalink }}" width="48" height="48" alt="" loading="lazy" decoding="async">
+        {{- end }}
+        <span>{{ site.Title }}</span>
+      </a>
+      <p>{{ site.Params.tagline }}</p>
+      <a class="fk-rss-cta" href="{{ "feed.xml" | relLangURL }}">
+        {{ partial "icon.html" "rss" }}
+        <span>{{ cond $isTR "RSS ile takip et" "Follow via RSS" }}</span>
+      </a>
+    </section>
+
+    <nav class="fk-footer-col" aria-label="{{ cond $isTR "Blog bağlantıları" "Blog links" }}">
+      <h3>Blog</h3>
+      <ul>
+        {{- range site.Menus.main }}
+          {{- if not (strings.HasPrefix .URL "http") }}
+        <li><a href="{{ .URL }}">{{ .Name }}</a></li>
+          {{- end }}
+        {{- end }}
+        {{- range site.Menus.footer }}
+        <li><a href="{{ .URL }}">{{ .Name }}</a></li>
+        {{- end }}
+      </ul>
+    </nav>
+
+    <nav class="fk-footer-col" aria-label="{{ cond $isTR (printf "%s bağlantıları" $author) (printf "%s links" $author) }}">
+      <h3>{{ $author }}</h3>
+      <ul>
+        <li><a href="{{ cond $isTR site.Params.fk.portfolio site.Params.fk.portfolioEN }}">{{ cond $isTR "Portfolyo ve projeler" "Portfolio and projects" }} &#x2197;&#xFE0E;</a></li>
+        {{- range where site.Params.fk.social "support" true }}
+        <li><a href="{{ .url }}" rel="me noopener">{{ .name }} &#x2197;&#xFE0E;</a></li>
+        {{- end }}
+      </ul>
+      <ul class="fk-social" aria-label="{{ cond $isTR "Sosyal hesaplar" "Social accounts" }}">
+        {{- range where site.Params.fk.social "support" "!=" true }}
+        <li><a href="{{ .url }}" rel="me noopener" target="_blank" aria-label="{{ .name }}" title="{{ .name }}">{{ partial "icon.html" .icon }}</a></li>
+        {{- end }}
+      </ul>
+    </nav>
+  </div>
+
+  <div class="fk-footer-bottom">
+    <p class="fk-copy">{{ replace site.Params.copyright "{ year }" (string now.Year) }}</p>
+    <div class="fk-footer-tools">
+      <a href="{{ cond $isTR "/gizlilik/" "/en/privacy/" }}">{{ cond $isTR "Gizlilik" "Privacy" }}</a>
+      {{- if and hugo.IsProduction (or $a.ga4 $a.clarity $a.cfBeaconToken) }}
+      <button type="button" class="fk-linkbtn" data-cookie-settings>{{ cond $isTR "Çerez tercihleri" "Cookie settings" }}</button>
+      {{- end }}
+      {{- range hugo.Sites }}{{ with .Language }}
+        {{- if ne .Lang site.Language.Lang }}
+      <a href="{{ (cond (eq .Lang "tr") "/" "/en/") }}" lang="{{ .Lang }}" hreflang="{{ .Lang }}">{{ .Label }}</a>
+        {{- end }}
+      {{- end }}{{ end }}
+    </div>
+  </div>
+</footer>

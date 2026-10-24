@@ -1,0 +1,21 @@
+{{- /* Language switcher: links to the translation when one exists, otherwise to the other language's home. */ -}}
+{{- $cur := site.Language.Lang -}}
+<div class="fk-lang">
+  {{- range hugo.Sites }}{{ with .Language }}
+    {{- if ne .Lang $cur }}
+      {{- $lang := .Lang -}}
+      {{- $target := "" -}}
+      {{- range $.Translations }}{{ if eq .Language.Lang $lang }}{{ $target = .RelPermalink }}{{ end }}{{ end -}}
+      {{- $title := "" -}}
+      {{- if $target -}}
+        {{- $title = cond (eq $lang "en") "Read this page in English" "Bu sayfayı Türkçe oku" -}}
+      {{- else -}}
+        {{- $target = cond (eq $lang "en") "/en/" "/" -}}
+        {{- $title = cond (eq $lang "en") "English version of the blog" "Blogun Türkçe sürümü" -}}
+      {{- end }}
+  <a href="{{ $target }}" class="fk-lang-link bf-icon-color-hover" lang="{{ $lang }}" hreflang="{{ $lang }}" title="{{ $title }}">
+    {{ partial "icon.html" "language" }}<span>{{ upper $lang }}</span><span class="sr-only"> ({{ $title }})</span>
+  </a>
+    {{- end }}
+  {{- end }}{{ end }}
+</div>

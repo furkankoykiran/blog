@@ -1,0 +1,24 @@
+global:
+  language: "Language"
+
+article:
+  reading_time:
+    one: "{{ .Count }} min read"
+    other: "{{ .Count }} min read"
+  related_articles: "Related posts"
+  image_credits: "Image credits"
+  image_quotation: "quotation"
+  table_label: "Scrollable table"
+
+footer:
+  powered_by: ""
+
+search:
+  open_button_title: "Search (/ or Ctrl K)"
+  input_placeholder: "Search posts"
+
+sharing:
+  twitter: "Share on X"
+
+shortcode:
+  recent_articles: "Latest posts"

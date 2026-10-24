@@ -1,0 +1,75 @@
+{{ define "main" }}
+{{- $isTR := eq site.Language.Lang "tr" -}}
+{{- $posts := where site.RegularPages "Section" "posts" -}}
+<section class="fk-hero" aria-labelledby="fk-hero-title">
+  <div class="fk-hero-text">
+    <p class="fk-kicker">{{ site.Title }}</p>
+    <h1 id="fk-hero-title">
+      {{- if $isTR -}}MCP, yapay zeka ajanları, açık kaynak ve Python üzerine <span class="fk-accent">sahadan notlar</span>{{- else -}}Field notes on MCP, AI agents, open source and <span class="fk-accent">Python</span>{{- end -}}
+    </h1>
+    <p class="fk-lead">
+      {{- if $isTR -}}
+      Ben Furkan Köykıran. MCP sunucuları, trading botları ve backend servisleri geliştiriyor, büyük açık kaynak projelere katkı veriyorum. Burada çalışırken öğrendiklerimi yazıyorum.
+      {{- else -}}
+      I'm Furkan Köykıran. I build MCP servers, trading bots and backend services and contribute to large open-source projects. This is where I write down what I learn along the way.
+      {{- end -}}
+    </p>
+    <div class="fk-actions">
+      <a class="fk-btn fk-btn-primary" href="{{ "posts/" | relLangURL }}">{{ cond $isTR "Tüm yazılar" "All posts" }}</a>
+      <a class="fk-btn" href="{{ "feed.xml" | relLangURL }}">{{ partial "icon.html" "rss" }}<span>RSS</span></a>
+      <a class="fk-btn" href="{{ cond $isTR site.Params.fk.portfolio site.Params.fk.portfolioEN }}">{{ cond $isTR "Portfolyo" "Portfolio" }} &#x2197;&#xFE0E;</a>
+    </div>
+  </div>
+  <div class="fk-hero-photo">
+    {{- with resources.Get site.Params.Author.image }}
+      {{- $a := .Resize "176x176 webp q85" }}{{ $b := .Resize "352x352 webp q85" }}{{ $c := .Resize "192x192 webp q85" }}
+    <img src="{{ $a.RelPermalink }}" srcset="{{ $c.RelPermalink }} 192w, {{ $a.RelPermalink }} 176w, {{ $b.RelPermalink }} 352w" sizes="(max-width: 767px) 96px, 176px" width="176" height="176" alt="{{ site.Params.author.name }}" fetchpriority="high">
+    {{- end }}
+  </div>
+</section>
+
+{{- with site.Taxonomies.series }}
+<nav class="fk-topics" aria-label="{{ cond $isTR "Seriler" "Series" }}">
+  <span class="fk-topics-label">{{ cond $isTR "Seriler" "Series" }}</span>
+  <ul>
+    {{- range .ByCount }}
+    <li><a href="{{ .Page.RelPermalink }}">{{ .Page.Title }} <span aria-hidden="true">·</span> <span class="fk-count">{{ .Count }}</span></a></li>
+    {{- end }}
+  </ul>
+</nav>
+{{- end }}
+
+<section class="fk-latest" aria-labelledby="fk-latest-title">
+  <div class="fk-section-head">
+    <h2 id="fk-latest-title">{{ cond $isTR "Son yazılar" "Latest posts" }}</h2>
+    <a href="{{ "posts/" | relLangURL }}">{{ cond $isTR "Hepsini gör →" "See all →" }}</a>
+  </div>
+  <ul class="fk-cards">
+    {{- range $i, $p := first 6 $posts.ByDate.Reverse }}
+    <li>{{ partial "fk/card.html" (dict "page" $p "eager" (eq $i 0)) }}</li>
+    {{- end }}
+  </ul>
+</section>
+
+{{- $rest := after 6 $posts.ByDate.Reverse -}}
+{{- with first 10 $rest }}
+<section class="fk-more" aria-labelledby="fk-more-title">
+  <h2 id="fk-more-title">{{ cond $isTR "Daha fazlası" "More posts" }}</h2>
+  <ul class="fk-postlist">
+    {{- range . }}
+    <li>
+      <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+      <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date | time.Format site.Params.dateFormat }}</time>
+    </li>
+    {{- end }}
+  </ul>
+  <p><a class="fk-btn" href="{{ "posts/" | relLangURL }}">{{ cond $isTR (printf "Tüm %d yazı →" (len $posts)) (printf "All %d posts →" (len $posts)) }}</a></p>
+</section>
+{{- end }}
+
+{{- if not $isTR }}
+<aside class="fk-note" aria-label="Language note">
+  <p>Most posts were first written in Turkish and English versions are being added. <a href="/" lang="tr" hreflang="tr">Browse the Turkish blog</a> for the full archive.</p>
+</aside>
+{{- end }}
+{{ end }}

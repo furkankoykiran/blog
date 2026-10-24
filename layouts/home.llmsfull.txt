@@ -1,0 +1,19 @@
+{{- $isTR := eq site.Language.Lang "tr" -}}
+# {{ site.Title }}: {{ if $isTR }}tüm yazıların tam metni{{ else }}full text of all English posts{{ end }}
+
+> {{ site.Params.description }}
+
+{{ if $isTR }}Yazar: {{ site.Params.author.name }} ({{ site.Params.fk.portfolio }}). Kod örnekleri MIT, metinler ve görseller © {{ site.Params.author.name }}.{{ else }}Author: {{ site.Params.author.name }} ({{ site.Params.fk.portfolioEN }}). Code samples MIT; text and images © {{ site.Params.author.name }}.{{ end }}
+{{ range (where site.RegularPages "Section" "posts").ByDate.Reverse }}
+---
+
+## {{ .Title }}
+
+URL: {{ .Permalink }}
+{{ if $isTR }}Tarih{{ else }}Date{{ end }}: {{ .Date.Format "2006-01-02" }} · lastmod {{ .Lastmod.Format "2006-01-02" }}
+{{ with .Params.tags }}Tags: {{ delimit . ", " }}{{ end }}
+{{ with .Description }}
+> {{ . | plainify | htmlUnescape }}
+{{ end }}
+{{ partial "fk/abs-markdown.html" . }}
+{{ end }}

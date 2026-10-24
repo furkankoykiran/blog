@@ -1,0 +1,19 @@
+{{- /* Compact post row for section and term lists. Context: the page. */ -}}
+{{- $cover := partial "fk/cover.html" . -}}
+<article class="fk-row">
+  <div class="fk-row-media" aria-hidden="true">
+    {{- if $cover }}
+      {{- if $cover.isSVG }}<img src="{{ $cover.src }}" alt="" loading="lazy" decoding="async">
+      {{- else }}{{ partial "fk/picture.html" (dict "res" $cover.res "alt" "" "sizes" "160px" "widths" (slice 160 320)) }}{{ end }}
+    {{- else }}<span class="fk-card-fallback">{{ substr (.Title | plainify) 0 1 }}</span>{{ end }}
+  </div>
+  <div class="fk-row-body">
+    <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+    {{- with .Description }}<p class="fk-card-desc">{{ . | plainify | truncate 170 }}</p>{{ end }}
+    <p class="fk-card-meta">
+      <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date | time.Format site.Params.dateFormat }}</time>
+      <span aria-hidden="true">·</span> <span>{{ i18n "article.reading_time" .ReadingTime }}</span>
+      {{- with .Params.categories }} <span aria-hidden="true">·</span> <span>{{ index . 0 }}</span>{{ end }}
+    </p>
+  </div>
+</article>

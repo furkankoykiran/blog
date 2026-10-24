@@ -1,0 +1,45 @@
+{{- /*
+  Data source for the cross-posting job (scripts/syndicate_devto.py). One file per language:
+  /syndication.json (tr) and /en/syndication.json. Only public content metadata goes here:
+  front matter workflow keys are never published.
+*/ -}}
+{{- $base := strings.TrimSuffix "/" site.BaseURL -}}
+{{- $items := slice -}}
+{{- range (where site.RegularPages "Section" "posts").ByDate.Reverse -}}
+  {{- $p := . -}}
+  {{- $res := dict -}}
+  {{- range .Resources.ByType "image" -}}{{- $res = merge $res (dict .Name .Permalink) -}}{{- end -}}
+  {{- $md := partial "fk/abs-markdown.html" . -}}
+  {{- $md = replace $md "](/" (printf "](%s/" $base) -}}
+  {{- $cover := partial "fk/cover.html" . -}}
+  {{- $coverURL := "" -}}
+  {{- with $cover }}{{ if .isSVG }}{{ $coverURL = .res.Permalink }}{{ else }}{{ $coverURL = (.res.Process "resize 1600x jpg q85").Permalink }}{{ end }}{{ end -}}
+  {{- $og := partial "fk/og-image.html" (dict "title" .Title "lang" .Language.Lang "path" (strings.TrimPrefix "/" (printf "%sog.jpg" .RelPermalink))) -}}
+  {{- $tr := slice -}}
+  {{- range .Translations }}{{ $tr = $tr | append (dict "lang" .Language.Lang "permalink" .Permalink "title" .Title) }}{{ end -}}
+  {{- $items = $items | append (dict
+      "permalink" .Permalink
+      "lang" .Language.Lang
+      "bundle" (path.Base (replace .File.Dir "\\" "/"))
+      "slug" .Slug
+      "translations" $tr
+      "title" .Title
+      "description" (.Description | plainify | htmlUnescape)
+      "tags" (.Params.tags | default slice)
+      "categories" (.Params.categories | default slice)
+      "series" (.Params.series | default slice)
+      "postType" (.Params.postType | default "")
+      "date" (.Date.Format "2006-01-02T15:04:05Z07:00")
+      "lastmod" (.Lastmod.Format "2006-01-02T15:04:05Z07:00")
+      "draft" .Draft
+      "syndicate" (.Params.syndicate | default true)
+      "canonical_url" (.Params.canonical | default .Permalink)
+      "cover_image" $coverURL
+      "og_image" $og.Permalink
+      "resources" $res
+      "reading_time" .ReadingTime
+      "word_count" .WordCount
+      "markdown" $md
+  ) -}}
+{{- end -}}
+{{- dict "site" site.Home.Permalink "lang" site.Language.Lang "generated" (now.UTC.Format "2006-01-02T15:04:05Z") "count" (len $items) "posts" $items | jsonify (dict "indent" "  ") -}}

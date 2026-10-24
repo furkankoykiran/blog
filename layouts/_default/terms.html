@@ -1,0 +1,15 @@
+{{ define "main" }}
+{{- $isTR := eq site.Language.Lang "tr" -}}
+{{- $thr := site.Params.fk.thinTermThreshold | default 3 -}}
+<header class="fk-list-head">
+  {{ partial "breadcrumbs.html" . }}
+  <h1>{{ .Title }}</h1>
+  {{- with .Description }}<p class="fk-lead">{{ . }}</p>{{ end }}
+  <p class="fk-list-meta">{{ cond $isTR (printf "%d başlık" (len .Data.Terms)) (printf "%d terms" (len .Data.Terms)) }}</p>
+</header>
+<ul class="fk-chips">
+  {{- range .Data.Terms.ByCount }}
+  <li class="{{ if lt .Count $thr }}fk-chip-thin{{ end }}"><a href="{{ .Page.RelPermalink }}">{{ if eq $.Data.Plural "tags" }}#{{ end }}{{ .Page.Title }} <span class="fk-count">{{ .Count }}</span></a></li>
+  {{- end }}
+</ul>
+{{ end }}

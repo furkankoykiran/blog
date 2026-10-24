@@ -1,0 +1,10 @@
+{{- /*
+  Intrinsic size of an SVG resource, read from its viewBox (Hugo cannot decode SVG).
+  Returns dict "w" "h" (ints), or "" when the file has no usable viewBox.
+*/ -}}
+{{- $out := "" -}}
+{{- with findRESubmatch `viewBox="\s*[-\d.]+[\s,]+[-\d.]+[\s,]+([\d.]+)[\s,]+([\d.]+)\s*"` .Content 1 -}}
+  {{- $m := index . 0 -}}
+  {{- $out = dict "w" (math.Round (float (index $m 1)) | int) "h" (math.Round (float (index $m 2)) | int) -}}
+{{- end -}}
+{{- return $out -}}

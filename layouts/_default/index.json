@@ -1,0 +1,22 @@
+{{- /* Search index (Fuse): current language only; posts, pages and non-thin terms. Content is trimmed to keep the file small. */ -}}
+{{- $index := slice -}}
+{{- $thr := site.Params.fk.thinTermThreshold | default 3 -}}
+{{- range site.Pages -}}
+  {{- $ok := and (not .Params.excludeFromSearch) (not .IsHome) (ne .Kind "404") (ne .Kind "taxonomy") -}}
+  {{- if and (eq .Kind "term") (lt (len .Pages) $thr) }}{{ $ok = false }}{{ end -}}
+  {{- if and (eq .Kind "section") }}{{ $ok = false }}{{ end -}}
+  {{- if $ok -}}
+    {{- $section := "" -}}
+    {{- if eq .Kind "term" }}{{ $section = .Parent.Title }}{{ else }}{{ with site.GetPage .Section }}{{ $section = .Title }}{{ end }}{{ end -}}
+    {{- $item := dict
+      "title" (.Title | emojify)
+      "section" $section
+      "summary" (.Description | default .Summary | plainify | htmlUnescape)
+      "content" (.Plain | htmlUnescape | truncate 2500)
+      "permalink" .RelPermalink
+      "type" .Type -}}
+    {{- if and .IsPage .Date }}{{ $item = merge $item (dict "date" (.Date | time.Format site.Params.dateFormat)) }}{{ end -}}
+    {{- $index = $index | append $item -}}
+  {{- end -}}
+{{- end -}}
+{{- $index | jsonify -}}

@@ -1,0 +1,57 @@
+{{- $isTR := eq site.Language.Lang "tr" -}}
+{{- $pages := slice -}}
+{{- if .IsHome -}}
+  {{- $pages = where site.RegularPages "Section" "posts" -}}
+{{- else if .IsSection -}}
+  {{- $pages = .RegularPages -}}
+{{- else -}}
+  {{- $pages = .Pages -}}
+{{- end -}}
+{{- $pages = $pages.ByDate.Reverse -}}
+{{- with site.Config.Services.RSS.Limit }}{{ if gt . 0 }}{{ $pages = first . $pages }}{{ end }}{{ end -}}
+{{- $base := strings.TrimSuffix "/" site.BaseURL -}}
+{{- printf "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\"?>" | safeHTML }}
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:media="http://search.yahoo.com/mrss/">
+  <channel>
+    <title>{{ if .IsHome }}{{ site.Title }}{{ else }}{{ .Title }} · {{ site.Title }}{{ end }}</title>
+    <link>{{ .Permalink }}</link>
+    <description>{{ site.Params.description }}</description>
+    <generator>Hugo {{ hugo.Version }}</generator>
+    <language>{{ site.Language.Locale }}</language>
+    <copyright>{{ replace site.Params.copyright "{ year }" (string now.Year) }}</copyright>
+    <managingEditor>{{ site.Params.fk.email }} ({{ site.Params.author.name }})</managingEditor>
+    {{- with $pages }}
+    <lastBuildDate>{{ (index $pages.ByLastmod.Reverse 0).Lastmod.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</lastBuildDate>
+    {{- end }}
+    {{- with .OutputFormats.Get "RSS" }}
+    {{ printf "<atom:link href=%q rel=\"self\" type=%q />" .Permalink .MediaType | safeHTML }}
+    {{- end }}
+    <atom:link href="https://pubsubhubbub.appspot.com/" rel="hub" />
+    <image>
+      <url>{{ "android-chrome-192x192.png" | absURL }}</url>
+      <title>{{ site.Title }}</title>
+      <link>{{ site.Home.Permalink }}</link>
+    </image>
+    {{- range $pages }}
+    {{- $content := .Content | replaceRE `(src|href|srcset)="/` (printf `$1="%s/` $base) | replaceRE `(\d+w), /` (printf `$1, %s/` $base) }}
+    <item>
+      <title>{{ .Title }}</title>
+      <link>{{ .Permalink }}</link>
+      <guid isPermaLink="true">{{ .Permalink }}</guid>
+      <pubDate>{{ .Date.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</pubDate>
+      <dc:creator>{{ site.Params.author.name }}</dc:creator>
+      {{- range .Params.categories }}
+      <category>{{ . }}</category>
+      {{- end }}
+      {{- range .Params.tags }}
+      <category>{{ . }}</category>
+      {{- end }}
+      <description>{{ .Description | default .Summary | plainify | transform.XMLEscape | safeHTML }}</description>
+      <content:encoded>{{ printf "<![CDATA[%s]]>" $content | safeHTML }}</content:encoded>
+      {{- with partial "fk/cover.html" . }}{{ if not .isSVG }}
+      <media:content url="{{ (.res.Process "resize 1200x jpg q82").Permalink }}" medium="image" type="image/jpeg" />
+      {{- end }}{{ end }}
+    </item>
+    {{- end }}
+  </channel>
+</rss>
