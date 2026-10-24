@@ -1,1 +1,47 @@
-{}
+{
+  "https://blog.furkankoykiran.com.tr/en/posts/github-actions-self-hosted-runner/": {
+    "id": 3621968,
+    "url": "https://dev.to/furkankoykiran/free-ci-minutes-are-gone-setting-up-a-github-actions-self-hosted-runner-on-linux-4a6l",
+    "synced_at": "2026-10-24T04:07:30"
+  },
+  "https://blog.furkankoykiran.com.tr/posts/freqtrade-mcp-server-tr/": {
+    "id": 3453987,
+    "url": "https://dev.to/furkankoykiran/freqtrade-mcp-bota-claude-uzerinden-sor-2me8",
+    "synced_at": "2026-10-24T04:07:36"
+  },
+  "https://blog.furkankoykiran.com.tr/en/posts/freqtrade-mcp-server/": {
+    "id": 3453986,
+    "url": "https://dev.to/furkankoykiran/freqtrade-mcp-ask-claude-to-check-your-trades-44hj",
+    "synced_at": "2026-10-24T04:07:41"
+  },
+  "https://blog.furkankoykiran.com.tr/en/posts/awesome-trending-repos-web/": {
+    "id": 3416810,
+    "url": "https://dev.to/furkankoykiran/awesome-trending-repos-modern-web-interface-for-github-trending-26b5",
+    "synced_at": "2026-10-24T04:07:46"
+  },
+  "https://blog.furkankoykiran.com.tr/posts/awesome-trending-repos-web/": {
+    "id": 3416808,
+    "url": "https://dev.to/furkankoykiran/awesome-trending-repos-github-trending-icin-modern-web-arayuzu-m7n",
+    "synced_at": "2026-10-24T04:07:52"
+  },
+  "https://blog.furkankoykiran.com.tr/en/posts/cli-anything-browser-automation-contribution/": {
+    "id": 3386202,
+    "url": "https://dev.to/furkankoykiran/adding-browser-automation-to-cli-anything-first-mcp-backend-pattern-4bb3",
+    "synced_at": "2026-10-24T04:07:56"
+  },
+  "https://blog.furkankoykiran.com.tr/posts/cli-anything-browser-automation-katkim/": {
+    "id": 3386201,
+    "url": "https://dev.to/furkankoykiran/cli-anythinge-tarayici-otomasyon-destegi-mcp-backend-pattern-ilk-uygulama-221d",
+    "synced_at": "2026-10-24T04:08:02"
+  },
+  "https://blog.furkankoykiran.com.tr/en/posts/my-open-source-contribution-keploy/": {
+    "id": 3378441,
+    "url": "https://dev.to/furkankoykiran/my-keploy-contribution-resource-management-in-go-and-open-source-journey-2139",
+    "synced_at": "2026-10-24T04:08:07"
+  },
+  "https://blog.furkankoykiran.com.tr/posts/keploy-acik-kaynak-katkim/": {
+    "id": 3378440,
+    "url": "https://dev.to/furkankoykiran/keploya-katkilarim-goda-resource-management-ve-open-source-seruveni-27lb",
+    "synced_at": "2026-10-24T04:08:18"
+  }
+}
