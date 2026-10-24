@@ -1,0 +1,38 @@
+# Terms that must never appear on the blog, stored as SHA-256 hashes of the
+# lower-case term so this public file does not spell them out. Text matches a
+# term when a substring of `length` characters hashes to `sha256`; with
+# `word = true` only whole words (or two adjacent words) are compared, which
+# keeps short terms from matching inside longer words.
+#
+# Used by scripts/lint_posts.py (rule BD013) and scripts/blocklist.py. Add an
+# entry with:
+#   python scripts/blocklist.py hash "<term>"
+
+[[terms]]
+  length = 8
+  sha256 = "4dadda0846ca8491009320c19b5a3469bcd2b9822d7749ab7580b7c54336299d"
+
+[[terms]]
+  length = 7
+  sha256 = "d0602b4f193e8cf55e584817cdcf2c7a6ba6a77f93c78ac29647e53bb436a001"
+
+[[terms]]
+  length = 8
+  sha256 = "6a0332bd9c518579989d3d5569d44dfe12cc753793823cd8ab6abcc10c5aa5c0"
+
+[[terms]]
+  length = 8
+  sha256 = "e53600ce8fc296f5bb505ed4c32447a411ad5aef05f75abfe0ac9da8ab24726f"
+
+[[terms]]
+  length = 8
+  sha256 = "4f80d5aa8e7d7223c6ef051eb9aa50c5672c6c488f015d81fde7e7eff35c18b5"
+
+[[terms]]
+  length = 9
+  sha256 = "eadd4c57780af1c3b6d83f94e3f53b33c757f8c54303436417b28bc912521b04"
+
+[[terms]]
+  length = 4
+  sha256 = "7060ed8f58514a4dab43329253e725546836b3b8c24d091bdd09f3cd42ef96d7"
+  word = true

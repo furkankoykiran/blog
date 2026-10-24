@@ -1,0 +1,149 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://blog.furkankoykiran.com.tr/schemas/post-frontmatter.json",
+  "title": "Blog post front matter (content/tr/posts/<bundle>/index.md and content/en/posts/<bundle>/index.md)",
+  "description": "Validated by scripts/lint_posts.py (rule FM019) after YAML parsing (dates are parsed as strings). Cross-file rules (TR/EN pairing, uniqueness, bundle name = EN slug, lastmod honesty) are not expressible here and live in the linter itself. Language-dependent enums are selected with if/then on the `lang` the linter injects as `_lang` before validating; `_lang` is never written to files.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["_lang", "title", "description", "date", "slug", "postType", "tags", "categories", "coverAlt", "draft"],
+  "properties": {
+    "_lang": {
+      "description": "Injected by the linter from the directory (content/tr or content/en). Never present in files.",
+      "enum": ["tr", "en"]
+    },
+    "title": {
+      "description": "Page title, H1 and social title. Main keyword early. Recommended 30-60 characters (warning above 60). Hard limits 15-70. No trailing period, no clickbait, no emoji, no site name.",
+      "type": "string",
+      "minLength": 15,
+      "maxLength": 70,
+      "pattern": "^[^\\s].*[^\\s.!]$"
+    },
+    "description": {
+      "description": "Meta description and card text: a real one- or two-sentence summary of what the reader gets. Recommended 120-160 characters (warning outside). Hard limits 100-170. Unique site-wide. Must differ from title.",
+      "type": "string",
+      "minLength": 100,
+      "maxLength": 170
+    },
+    "date": {
+      "description": "First publication, ISO 8601 with offset (Europe/Istanbul). Never changed after publishing. Same value in TR and EN.",
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\+03:00|Z|[+-]\\d{2}:\\d{2})$"
+    },
+    "lastmod": {
+      "description": "OPTIONAL. Only after a real, meaningful content update (see lastmod policy). Absent = the post has not been meaningfully updated since `date`. Must be later than `date` and not in the future. May differ between TR and EN.",
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\+03:00|Z|[+-]\\d{2}:\\d{2})$"
+    },
+    "slug": {
+      "description": "URL segment: /posts/<slug>/ (TR) or /en/posts/<slug>/ (EN). Lowercase ASCII, digits, single hyphens, 3-75 characters. EN slug must equal the bundle directory name. Existing TR slugs never change (indexed URLs).",
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+      "minLength": 3,
+      "maxLength": 75
+    },
+    "postType": {
+      "description": "Drives the anatomy and the image mix. project = something Furkan built; contribution = an OSS PR/issue story; guide = tutorial/how-to/reference; story = experience/opinion/career.",
+      "enum": ["project", "contribution", "guide", "story"]
+    },
+    "tags": {
+      "description": "3-6 tags from the controlled vocabulary, same English slugs in both languages, no duplicates.",
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 6,
+      "uniqueItems": true,
+      "items": {
+        "enum": ["mcp", "ai-agents", "claude", "llm", "open-source", "python", "typescript", "go", "rust", "fastapi", "asyncio", "testing", "devops", "docker", "kubernetes", "github-actions", "ci-cd", "monitoring", "linux", "databases", "redis", "messaging", "api", "security", "performance", "trading", "telegram", "web3", "ethereum", "solana", "automation", "tooling", "web", "career"]
+      }
+    },
+    "categories": {
+      "description": "Exactly one category in the page's language (pairs: MCP ve Yapay Zekâ/MCP & AI, Açık Kaynak/Open Source, Python, Backend, DevOps, Trading, Web3, Projeler/Projects, Deneyimler/Stories).",
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 1
+    },
+    "series": {
+      "description": "OPTIONAL. At most one series, named in the page's language. Omit the key when the post is in no series (no empty lists).",
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 1
+    },
+    "aliases": {
+      "description": "OPTIONAL. Old URLs that redirect here (Jekyll-era paths only). Absolute site paths with trailing slash. Omit when empty.",
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "type": "string", "pattern": "^/([a-z0-9._-]+/)+$" }
+    },
+    "cover": {
+      "description": "OPTIONAL. Bundle-relative path of a custom cover that should also be the og:image. Omit to use feature.webp (hero) and the generated social card.",
+      "type": "string",
+      "pattern": "^(img/)?[a-z0-9][a-z0-9._-]*\\.(webp|png|jpg|svg)$"
+    },
+    "coverAlt": {
+      "description": "Alt text for the cover/hero in the page's language: what the image shows and why it matters, 20-160 characters. Not the title, does not start with 'Image of', 'Görsel', 'Resim'.",
+      "type": "string",
+      "minLength": 20,
+      "maxLength": 160
+    },
+    "draft": { "type": "boolean" },
+    "canonical": {
+      "description": "OPTIONAL and rare: only when the canonical original lives on another site. Absolute https URL.",
+      "type": "string",
+      "pattern": "^https://"
+    },
+    "syndicate": {
+      "description": "OPTIONAL, EN only. false keeps the post off dev.to. Default true.",
+      "type": "boolean"
+    },
+    "noindex": {
+      "description": "OPTIONAL. true adds robots noindex and drops the page from the sitemap.",
+      "type": "boolean"
+    },
+    "showTableOfContents": {
+      "description": "OPTIONAL. Override the site default (TOC on). Set false only for posts under ~800 words or with fewer than 3 H2s.",
+      "type": "boolean"
+    }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "_lang": { "const": "tr" } } },
+      "then": {
+        "properties": {
+          "categories": { "items": { "enum": ["MCP ve Yapay Zekâ", "Açık Kaynak", "Python", "Backend", "DevOps", "Trading", "Web3", "Projeler", "Deneyimler"] } },
+          "series": { "items": { "enum": ["MCP Sunucularım", "Açık Kaynak Katkılarım", "Python ile Algoritmik Trading", "GitHub Actions"] } },
+          "syndicate": false
+        }
+      }
+    },
+    {
+      "if": { "properties": { "_lang": { "const": "en" } } },
+      "then": {
+        "properties": {
+          "categories": { "items": { "enum": ["MCP & AI", "Open Source", "Python", "Backend", "DevOps", "Trading", "Web3", "Projects", "Stories"] } },
+          "series": { "items": { "enum": ["My MCP Servers", "Open Source Contributions", "Algorithmic Trading with Python", "GitHub Actions"] } }
+        }
+      }
+    }
+  ],
+  "x-pairs": {
+    "description": "Read by the linter for TR/EN pairing checks.",
+    "categories": {
+      "MCP ve Yapay Zekâ": "MCP & AI",
+      "Açık Kaynak": "Open Source",
+      "Python": "Python",
+      "Backend": "Backend",
+      "DevOps": "DevOps",
+      "Trading": "Trading",
+      "Web3": "Web3",
+      "Projeler": "Projects",
+      "Deneyimler": "Stories"
+    },
+    "series": {
+      "MCP Sunucularım": "My MCP Servers",
+      "Açık Kaynak Katkılarım": "Open Source Contributions",
+      "Python ile Algoritmik Trading": "Algorithmic Trading with Python",
+      "GitHub Actions": "GitHub Actions"
+    }
+  },
+  "x-forbidden-keys": ["translationKey", "status", "todo", "notes", "review", "reviewed", "internal", "featureimage", "images", "keywords", "lastmod_reason", "changelog", "updated_note"]
+}
