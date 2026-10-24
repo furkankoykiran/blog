@@ -1,0 +1,23 @@
+disabled = false
+locale = "en-US"
+label = "English"
+direction = "ltr"
+weight = 2
+title = "Furkan Köykıran Blog"
+
+[params]
+  displayName = "EN"
+  isoCode = "en"
+  htmlCode = "en"
+  rtl = false
+  dateFormat = "January 2, 2006"
+  logo = "img/fk-logo.png"
+  description = "Furkan Köykıran's engineering blog: MCP servers and AI agents, open-source contributions, Python trading bots, Python backend and DevOps, written from hands-on work."
+  tagline = "Field notes on MCP, AI agents, open source, Python and DevOps."
+  copyright = "© { year } Furkan Köykıran. Posts and images all rights reserved; code samples MIT licensed."
+
+[params.author]
+  name = "Furkan Köykıran"
+  image = "img/author.jpg"
+  headline = "Software developer · MCP servers, Python and open source"
+  bio = "I build MCP servers, trading bots and backend services with Python and TypeScript, contribute to large open-source projects, and write down what I learn here."

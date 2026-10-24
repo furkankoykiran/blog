@@ -1,0 +1,40 @@
+# English menus
+[[main]]
+  name = "Posts"
+  pageRef = "/posts"
+  weight = 10
+[[main]]
+  name = "Series"
+  pageRef = "/series"
+  weight = 20
+[[main]]
+  name = "Tags"
+  pageRef = "/tags"
+  weight = 30
+[[main]]
+  name = "About"
+  pageRef = "/about"
+  weight = 40
+[[main]]
+  name = "Portfolio"
+  url = "https://furkankoykiran.com.tr/en/"
+  weight = 50
+  [main.params]
+    target = "_blank"
+
+[[footer]]
+  name = "RSS"
+  url = "/en/feed.xml"
+  weight = 10
+[[footer]]
+  name = "Categories"
+  pageRef = "/categories"
+  weight = 20
+[[footer]]
+  name = "Privacy"
+  pageRef = "/privacy"
+  weight = 30
+[[footer]]
+  name = "llms.txt"
+  url = "/en/llms.txt"
+  weight = 40

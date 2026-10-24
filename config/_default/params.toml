@@ -1,0 +1,147 @@
+# Blowfish theme parameters and the site's own settings ([fk], [giscus],
+# [analytics], [verification]). Theme reference:
+# https://blowfish.page/docs/configuration/#theme-parameters
+
+# Colour scheme file in assets/css/schemes/ (Blowfish scheme format).
+colorScheme = "ember"
+# Used until the visitor picks a theme; with autoSwitchAppearance the OS setting wins.
+defaultAppearance = "light"
+autoSwitchAppearance = true
+fingerprintAlgorithm = "sha256"
+
+enableSearch = true
+enableCodeCopy = true
+enableStyledScrollbar = true
+# Show the site title next to the logo in the header.
+disableTextInHeader = false
+highlightCurrentMenuArea = true
+smartTOC = true
+smartTOCHideUnfocusedChildren = false
+
+# Identity and options read by the site's own templates (layouts/).
+[fk]
+  portfolio = "https://furkankoykiran.com.tr/"
+  portfolioEN = "https://furkankoykiran.com.tr/en/"
+  # JSON-LD ids; the person id is shared with the portfolio site.
+  personId = "https://furkankoykiran.com.tr/#person"
+  websiteId = "https://blog.furkankoykiran.com.tr/#website"
+  twitterHandle = "@furkankoykiran"
+  # RSS <managingEditor>.
+  email = "furkankoykiran@gmail.com"
+  # Tag and category pages with fewer posts get noindex and stay out of the
+  # sitemap and the search index.
+  thinTermThreshold = 3
+  # Draw a 1200x630 social card per post at build time (layouts/partials/fk/og-image.html).
+  generateOGImages = true
+  # schema.org Person.alternateName (ASCII spelling of params.author.name).
+  # Person.sameAs is built from [[fk.social]] plus the portfolio URL.
+  alternateName = "Furkan Koykiran"
+
+# Social profiles in display order (author box, footer, rel="me"). `icon` is an
+# SVG name from the theme's assets/icons/; `support` moves a link to the
+# footer's support group.
+[[fk.social]]
+  name = "GitHub"
+  icon = "github"
+  url = "https://github.com/furkankoykiran"
+[[fk.social]]
+  name = "LinkedIn"
+  icon = "linkedin"
+  url = "https://www.linkedin.com/in/furkankoykiran/"
+[[fk.social]]
+  name = "X"
+  icon = "x-twitter"
+  url = "https://x.com/furkankoykiran"
+[[fk.social]]
+  name = "dev.to"
+  icon = "dev"
+  url = "https://dev.to/furkankoykiran"
+[[fk.social]]
+  name = "Medium"
+  icon = "medium"
+  url = "https://medium.com/@furkankoykiran"
+[[fk.social]]
+  name = "YouTube"
+  icon = "youtube"
+  url = "https://www.youtube.com/channel/UCXGn4Rqllr3GISS6pwKkYhw"
+[[fk.social]]
+  name = "Instagram"
+  icon = "instagram"
+  url = "https://instagram.com/furkankoykiran"
+[[fk.social]]
+  name = "GitHub Sponsors"
+  icon = "heart"
+  url = "https://github.com/sponsors/furkankoykiran"
+  support = true
+[[fk.social]]
+  name = "Buy Me a Coffee"
+  icon = "mug-hot"
+  url = "https://www.buymeacoffee.com/furkankoykiran"
+  support = true
+
+# Comments via giscus (GitHub Discussions). The section is only rendered when
+# repoId and categoryId are set; the deploy workflow fills them from repository
+# variables (vars.* mapped to HUGO_PARAMS_*).
+[giscus]
+  repo = "furkankoykiran/blog"
+  repoId = ""     # giscus repository ID (vars.GISCUS_REPO_ID)
+  category = "Announcements"
+  categoryId = "" # giscus category ID (vars.GISCUS_CATEGORY_ID)
+  mapping = "pathname"
+  strict = "1"
+  reactionsEnabled = "1"
+  emitMetadata = "0"
+  inputPosition = "top"
+
+# Empty values render nothing. The deploy workflow fills them from repository
+# variables (vars.* mapped to HUGO_PARAMS_*), so IDs never need to be committed.
+[analytics]
+  ga4 = ""           # Google Analytics 4 measurement ID (vars.GA4_ID)
+  clarity = ""       # Microsoft Clarity project ID (vars.CLARITY_ID)
+  cfBeaconToken = "" # Cloudflare Web Analytics token (vars.CF_BEACON_BLOG)
+
+[verification]
+  google = "" # Google Search Console meta tag content (vars.GOOGLE_SITE_VERIFICATION)
+  bing = ""   # Bing Webmaster Tools msvalidate.01 content (vars.BING_SITE_VERIFICATION)
+  yandex = "" # Yandex Webmaster verification content (vars.YANDEX_VERIFICATION)
+
+# ---- Theme options for the Blowfish templates the site still uses ----------
+
+[header]
+  layout = "fixed-fill-blur"
+  mobileMenuStyle = "dropdown"
+
+[footer]
+  showAppearanceSwitcher = true
+  showScrollToTop = true
+
+[article]
+  showDate = true
+  showViews = false
+  showLikes = false
+  showDateOnlyInArticle = false
+  showDateUpdated = true
+  showAuthor = true
+  showHero = true
+  showBreadcrumbs = true
+  showDraftLabel = true
+  showEdit = false
+  seriesOpened = false
+  showHeadingAnchors = true
+  showPagination = true
+  invertPagination = false
+  showReadingTime = true
+  showReadingProgress = true
+  showTableOfContents = true
+  showRelatedContent = true
+  relatedContentLimit = 3
+  showTaxonomies = true
+  showCategories = true
+  showTags = true
+  showCategoriesInSecondaryColor = true
+  showAuthorsBadges = false
+  showWordCount = false
+  showComments = true
+  sharingLinks = ["linkedin", "twitter", "reddit", "telegram", "whatsapp", "email", "bluesky"]
+  showZenMode = false
+  externalLinkForceNewTab = true
