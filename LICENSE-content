@@ -1,0 +1,70 @@
+Content licence and third-party notices
+=======================================
+
+The MIT licence in LICENSE covers the source code: templates (layouts/),
+styles and scripts (assets/css/, assets/js/), configuration (config/),
+maintenance scripts and their tests (scripts/, tests/, schemas/), workflows
+(.github/) and tooling files. Code samples inside the posts are also MIT
+licensed.
+
+
+Content: all rights reserved
+----------------------------
+
+Copyright (c) 2026 Furkan Köykıran. All rights reserved.
+
+The following are NOT licensed for reuse. They may not be copied, modified or
+redistributed without prior written permission:
+
+  - the posts and pages: the text in content/ and the interface copy in i18n/;
+  - the images in content/, including the post covers (feature.webp), diagrams,
+    screenshots and rendered cards, and the card sources in
+    scripts/images/templates/data/;
+  - the photograph of Furkan Köykıran (assets/img/author.jpg,
+    assets/img/og-author.png) and every image derived from it;
+  - the FK logo, favicons and app icons (assets/img/fk-logo.png, static/*.png,
+    static/favicon.ico);
+  - the Open Graph artwork (assets/img/og-base.png, assets/img/og-canvas.png)
+    and the social images generated from it.
+
+Third-party images used in posts (screenshots of other projects, logos and
+licensed images) remain the property of their owners. Each post lists them,
+with their source and licence, in content/media/posts/<bundle>/credits.yaml;
+the published page shows these credits under the post.
+
+If you fork this repository to build your own site, replace these files with
+your own.
+
+
+Third-party components
+----------------------
+
+Blowfish theme (themes/blowfish, Git submodule)
+  MIT License, Copyright (c) 2022 Nuno Coração.
+  https://github.com/nunocoracao/blowfish
+
+Font Awesome Free 6 icons (shipped with Blowfish in themes/blowfish/assets/icons,
+inlined into pages as SVG)
+  Icons: CC BY 4.0, Copyright Fonticons, Inc. https://fontawesome.com/license/free
+  Brand icons are trademarks of their respective owners.
+
+Fuse.js 7.5.0 (shipped with Blowfish in themes/blowfish/assets/lib/fuse and
+bundled into the site's JavaScript for the search)
+  Apache License 2.0, Copyright (c) Kiro Risk. https://fusejs.io
+
+Inter and Inter Display (assets/fonts/Inter-*.ttf, assets/fonts/InterDisplay-*.ttf)
+  SIL Open Font License 1.1, Copyright (c) 2016 The Inter Project Authors.
+  Full text: assets/fonts/OFL-Inter.txt
+
+IBM Plex Mono (assets/fonts/IBMPlexMono-Medium.ttf)
+  SIL Open Font License 1.1, Copyright 2017 IBM Corp.,
+  with Reserved Font Name "Plex". Full text: assets/fonts/OFL-IBMPlexMono.txt
+
+The fonts are only used at build time, to draw text on the Open Graph images
+and the image cards; they are not served to visitors.
+
+Mermaid 11.4.1 (https://github.com/mermaid-js/mermaid)
+  MIT License, Copyright (c) 2014-2022 Knut Sveidqvist.
+  Not bundled: scripts/images/render.py loads the pinned release from
+  cdn.jsdelivr.net to render diagram sources into the static SVG files in
+  content/.
