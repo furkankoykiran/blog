@@ -1,0 +1,26 @@
+{{- /*
+  Click-to-load live demo for a post.
+
+    {{< demo url="https://furkankoykiran.com.tr/Memoryze/" name="Memoryze" >}}
+
+  The iframe is created by assets/js/fk.js only after a click, always with
+  loading="lazy", a descriptive title and a responsive 16/9 wrapper.
+*/ -}}
+{{- $url := .Get "url" -}}
+{{- if not $url -}}
+  {{- errorf "demo: the url parameter is required (%s)" .Position -}}
+{{- end -}}
+{{- $name := .Get "name" | default (urls.Parse $url).Host -}}
+<figure class="fk-demo">
+  <div class="fk-demo__frame" data-embed="{{ $url }}" data-embed-title="{{ i18n "fk.demo_frame_title" (dict "name" $name) }}">
+    <button type="button" class="fk-demo__start" data-embed-load>
+      <span class="fk-demo__badge">{{ i18n "fk.demo_label" }}</span>
+      <span class="fk-demo__label">{{ $name }} — {{ i18n "fk.demo_start" }}</span>
+      <span class="fk-demo__url">{{ $url }}</span>
+    </button>
+  </div>
+  <figcaption class="fk-demo__note">
+    {{ i18n "fk.demo_note" }}
+    <a href="{{ $url }}" rel="noopener" data-ga-event="demo_open" data-ga-param-project="{{ $name }}">{{ i18n "fk.demo_open" }}</a>
+  </figcaption>
+</figure>

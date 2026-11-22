@@ -83,6 +83,22 @@
   {{- end }}
   {{- end }}
 
+  {{- /* Translation data for the language suggestion strip in fk.js. The strip
+    never redirects; it only offers the other language. */}}
+  {{- $other := "" -}}
+  {{- $otherLang := cond (eq site.Language.Lang "tr") "en" "tr" -}}
+  {{- range .Translations }}{{ if eq .Language.Lang $otherLang }}{{ $other = .RelPermalink }}{{ end }}{{ end -}}
+  {{- with $other }}
+  <script type="application/json" id="fk-lang-suggest-data">{{ dict
+    "href" .
+    "lang" $otherLang
+    "label" (i18n "fk.langbar_label")
+    "text" (i18n "fk.langbar_text")
+    "action" (i18n "fk.langbar_action")
+    "dismiss" (i18n "fk.langbar_dismiss")
+    | jsonify | safeJS }}</script>
+  {{- end }}
+
   {{/* ---------- Feeds and machine-readable alternates ---------- */}}
   {{- with site.Home.OutputFormats.Get "RSS" }}
   <link rel="alternate" type="application/rss+xml" href="{{ .Permalink }}" title="{{ site.Title }} ({{ upper $lang }})">

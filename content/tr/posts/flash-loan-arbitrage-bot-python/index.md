@@ -4,6 +4,7 @@ description: "Aave V3 flash loan ile DEX arbitrajı: Python botumun yaptığı v
 date: 2024-04-11T12:00:00+03:00
 slug: "building-flash-loan-arbitrage-bot"
 postType: project
+repo: furkankoykiran/Flash-Loan-Arbitrage
 tags: ["web3", "ethereum", "python", "trading", "security"]
 categories: ["Web3"]
 coverAlt: "Flash loan ile iki DEX arasında arbitraj yapan bir kontratın işlem akışı"
@@ -290,3 +291,5 @@ Bugün flash loan'ı DeFi protokollerinin atomik işlemlerini ve oracle varsayı
 ## Sırada ne var?
 
 Kodun tamamı [GitHub'da](https://github.com/furkankoykiran/Flash-Loan-Arbitrage), projenin özeti de [portföyümde](https://furkankoykiran.com.tr/projeler/flash-loan-arbitrage/) duruyor. Aynı mantığın kullanıcı tarafını, yani en iyi fiyat için rota bulmayı [DEX aggregator yazısında](/posts/building-dex-aggregator-web3/), Python'dan zincirle konuşmanın temellerini de [web3.py v7 rehberinde](/posts/web3py-ethereum-blockchain-etkilesimi/) bulabilirsiniz. Bu alanda bir şey deneyecekseniz önce fork üzerinde, sonra testnet'te ve kaybetmeyi göze aldığınız küçük tutarlarla deneyin.
+
+{{< github-star repo="furkankoykiran/Flash-Loan-Arbitrage" >}}

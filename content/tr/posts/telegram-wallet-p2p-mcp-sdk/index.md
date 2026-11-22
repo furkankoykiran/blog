@@ -4,6 +4,7 @@ description: "Telegram Wallet'ın salt okunur P2P API'si için yazdığım resmi
 date: 2026-02-24T19:30:00+03:00
 slug: "telegram-wallet-p2p-mcp-sdk-gelistirme-hikayesi"
 postType: project
+repo: furkankoykiran/telegram-wallet-p2p-sdk
 tags: ["telegram", "python", "typescript", "mcp", "trading", "asyncio"]
 categories: ["Projeler"]
 series: ["MCP Sunucularım"]
@@ -199,3 +200,5 @@ Kısa vadede yukarıdaki iki düzeltme var: `side` tanımını tek bir yerde net
 Wallet API'ye yazma yetkisi gelirse SDK'lara emir oluşturma eklemek mantıklı olur, ama bugün öyle bir uç nokta yok ve olmayan bir API için kod yazmıyorum. Sık sorgulanan pariteler için kısa ömürlü bir önbellek de hız sınırını korumanın kolay bir yolu.
 
 asyncio'da paralel istekleri, zaman aşımlarını ve sınırlamayı daha ayrıntılı [Python asyncio rehberinde](/posts/python-asyncio-paralel-islem/) anlattım. Aynı serideki diğer MCP sunucularım [freqtrade-mcp](/posts/freqtrade-mcp-server-tr/) ve [DevTo-MCP](/posts/devto-mcp-server-gelistirme-ve-yayinlama/).
+
+{{< github-star repo="furkankoykiran/telegram-wallet-p2p-sdk" >}}

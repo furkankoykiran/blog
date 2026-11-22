@@ -4,6 +4,7 @@ description: "DEX arbitrage with Aave V3 flash loans: what my Python bot did and
 date: 2024-04-11T12:00:00+03:00
 slug: "flash-loan-arbitrage-bot-python"
 postType: project
+repo: furkankoykiran/Flash-Loan-Arbitrage
 tags: ["web3", "ethereum", "python", "trading", "security"]
 categories: ["Web3"]
 coverAlt: "Transaction flow of a contract that uses a flash loan to arbitrage between two DEXs"
@@ -290,3 +291,5 @@ Today I see flash loans as a good tool for understanding atomic transactions and
 ## Where to go next
 
 The full code is [on GitHub](https://github.com/furkankoykiran/Flash-Loan-Arbitrage) and the project summary is in [my portfolio](https://furkankoykiran.com.tr/en/projects/flash-loan-arbitrage/). The user-facing side of the same mechanics, routing for the best price, is in the [DEX aggregator post](/en/posts/dex-aggregator-web3-routing/), and the basics of talking to the chain from Python are in the [web3.py v7 guide](/en/posts/web3py-ethereum-interaction/). If you try anything in this space, start on a fork, then a testnet, and only then with small amounts you can afford to lose.
+
+{{< github-star repo="furkankoykiran/Flash-Loan-Arbitrage" >}}

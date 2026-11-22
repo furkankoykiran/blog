@@ -4,6 +4,7 @@ description: "AI Face Detector classifies a face photo as real or StyleGAN-gener
 date: 2026-03-07T18:00:00+03:00
 slug: "ai-face-detector"
 postType: project
+repo: furkankoykiran/ai-face-detector
 tags: ["python", "fastapi", "api", "open-source"]
 categories: ["Projects"]
 aliases: ["/../posts/ai-face-detector-deepfake-detection-with-deep-learning/"]
@@ -166,3 +167,5 @@ def load_model(path: str, device: torch.device) -> nn.Module:
 The code is [on GitHub](https://github.com/furkankoykiran/ai-face-detector), and there's a summary on [my portfolio](https://furkankoykiran.com.tr/en/projects/ai-face-detector/). Next up: fix the rough edges above and build a separate test set of faces from diffusion models. If the model holds up there, it will be fair to widen the claim in the README.
 
 If you're interested in the API side, [REST API development with FastAPI](/en/posts/python-fastapi-rest-api/) goes deeper into Pydantic v2 and async. For preprocessing, see [image processing with Pillow and OpenCV](/en/posts/python-image-processing-pillow-opencv/), and for shipping the service, [containerizing a Python app with Docker](/en/posts/docker-python-app-containerization/).
+
+{{< github-star repo="furkankoykiran/ai-face-detector" >}}

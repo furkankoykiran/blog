@@ -4,6 +4,7 @@ description: "My TypeScript MCP server that exposes the Freqtrade REST API to Cl
 date: 2026-04-04T13:00:00+03:00
 slug: "freqtrade-mcp-server"
 postType: project
+repo: furkankoykiran/freqtrade-mcp
 tags: ["mcp", "trading", "typescript", "claude", "ai-agents"]
 categories: ["MCP & AI"]
 series: ["My MCP Servers"]
@@ -156,3 +157,5 @@ Things to know before you rely on it:
 What I wanted was simple: check the bot without opening FreqUI. The REST API was already there; the MCP server moved it into the chat. I still wonder whether something changed while I wasn't looking, but now finding out takes one sentence.
 
 The code is MIT licensed and [on GitHub](https://github.com/furkankoykiran/freqtrade-mcp), with a summary on my [project page](https://furkankoykiran.com.tr/en/projects/freqtrade-mcp/). Before you point it at your own bot, run it for a week with `dry_run: true` and compare what `get_profit_stats` and `get_open_trades` report with FreqUI. To see a different MCP integration, where I wrapped someone else's MCP server as a CLI, read [my CLI-Anything contribution](/en/posts/cli-anything-browser-automation-contribution/). If your Python services lean on async I/O the way trading bots do, the [asyncio guide](/en/posts/python-asyncio-concurrent-processing/) is a good next read.
+
+{{< github-star repo="furkankoykiran/freqtrade-mcp" >}}

@@ -4,6 +4,7 @@ description: "DevTo-MCP connects the DEV Community (Forem) API to assistants lik
 date: 2026-02-18T16:00:00+03:00
 slug: "devto-mcp-server"
 postType: project
+repo: furkankoykiran/DevTo-MCP
 tags: ["mcp", "typescript", "api", "ci-cd", "open-source"]
 categories: ["MCP & AI"]
 series: ["My MCP Servers"]
@@ -206,3 +207,5 @@ The file lives in `~/Library/Application Support/Claude/` on macOS and `%APPDATA
 ## Next steps
 
 On my list: closing the POST retry risk above, moving the tools to the SDK's newer `registerTool()` API, and finding the cause of the reactions 401. The first real job I gave DevTo-MCP, having an assistant write and publish a challenge entry on DEV, is in [the Gemini challenge post](/en/posts/mcp-gemini-challenge-experience/). Other servers in this series: [OmniWire-MCP](/en/posts/omniwire-mcp-news-server/) and [freqtrade-mcp](/en/posts/freqtrade-mcp-server/).
+
+{{< github-star repo="furkankoykiran/DevTo-MCP" >}}

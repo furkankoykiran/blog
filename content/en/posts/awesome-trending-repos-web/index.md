@@ -4,6 +4,7 @@ description: "How my open source tracker scrapes GitHub Trending every day, comp
 date: 2026-03-27T18:00:00+03:00
 slug: "awesome-trending-repos-web"
 postType: project
+repo: furkankoykiran/awesome-trending-repos
 tags: ["github-actions", "automation", "ci-cd", "web", "open-source"]
 categories: ["Projects"]
 aliases: ["/../posts/awesome-trending-repos-web-en/", "/../posts/awesome-trending-repos-en/"]
@@ -164,3 +165,7 @@ Putting the root domain in a project's `public/CNAME` is a common mistake, and t
 The project still runs every day. Next on the list: fix the feed bug, mark estimated star counts in the UI, and bump the workflow's action versions.
 
 The live site is at [furkankoykiran.com.tr/awesome-trending-repos](https://furkankoykiran.com.tr/awesome-trending-repos/), and there's a summary on the [project page](https://furkankoykiran.com.tr/en/projects/awesome-trending-repos/). If your Actions minutes are running low, my [self-hosted runner post](/en/posts/github-actions-self-hosted-runner/) shows how I moved CI onto my own server. The story of how this blog ended up on GitHub Pages is in [my GitLab and GitHub migration post](/en/posts/gitlab-github-jekyll-migration/).
+
+{{< demo url="https://furkankoykiran.com.tr/awesome-trending-repos/" name="awesome-trending-repos" >}}
+
+{{< github-star repo="furkankoykiran/awesome-trending-repos" >}}

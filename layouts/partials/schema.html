@@ -82,6 +82,7 @@
   {{- end -}}
   {{- with $tr }}{{ $post = merge $post (dict "workTranslation" .) }}{{ end -}}
   {{- with .Params.series }}{{ $post = merge $post (dict "isPartOf" (slice (dict "@id" $websiteId) (dict "@type" "CreativeWorkSeries" "name" (index . 0)))) }}{{ end -}}
+  {{- with .Params.repo }}{{ $post = merge $post (dict "codeRepository" (printf "https://github.com/%s" .)) }}{{ end -}}
   {{- $graph = $graph | append $post -}}
   {{- $graph = $graph | append (dict "@type" "BreadcrumbList" "itemListElement" $crumbs) -}}
 {{- else if or (eq .Kind "term") (eq .Kind "taxonomy") (eq .Kind "section") -}}

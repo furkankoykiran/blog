@@ -4,6 +4,7 @@ description: "Memoryze'ı bir gecede nasıl yazdım: SM-2 algoritması, Supabase
 date: 2026-02-05T14:00:00+03:00
 slug: "memoryze-flashcard-spaced-repetition"
 postType: project
+repo: furkankoykiran/Memoryze
 tags: ["typescript", "web", "databases", "open-source"]
 categories: ["Projeler"]
 coverAlt: "Ön yüzünde soru, arka yüzünde cevap olan bir dijital bilgi kartı"
@@ -165,3 +166,7 @@ Listemde paylaşılabilir desteler, tarayıcının Web Speech API'si ile telaffu
 Kod MIT lisanslı ve [GitHub'da](https://github.com/furkankoykiran/Memoryze). Supabase projenizi oluşturup `.env` dosyasına kendi URL ve anon key'inizi yazarak `npm install && npm run dev` ile yerelde çalıştırabilirsiniz. Ücretsiz Supabase planında e-posta gönderim limiti düşük, geliştirme sırasında "Confirm email" seçeneğini kapatmak kayıt olmayı kolaylaştırıyor.
 
 React ve Vite ile yazdığım bir başka küçük proje [awesome-trending-repos](/posts/awesome-trending-repos-web/). Framework'süz arayüz yazmaya dair düşüncelerim de [modern web arayüzü yazısında](/posts/modern-web-arayuzu-css-javascript/).
+
+{{< demo url="https://furkankoykiran.com.tr/Memoryze/" name="Memoryze" >}}
+
+{{< github-star repo="furkankoykiran/Memoryze" >}}

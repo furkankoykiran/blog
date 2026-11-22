@@ -4,6 +4,7 @@ description: "GitHub Trending'i her gün kazıyan, geçmişle karşılaştıran 
 date: 2026-03-27T18:00:00+03:00
 slug: "awesome-trending-repos-web"
 postType: project
+repo: furkankoykiran/awesome-trending-repos
 tags: ["github-actions", "automation", "ci-cd", "web", "open-source"]
 categories: ["Projeler"]
 aliases: ["/posts/awesome-trending-repos/"]
@@ -164,3 +165,7 @@ Proje sayfasında `public/CNAME` dosyasına kök alan adını yazmak sık yapıl
 Proje her gün çalışmaya devam ediyor. Sıradaki işler: feed hatasını kapatmak, tahmini yıldız sayılarını arayüzde işaretlemek ve workflow sürümlerini güncellemek.
 
 Canlı siteye [furkankoykiran.com.tr/awesome-trending-repos](https://furkankoykiran.com.tr/awesome-trending-repos/) adresinden, projenin özetine [proje sayfasından](https://furkankoykiran.com.tr/projeler/awesome-trending-repos/) bakabilirsiniz. GitHub Actions dakikalarınız bitiyorsa [self-hosted runner yazım](/posts/github-actions-self-hosted-runner-tr/), daha büyük pipeline'lar için [GitHub Actions CI/CD yazısı](/posts/github-actions-cicd-pipeline/) iyi bir devam olur. Bu blogun GitHub Pages yolculuğunu da [GitLab ve GitHub macerası](/posts/gitlab-github-macerasi-jekyll-altyapisi/) yazısında anlattım.
+
+{{< demo url="https://furkankoykiran.com.tr/awesome-trending-repos/" name="awesome-trending-repos" >}}
+
+{{< github-star repo="furkankoykiran/awesome-trending-repos" >}}

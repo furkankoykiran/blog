@@ -4,6 +4,7 @@ description: "OmniWire-MCP serves RSS, Atom, JSON and HTML sources to AI assista
 date: 2026-02-06T20:00:00+03:00
 slug: "omniwire-mcp-news-server"
 postType: project
+repo: furkankoykiran/OmniWire-MCP
 tags: ["mcp", "typescript", "ai-agents", "github-actions", "ci-cd"]
 categories: ["MCP & AI"]
 series: ["My MCP Servers"]
@@ -207,3 +208,5 @@ Keep `-i`: the server talks over stdio and exits when stdin closes.
 First the three fixes above: a single probe in HALF_OPEN, sniffing the body before trusting the header, and validating items against the Zod schema. After that I want to move tool definitions from `server.tool()` to `registerTool()`, since the MCP TypeScript SDK is deprecating the old API, and change the Dockerfile's `npm ci --only=production` to `npm ci --omit=dev`. Longer term, writing items into a vector store would allow semantic questions like "what came out about X last month?"
 
 Other servers in this series: [DevTo-MCP](/en/posts/devto-mcp-server/) for the DEV Community API, and [freqtrade-mcp](/en/posts/freqtrade-mcp-server/) for asking a trading bot questions through Claude. I also wrote about running CI on my own machine in [the self-hosted runner post](/en/posts/github-actions-self-hosted-runner/).
+
+{{< github-star repo="furkankoykiran/OmniWire-MCP" >}}
