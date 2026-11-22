@@ -67,55 +67,23 @@
     });
   }
 
-  // 0c) Language suggestion strip, never a redirect. It appears only when the
-  // browser prefers the other language, this page has a translation and the
-  // visitor has not dismissed it in the last 30 days.
+  // 0c) Language suggestion strip, never a redirect. The bar is rendered by
+  // header/basic.html and the head script decides before the first paint
+  // whether to show it, so this only wires dismissal and remembers it.
   function setupLanguageSuggestion() {
+    var bar = document.getElementById("fk-langbar");
     var data = document.getElementById("fk-lang-suggest-data");
-    if (!data || !document.body) return;
+    if (!bar || !data) return;
     try {
       var cfg = JSON.parse(data.textContent);
-      var prefs = (navigator.languages && navigator.languages.length
-        ? Array.prototype.slice.call(navigator.languages)
-        : [navigator.language || ""]
-      ).map(function (l) { return String(l).toLowerCase(); });
-      var current = String(document.documentElement.lang || "").toLowerCase();
-      var wantsOther = prefs.some(function (l) { return l.indexOf(cfg.lang.toLowerCase()) === 0; });
-      var knowsCurrent = prefs.some(function (l) { return current && l.indexOf(current) === 0; });
       var key = "fk_lang_suggest_" + cfg.lang + "_" + location.pathname;
-      var until = 0;
-      try { until = Number(localStorage.getItem(key)) || 0; } catch (e) {}
-      if (!wantsOther || knowsCurrent || until >= Date.now()) return;
-      var bar = document.createElement("aside");
-      bar.className = "fk-langbar";
-      bar.setAttribute("role", "region");
-      bar.setAttribute("aria-label", cfg.label);
-      var text = document.createElement("span");
-      text.textContent = cfg.text;
-      var link = document.createElement("a");
-      link.href = cfg.href;
-      link.hreflang = cfg.lang;
-      link.textContent = cfg.action;
-      link.setAttribute("data-ga-event", "language_switch");
-      link.setAttribute("data-ga-param-from", current || "unknown");
-      link.setAttribute("data-ga-param-to", cfg.lang);
-      var close = document.createElement("button");
-      close.type = "button";
-      close.setAttribute("aria-label", cfg.dismiss);
-      close.textContent = "\u00d7";
+      var close = bar.querySelector("[data-lang-dismiss]");
+      if (!close) return;
       close.addEventListener("click", function () {
         try { localStorage.setItem(key, String(Date.now() + 30 * 864e5)); } catch (e) {}
         bar.remove();
+        document.documentElement.removeAttribute("data-lang-suggest");
       });
-      bar.appendChild(text);
-      bar.appendChild(link);
-      bar.appendChild(close);
-      var anchor = document.querySelector(".fk-skip, #the-top");
-      if (anchor && anchor.parentNode) {
-        anchor.parentNode.insertBefore(bar, anchor.nextSibling);
-      } else {
-        document.body.insertBefore(bar, document.body.firstChild);
-      }
     } catch (e) {}
   }
 

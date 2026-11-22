@@ -97,6 +97,30 @@
     "action" (i18n "fk.langbar_action")
     "dismiss" (i18n "fk.langbar_dismiss")
     | jsonify | safeJS }}</script>
+  <script>
+    /* Decide before the first paint so the server-rendered strip cannot shift
+       the page. fk.js only wires the dismiss button. */
+    (function () {
+      var data = document.getElementById("fk-lang-suggest-data");
+      if (!data) return;
+      try {
+        var cfg = JSON.parse(data.textContent);
+        var prefs = (navigator.languages && navigator.languages.length
+          ? Array.prototype.slice.call(navigator.languages)
+          : [navigator.language || ""]
+        ).map(function (l) { return String(l).toLowerCase(); });
+        var current = String(document.documentElement.lang || "").toLowerCase();
+        var wantsOther = prefs.some(function (l) { return l.indexOf(cfg.lang.toLowerCase()) === 0; });
+        var knowsCurrent = prefs.some(function (l) { return current && l.indexOf(current) === 0; });
+        var key = "fk_lang_suggest_" + cfg.lang + "_" + location.pathname;
+        var until = 0;
+        try { until = Number(localStorage.getItem(key)) || 0; } catch (e) {}
+        if (wantsOther && !knowsCurrent && until < Date.now()) {
+          document.documentElement.setAttribute("data-lang-suggest", "1");
+        }
+      } catch (e) {}
+    })();
+  </script>
   {{- end }}
 
   {{/* ---------- Feeds and machine-readable alternates ---------- */}}

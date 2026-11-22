@@ -443,13 +443,15 @@ html.dark .fk-star-cta__count { background: rgba(255, 255, 255, .14); }
 .fk-demo__note a { color: var(--fk-accent); }
 .fk-demo.is-loading .fk-demo__start { opacity: .65; cursor: progress; }
 
-/* Language suggestion strip (progressive enhancement, never a redirect). */
+/* Language suggestion strip (progressive enhancement, never a redirect).
+   It is server-rendered and hidden until a head script sets the attribute
+   before the first paint, so showing it never moves the page. */
 .fk-langbar {
-  display: flex; align-items: center; justify-content: center; gap: .75rem;
+  display: none; align-items: center; justify-content: center; gap: .75rem;
   padding: .55rem 1rem; border-bottom: 1px solid var(--fk-line);
   background: var(--fk-card-hover); color: var(--fk-text); font-size: .9rem;
 }
-.fk-langbar[hidden] { display: none; }
+html[data-lang-suggest="1"] .fk-langbar { display: flex; }
 .fk-langbar a { font-weight: 650; color: var(--fk-accent); }
 .fk-langbar button {
   border: 0; background: none; color: var(--fk-muted); cursor: pointer;
