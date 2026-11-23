@@ -216,6 +216,7 @@ REQUIRED = [
 OPTIONAL = [
     "lastmod",
     "series",
+    "repo",
     "aliases",
     "cover",
     "canonical",

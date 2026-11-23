@@ -4,6 +4,7 @@ description: "RSS, Atom, JSON ve HTML kaynaklarını AI asistanlarına sunan Omn
 date: 2026-02-06T20:00:00+03:00
 slug: "omniwire-mcp-ai-news-server"
 postType: project
+repo: furkankoykiran/OmniWire-MCP
 tags: ["mcp", "typescript", "ai-agents", "github-actions", "ci-cd"]
 categories: ["MCP ve Yapay Zekâ"]
 series: ["MCP Sunucularım"]
@@ -207,3 +208,5 @@ docker run -i --rm -e RSS_FEEDS="https://example.com/my-feeds.json" omniwire-mcp
 Önce yukarıdaki üç düzeltme geliyor: HALF_OPEN'da tek deneme isteği, içerik koklamanın header'dan önce yapılması ve haberlerin Zod şemasından geçirilmesi. Ardından araçları SDK'daki `server.tool()` yerine `registerTool()` ile tanımlamak istiyorum, MCP TypeScript SDK'sı eski API'yi kullanımdan kaldırıyor. Dockerfile'daki `npm ci --only=production` de artık `npm ci --omit=dev` olmalı. Daha uzun vadede haberleri bir vektör veritabanına yazıp "geçen ay X hakkında ne çıktı?" gibi anlamsal sorguları desteklemek var.
 
 Aynı serideki diğer sunucularım: [DevTo-MCP](/posts/devto-mcp-server-gelistirme-ve-yayinlama/), DEV Community API'si için, ve [freqtrade-mcp](/posts/freqtrade-mcp-server-tr/), trading botuna Claude üzerinden soru sormak için. CI tarafını kendi makinemde çalıştırmayı da [self-hosted runner yazısında](/posts/github-actions-self-hosted-runner-tr/) anlattım.
+
+{{< github-star repo="furkankoykiran/OmniWire-MCP" >}}

@@ -4,6 +4,7 @@ description: "Freqtrade'in REST API'sini Claude ve diğer MCP istemcilerine aça
 date: 2026-04-04T13:00:00+03:00
 slug: "freqtrade-mcp-server-tr"
 postType: project
+repo: furkankoykiran/freqtrade-mcp
 tags: ["mcp", "trading", "typescript", "claude", "ai-agents"]
 categories: ["MCP ve Yapay Zekâ"]
 series: ["MCP Sunucularım"]
@@ -155,3 +156,5 @@ Güvenmeden önce şunları bilmeniz gerekiyor:
 Çözmek istediğim şey basitti: FreqUI'yı açmadan bota bakabilmek. REST API zaten oradaydı, MCP sunucusu onu sohbete taşıdı. "Acaba bir şey değişti mi" hissi geçmedi, ama sormak artık tek bir cümle.
 
 Kod MIT lisanslı ve [GitHub'da](https://github.com/furkankoykiran/freqtrade-mcp), projenin özeti de [proje sayfamda](https://furkankoykiran.com.tr/projeler/freqtrade-mcp/). Kendi botunuza bağlamadan önce bir hafta `dry_run: true` ile çalıştırıp `get_profit_stats` ve `get_open_trades` sonuçlarını FreqUI ile karşılaştırın. Python tarafında bot geliştirmeyle ilgileniyorsanız [Python ile Telegram trading botu](/posts/python-telegram-trading-bot/) ve [yapay zekâ destekli trading stratejileri](/posts/yapay-zeka-destekli-trading-stratejileri/) yazılarına, başka bir MCP sunucusunu nasıl sardığımı görmek için de [CLI-Anything katkıma](/posts/cli-anything-browser-automation-katkim/) bakabilirsiniz.
+
+{{< github-star repo="furkankoykiran/freqtrade-mcp" >}}

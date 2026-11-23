@@ -1,0 +1,25 @@
+# ai.txt — how AI systems may use this blog
+# Standards: https://contentsignals.org/ and https://llmstxt.org/
+#
+# Owner: Furkan Köykıran
+# Contact: furkankoykiran@gmail.com
+# Canonical: https://blog.furkankoykiran.com.tr/
+#
+# Summary for language models:
+#   https://blog.furkankoykiran.com.tr/llms.txt
+#   https://blog.furkankoykiran.com.tr/en/llms.txt
+# Full text:
+#   https://blog.furkankoykiran.com.tr/llms-full.txt
+# Crawling policy:
+#   https://blog.furkankoykiran.com.tr/robots.txt
+#
+# Content signals: search=yes, ai-input=yes, ai-train=yes
+# The same signals are declared in robots.txt. Search indexing, retrieval,
+# citation and training are all permitted; attribution is appreciated.
+#
+# Preferred citation:
+#   Furkan Köykıran, "Article title", https://blog.furkankoykiran.com.tr/
+#
+# Licensing: posts and diagrams © Furkan Köykıran unless the post credits say
+# otherwise. Code samples are MIT. Quoting short excerpts with a link is
+# always welcome; republishing whole posts is not.

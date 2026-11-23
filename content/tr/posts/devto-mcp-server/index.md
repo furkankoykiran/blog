@@ -4,6 +4,7 @@ description: "DEV Community (Forem) API'sini Claude gibi asistanlara açan DevTo
 date: 2026-02-18T16:00:00+03:00
 slug: "devto-mcp-server-gelistirme-ve-yayinlama"
 postType: project
+repo: furkankoykiran/DevTo-MCP
 tags: ["mcp", "typescript", "api", "ci-cd", "open-source"]
 categories: ["MCP ve Yapay Zekâ"]
 series: ["MCP Sunucularım"]
@@ -206,3 +207,5 @@ Dosya macOS'ta `~/Library/Application Support/Claude/`, Windows'ta `%APPDATA%\Cl
 ## Sırada ne var
 
 Yukarıda bahsettiğim POST retry riskini kapatmak, araçları SDK'nın yeni `registerTool()` API'sine taşımak ve reactions'taki 401'in nedenini bulmak listemde. DevTo-MCP'yi ilk kez gerçek bir iş için kullandığım hikayeyi, yani bir yarışma yazısını asistana yazdırıp DEV'de yayınlattığımı, [Gemini challenge yazısında](/posts/mcp-gemini-challenge-deneyimi/) anlattım. Aynı serideki diğer sunucularım [OmniWire-MCP](/posts/omniwire-mcp-ai-news-server/) ve [freqtrade-mcp](/posts/freqtrade-mcp-server-tr/).
+
+{{< github-star repo="furkankoykiran/DevTo-MCP" >}}

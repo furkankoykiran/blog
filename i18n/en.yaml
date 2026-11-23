@@ -1,6 +1,22 @@
 global:
   language: "Language"
 
+fk:
+  star_kicker: "Open source"
+  star_title: "Did {{ .name }} help you?"
+  star_text: "Stars are how open-source projects get discovered. Browse the repository and support it with one click."
+  star_button: "Star on GitHub"
+  star_aria: "Star {{ .name }} on GitHub"
+  demo_label: "Live demo"
+  demo_start: "Load the demo"
+  demo_note: "The demo loads only when you ask for it. If it doesn't open, use the direct link."
+  demo_open: "Open the demo"
+  demo_frame_title: "{{ .name }} live demo"
+  langbar_label: "Language suggestion"
+  langbar_text: "This page is also available in Turkish."
+  langbar_action: "Read in Turkish"
+  langbar_dismiss: "Dismiss suggestion"
+
 article:
   reading_time:
     one: "{{ .Count }} min read"

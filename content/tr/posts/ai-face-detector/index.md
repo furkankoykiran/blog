@@ -4,6 +4,7 @@ description: "AI Face Detector, bir yüz fotoğrafının gerçek mi StyleGAN ür
 date: 2026-03-07T18:00:00+03:00
 slug: "ai-face-detector-yapay-zeka-ile-yuz-dogrulama"
 postType: project
+repo: furkankoykiran/ai-face-detector
 tags: ["python", "fastapi", "api", "open-source"]
 categories: ["Projeler"]
 coverAlt: "Biri gerçek, biri yapay zekâyla üretilmiş iki yüz fotoğrafını karşılaştıran sınıflandırıcı çizimi"
@@ -165,3 +166,5 @@ def load_model(path: str, device: torch.device) -> nn.Module:
 Kod [GitHub'da](https://github.com/furkankoykiran/ai-face-detector), projenin özeti [portfolyomda](https://furkankoykiran.com.tr/projeler/ai-face-detector/). Sıradaki adımlar yukarıdaki pürüzleri düzeltmek ve diffusion modelleriyle üretilmiş yüzlerden oluşan ayrı bir test seti hazırlamak. Bir model bu sette de tutarsa ancak o zaman README'deki iddiayı genişletmek doğru olur.
 
 API tarafı ilginizi çektiyse [FastAPI ile REST API geliştirme](/posts/python-fastapi-restful-api-gelistirme/) yazısında Pydantic v2 ve async yapıyı daha ayrıntılı anlatıyorum. Görüntü ön işleme için [Pillow ve OpenCV ile görüntü işleme](/posts/python-goruntu-isleme-pillow-opencv/), servisi paketlemek için de [Docker ile Python uygulamalarını container'a almak](/posts/docker-ile-python-uygulamasi-containerization/) yazılarına bakabilirsiniz.
+
+{{< github-star repo="furkankoykiran/ai-face-detector" >}}

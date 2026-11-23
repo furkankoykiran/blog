@@ -1,0 +1,57 @@
+{{- /*
+  Reusable GitHub star callout.
+
+    {{< github-star repo="furkankoykiran/Leadwalk" >}}
+
+  The star count is read from the GitHub REST API at build time. The request
+  is cached by Hugo for the rest of the build, never happens in the browser,
+  and a rate limit or network error only hides the count; the callout itself
+  always renders. Set HUGO_GITHUB_TOKEN in CI for a higher rate limit.
+*/ -}}
+{{- $repo := .Get "repo" | default (.Get 0) -}}
+{{- if not $repo -}}
+  {{- errorf "github-star: the repo parameter is required (%s)" .Position -}}
+{{- end -}}
+{{- $repo = strings.TrimPrefix "https://github.com/" $repo -}}
+{{- $repo = strings.TrimPrefix "http://github.com/" $repo -}}
+{{- $repo = strings.TrimSuffix "/" $repo -}}
+{{- $name := path.Base $repo -}}
+{{- $stars := 0 -}}
+{{- $known := false -}}
+{{- $headers := dict "Accept" "application/vnd.github+json" "User-Agent" "furkankoykiran-blog" -}}
+{{- with os.Getenv "HUGO_GITHUB_TOKEN" -}}
+  {{- $headers = merge $headers (dict "Authorization" (printf "Bearer %s" .)) -}}
+{{- end -}}
+{{- $api := printf "https://api.github.com/repos/%s" $repo -}}
+{{- with try (resources.GetRemote $api (dict "headers" $headers "timeout" "5s")) -}}
+  {{- with .Err -}}
+    {{- /* A missing token or a rate limit must not fail the build (lint runs
+      with --panicOnWarning). Only surface the reason in local development. */ -}}
+    {{- if eq (os.Getenv "HUGO_ENVIRONMENT") "development" -}}
+      {{- warnf "github-star: cannot read %s: %s" $repo . -}}
+    {{- end -}}
+  {{- else -}}
+    {{- with .Value -}}
+      {{- $data := .Content | transform.Unmarshal -}}
+      {{- with $data.stargazers_count -}}
+        {{- $stars = int . -}}
+        {{- $known = true -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+<aside class="fk-star-cta" aria-label="{{ i18n "fk.star_kicker" }}: {{ $name }}">
+  <span class="fk-star-cta__icon" aria-hidden="true">{{ partial "icon.html" "star" }}</span>
+  <div class="fk-star-cta__body">
+    <p class="fk-star-cta__kicker">{{ i18n "fk.star_kicker" }}</p>
+    <p class="fk-star-cta__title">{{ i18n "fk.star_title" (dict "name" $name) }}</p>
+    <p class="fk-star-cta__text">{{ i18n "fk.star_text" }}</p>
+  </div>
+  <a class="fk-btn fk-btn-primary fk-star-cta__btn" href="https://github.com/{{ $repo }}" rel="noopener"
+     aria-label="{{ i18n "fk.star_aria" (dict "name" $name) }}"
+     data-ga-event="github_star_click" data-ga-param-repo="{{ $name }}" data-ga-param-placement="article">
+    <span class="fk-icon" aria-hidden="true">{{ partial "icon.html" "github" }}</span>
+    <span>{{ i18n "fk.star_button" }}</span>
+    {{- if $known }}<span class="fk-star-cta__count">{{ $stars }}</span>{{ end -}}
+  </a>
+</aside>

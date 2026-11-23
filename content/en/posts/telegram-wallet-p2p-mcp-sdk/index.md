@@ -4,6 +4,7 @@ description: "Unofficial Python and Node.js SDKs plus an MCP server for Telegram
 date: 2026-02-24T19:30:00+03:00
 slug: "telegram-wallet-p2p-mcp-sdk"
 postType: project
+repo: furkankoykiran/telegram-wallet-p2p-sdk
 tags: ["telegram", "python", "typescript", "mcp", "trading", "asyncio"]
 categories: ["Projects"]
 series: ["My MCP Servers"]
@@ -199,3 +200,5 @@ Short term, the two fixes above: one definition of `side`, and decimal math in t
 If Wallet ever adds write access to the API, order creation would be the obvious addition, but no such endpoint exists today and I'm not writing code against an API that isn't there. A short-lived cache for frequently queried pairs is an easy way to stay further under the rate limit.
 
 I cover parallel requests, timeouts and concurrency limits in more depth in my [Python asyncio guide](/en/posts/python-asyncio-concurrent-processing/). Other MCP servers in this series: [freqtrade-mcp](/en/posts/freqtrade-mcp-server/) and [DevTo-MCP](/en/posts/devto-mcp-server/).
+
+{{< github-star repo="furkankoykiran/telegram-wallet-p2p-sdk" >}}

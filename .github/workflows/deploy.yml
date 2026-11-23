@@ -82,6 +82,9 @@ jobs:
           HUGO_PARAMS_VERIFICATION_YANDEX: ${{ vars.YANDEX_VERIFICATION }}
           HUGO_PARAMS_GISCUS_REPOID: ${{ vars.GISCUS_REPO_ID }}
           HUGO_PARAMS_GISCUS_CATEGORYID: ${{ vars.GISCUS_CATEGORY_ID }}
+          # Optional PAT with public-repository read access. The shortcode
+          # falls back to the workflow token, then to no count.
+          HUGO_GITHUB_TOKEN: ${{ secrets.HUGO_GITHUB_TOKEN || secrets.GITHUB_TOKEN }}
         run: hugo --gc --minify
 
       - name: Check old URLs

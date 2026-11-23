@@ -4,6 +4,7 @@ description: "How I built Memoryze in one night: the SM-2 algorithm, Supabase au
 date: 2026-02-05T14:00:00+03:00
 slug: "memoryze-spaced-repetition-flashcards"
 postType: project
+repo: furkankoykiran/Memoryze
 tags: ["typescript", "web", "databases", "open-source"]
 categories: ["Projects"]
 coverAlt: "A digital flashcard with a question on the front and the answer on the back"
@@ -165,3 +166,7 @@ Ideas on the list: shareable decks, pronunciation through the browser's Web Spee
 The code is MIT licensed and [on GitHub](https://github.com/furkankoykiran/Memoryze). Create a Supabase project, put your own URL and anon key in `.env`, and run `npm install && npm run dev`. Supabase's free plan has a low email sending limit, so turning off "Confirm email" during development makes sign-ups much less painful.
 
 Another small React and Vite project of mine is [awesome-trending-repos](/en/posts/awesome-trending-repos-web/), and I wrote about building interfaces without a framework in [modern web UI without a framework](/en/posts/modern-web-ui-css-javascript/).
+
+{{< demo url="https://furkankoykiran.com.tr/Memoryze/" name="Memoryze" >}}
+
+{{< github-star repo="furkankoykiran/Memoryze" >}}

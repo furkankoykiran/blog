@@ -1,4 +1,14 @@
 {{- /* Theme header row with a responsive WebP logo (1x/2x/3x) instead of the full-size PNG. */ -}}
+{{- $otherLang := cond (eq site.Language.Lang "tr") "en" "tr" -}}
+{{- $other := "" -}}
+{{- range .Translations }}{{ if eq .Language.Lang $otherLang }}{{ $other = .RelPermalink }}{{ end }}{{ end -}}
+{{- with $other }}
+<aside class="fk-langbar" id="fk-langbar" role="region" aria-label="{{ i18n "fk.langbar_label" }}">
+  <span>{{ i18n "fk.langbar_text" }}</span>
+  <a href="{{ . }}" hreflang="{{ $otherLang }}" data-ga-event="language_switch" data-ga-param-from="{{ site.Language.Lang }}" data-ga-param-to="{{ $otherLang }}">{{ i18n "fk.langbar_action" }}</a>
+  <button type="button" data-lang-dismiss aria-label="{{ i18n "fk.langbar_dismiss" }}">&times;</button>
+</aside>
+{{- end }}
 <div class="main-menu flex items-center w-full gap-2 p-1 pl-0">
   {{ if .Site.Params.Logo }}
     {{ $logo := resources.Get .Site.Params.Logo }}

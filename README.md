@@ -51,7 +51,7 @@ TR and EN pages pair by their identical path, which also produces the hreflang l
 Old URLs are kept with `aliases` in front matter. Hugo prefixes EN aliases with `/en/`, so an EN page's alias for a URL outside `/en/` is written as `/../posts/<old-slug>/`.
 
 1. **Create the bundle.** `python scripts/new_post.py my-english-slug --tr-slug turkce-baslik --type guide` writes both drafts from `archetypes/posts.md` with the same date, creates `content/media/posts/my-english-slug/` with `img/` and `credits.yaml`, and generates the cover.
-2. **Write.** Front matter follows `schemas/frontmatter.schema.json`: title, description, date, slug, `postType`, 3-6 tags from the vocabulary, one category, `coverAlt` and `draft`; `lastmod` only after a meaningful update. Images are `![alt](img/name.webp "caption")`; callouts use GitHub alert syntax (`> [!TIP]`); code fences always name a language.
+2. **Write.** Front matter follows `schemas/frontmatter.schema.json`: title, description, date, slug, `postType`, 3-6 tags from the vocabulary, one category, `coverAlt` and `draft`; `lastmod` only after a meaningful update. Project and contribution posts also set `repo: owner/name`; it feeds the star shortcode and the `codeRepository` schema property. Images are `![alt](img/name.webp "caption")`; callouts use GitHub alert syntax (`> [!TIP]`); code fences always name a language.
 3. **Add images.** Image cards (step flows, comparisons, before/after) are HTML templates filled from a YAML file:
 
    ```sh
@@ -71,6 +71,25 @@ Old URLs are kept with `aliases` in front matter. Hugo prefixes EN aliases with 
 
    The linter checks front matter (schema, TR/EN pairing, honest `lastmod`), prose (intro, headings, internal links, alt text, reader address) and media (`credits.yaml`, size budgets, formats). `--changed-only BASE_REF` adds the git-aware rules for changed `lastmod`, `date` and slugs.
 6. **Publish** by setting `draft: false` in both languages.
+
+## Shortcodes
+
+Project posts use two shortcodes at the end of the article:
+
+```go
+{{< github-star repo="furkankoykiran/Leadwalk" >}}
+{{< demo url="https://furkankoykiran.com.tr/Memoryze/" name="Memoryze" >}}
+```
+
+- `github-star` is a reusable star CTA. It reads `stargazers_count` from the
+  GitHub REST API at build time (cached by Hugo for the build), renders the
+  count only when the request succeeds, and always renders the link. Set
+  `HUGO_GITHUB_TOKEN` (a PAT with public-repository read access) as a
+  repository secret for a higher rate limit; the workflow falls back to
+  `GITHUB_TOKEN`, then to an anonymous request. A failure never fails a build.
+- `demo` creates a click-to-load iframe: `loading="lazy"`, a descriptive
+  `title`, and a responsive 16/9 wrapper. Nothing is requested from the
+  embedded site until the visitor clicks.
 
 ## Scripts
 
@@ -123,6 +142,7 @@ Analytics, verification and comment IDs are optional and are not committed. Set 
 | Secret | Used for |
 |---|---|
 | `DEVTO_API_KEY` | dev.to API key for cross-posting; without it the workflow does nothing |
+| `HUGO_GITHUB_TOKEN` | Optional PAT with public-repository read access for the star counts; falls back to `GITHUB_TOKEN` and then to no count |
 
 The consent banner and analytics scripts are only rendered when at least one analytics ID is set.
 
@@ -133,6 +153,8 @@ The consent banner and analytics scripts are only rendered when at least one ana
 | `/feed.xml`, `/en/feed.xml` | RSS 2.0 with full content, latest 30 posts |
 | `/sitemap.xml`, `/en/sitemap.xml` | Sitemaps with hreflang and image entries; thin tag pages left out |
 | `/llms.txt`, `/llms-full.txt` (and under `/en/`) | Site summary and full text for language models |
+| `/ai.txt` | AI usage signals and citation preferences |
+| `/.well-known/security.txt` | Security contact (RFC 9116) |
 | `<post URL>index.md` | Markdown version of every post |
 | `/syndication.json`, `/en/syndication.json` | Post data for the cross-posting job |
 | `/index.json` | Search index |

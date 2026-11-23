@@ -1,6 +1,22 @@
 global:
   language: "Dil"
 
+fk:
+  star_kicker: "Açık kaynak"
+  star_title: "{{ .name }} işinize yaradı mı?"
+  star_text: "Yıldızlar açık kaynak projelerin keşfedilmesini sağlıyor. Repoyu inceleyip tek tıkla destek olabilirsiniz."
+  star_button: "GitHub'da yıldızla"
+  star_aria: "{{ .name }} deposuna GitHub'da yıldız ver"
+  demo_label: "Canlı demo"
+  demo_start: "Demoyu yükle"
+  demo_note: "Demo yalnızca siz istediğinizde yüklenir. Açılmazsa doğrudan bağlantıyı kullanın."
+  demo_open: "Demoyu aç"
+  demo_frame_title: "{{ .name }} canlı demo"
+  langbar_label: "Dil önerisi"
+  langbar_text: "Bu sayfanın İngilizcesi de var."
+  langbar_action: "İngilizce oku"
+  langbar_dismiss: "Öneriyi kapat"
+
 article:
   anchor_label: "Bağlantı"
   date: "{{ .Date }}"

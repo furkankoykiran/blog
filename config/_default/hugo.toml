@@ -143,6 +143,12 @@ summaryLength = 40
     name = "date"
     weight = 10
 
+[security.http]
+  # Only the github-star shortcode calls a remote API, at build time.
+  urls = ['^https://api\.github\.com/repos/']
+  methods = ['GET']
+  mediaTypes = ['application/json']
+
 [module]
   [module.hugoVersion]
     extended = true
