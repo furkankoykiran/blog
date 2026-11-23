@@ -108,6 +108,9 @@ jobs:
         uses: actions/upload-pages-artifact@v5
         with:
           path: public
+          # .well-known/security.txt lives in a dot-directory, which the
+          # artifact uploader skips unless this is enabled.
+          include-hidden-files: true
 
   deploy:
     needs: build
