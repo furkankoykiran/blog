@@ -1,4 +1,5 @@
 ---
+lastmod: 2026-11-23
 title: "About"
 seoTitle: "About Furkan Köykıran and what this blog covers | Furkan Köykıran Blog"
 description: "Who Furkan Köykıran is and what this blog covers: MCP servers, AI agents, open-source contributions, Python and DevOps."
