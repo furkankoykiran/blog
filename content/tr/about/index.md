@@ -1,4 +1,5 @@
 ---
+lastmod: 2026-11-23
 title: "Hakkımda"
 seoTitle: "Hakkımda: Furkan Köykıran ve bu blogun konuları | Furkan Köykıran Blog"
 description: "Furkan Köykıran kimdir, bu blogda neler yazıyor: MCP sunucuları, yapay zeka ajanları, açık kaynak katkıları, Python ve DevOps."
