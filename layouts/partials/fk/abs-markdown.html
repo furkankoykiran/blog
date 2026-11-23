@@ -2,9 +2,16 @@
   The page's Markdown source with every bundle image reference turned into an
   absolute URL, for outputs read outside the site (Markdown output, llms-full.txt,
   syndication.json). Root-relative links keep their path; callers add the host when needed.
+
+  Shortcodes are resolved to plain Markdown links here. Raw `{{< ... >}}` tags
+  are meaningless outside Hugo and broke the dev.to cross-posting job, which
+  rejects any Markdown that still contains one.
 */ -}}
 {{- $md := .RawContent -}}
 {{- range .Resources.ByType "image" -}}
   {{- $md = replace $md (printf "](%s" .Name) (printf "](%s" .Permalink) -}}
 {{- end -}}
+{{- $md = replaceRE `\{\{<\s*demo\s+url="([^"]+)"\s+name="([^"]+)"\s*>\}\}` "[$2]($1)" $md -}}
+{{- $md = replaceRE `\{\{<\s*github-star\s+repo="([^"]+)"\s*>\}\}` "[$1 on GitHub](https://github.com/$1)" $md -}}
+{{- $md = replaceRE `\{\{[<%].*?[>%]\}\}` "" $md -}}
 {{- return $md -}}
